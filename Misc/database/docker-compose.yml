@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    #env_file: dev.env
+    image: postgres:latest
+    container_name: sweetnotes-db
+    restart: unless-stopped
+    ports:
+      - 5435:5435
+    environment:
+      POSTGRES_USER: snadmin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: sweetnotes
+    
+
+# postgres://mqtadmin:$trongPa$$word@127.0.0.1:5435/sweetnotes
