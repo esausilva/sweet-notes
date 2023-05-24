@@ -18,7 +18,7 @@ public static class UserModelBuilderExtensions
 
         builder
             .Entity<User>()
-            .Property(x => x.SignedUpUtc)
+            .Property(x => x.SignedUpUTC)
             .HasDefaultValueSql("(now() at time zone 'utc')")
             .ValueGeneratedOnAdd();
 

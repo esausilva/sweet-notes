@@ -24,7 +24,7 @@ public class User
     // https://code-maze.com/dotnet-secure-passwords-bcrypt/
 
     [Required]
-    public DateTime SignedUpUtc { get; set; }
+    public DateTime SignedUpUTC { get; set; }
 
     public ICollection<Note> Notes { get; set; } = new List<Note>();
 
