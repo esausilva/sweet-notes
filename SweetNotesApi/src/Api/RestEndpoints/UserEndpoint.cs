@@ -25,6 +25,6 @@ public static class UserEndpoint
 
         await commandRequest.Handle(user);
 
-        return Results.Ok(user);
+        return Results.Ok(new {userId = user.Id});
     }
 }
