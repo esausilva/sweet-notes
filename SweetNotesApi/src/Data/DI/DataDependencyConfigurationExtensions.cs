@@ -19,6 +19,10 @@ public static class DataDependencyConfigurationExtensions
             )
             .AddGraphQLServer()
             .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled);
+            
+            // .AddMutationType(d => d.Name("Mutation"))
+
+            // .AddGlobalObjectIdentification();
         
         return services;
     }

@@ -1,6 +1,5 @@
 using Api.Models;
 using Application.Commands;
-using Domain.Entities;
 
 namespace Api.RestEndpoints;
 
@@ -13,18 +12,18 @@ public static class UserEndpoint
         return app;
     }
 
-    private static async Task<IResult> PostUserSignupAsync(UserSignupModel signupModel, ICommandRequest<User> commandRequest)
+    private static async Task<IResult> PostUserSignupAsync(CreateUserSignup userSignup, ICommandRequest<CreateUserSignupCommand, int> commandRequest)
     {
-        var user = new User
-        {
-            FirstName = signupModel.FirstName,
-            LastName = signupModel.LastName,
-            EmailAddress = signupModel.EmailAddress,
-            Password = signupModel.Password
-        };
+        var command = new CreateUserSignupCommand
+        (
+            FirstName: userSignup.FirstName,
+            LastName: userSignup.LastName,
+            EmailAddress: userSignup.EmailAddress,
+            Password: userSignup.Password
+        );
 
-        await commandRequest.Handle(user);
+        var userId = await commandRequest.Handle(command);
 
-        return Results.Ok(new {userId = user.Id});
+        return Results.Ok(new { userId });
     }
 }

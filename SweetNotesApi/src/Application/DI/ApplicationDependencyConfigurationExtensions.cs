@@ -16,10 +16,10 @@ public static class ApplicationDependencyConfigurationExtensions
         Assembly.GetExecutingAssembly()
             .GetTypes()
             .Where(item => item.GetInterfaces()
-                .Where(i => i.IsGenericType).Any(i => i.GetGenericTypeDefinition() == typeof(ICommandRequest<>)) && !item.IsAbstract && !item.IsInterface)
+                .Where(i => i.IsGenericType).Any(i => i.GetGenericTypeDefinition() == typeof(ICommandRequest<,>)) && !item.IsAbstract && !item.IsInterface)
             .ToList()
             .ForEach(assignedTypes => {
-                var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(ICommandRequest<>));
+                var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(ICommandRequest<,>));
                 services.AddTransient(serviceType, assignedTypes);
             });
         

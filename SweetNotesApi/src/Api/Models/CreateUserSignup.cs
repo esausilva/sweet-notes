@@ -1,6 +1,6 @@
 namespace Api.Models;
 
-public record UserSignupModel
+public record CreateUserSignup
 {
     private readonly string _password;
     public string FirstName { get; init; }

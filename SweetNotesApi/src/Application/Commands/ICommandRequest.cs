@@ -1,6 +1,6 @@
 namespace Application.Commands;
 
-public interface ICommandRequest<in TCommand>
+public interface ICommandRequest<in TCommand, TResult>
 {
-    Task Handle(TCommand command);
+    Task<TResult> Handle(TCommand command);
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Commands;
 
-public class UserSignupCommandRequestHandler : ICommandRequest<User>
+public sealed class UserSignupCommandRequestHandler : ICommandRequest<CreateUserSignupCommand, int>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
@@ -14,14 +14,24 @@ public class UserSignupCommandRequestHandler : ICommandRequest<User>
         _dbContextFactory = dbContextFactory;
     }
 
-    async Task ICommandRequest<User>.Handle(User request)
+    async Task<int> ICommandRequest<CreateUserSignupCommand, int>.Handle(CreateUserSignupCommand request)
     {
+        var user = new User
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            EmailAddress = request.EmailAddress,
+            Password = request.Password
+        };
+        
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync();
-        dbContext.Add(request);
+        dbContext.Add(user);
         
         try
         {
             await dbContext.SaveChangesAsync();
+
+            return user.Id;
         }
         catch (Exception e)
         {
