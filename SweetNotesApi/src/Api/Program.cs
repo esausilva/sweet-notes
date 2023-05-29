@@ -12,7 +12,8 @@ configuration.GetApiConfigurations();
 var services = builder.Services;
 services
     .ConfigureApplicationDependencies(configuration)
-    .ConfigureDataDependencies(configuration);
+    .ConfigureDataDependencies(configuration)
+    .ConfigureGraphQLDependencies(configuration);
 
 var app = builder.Build();
 app.ConfigureExceptionHandler();

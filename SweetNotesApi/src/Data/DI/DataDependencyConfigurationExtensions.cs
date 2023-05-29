@@ -16,13 +16,7 @@ public static class DataDependencyConfigurationExtensions
         services
             .AddPooledDbContextFactory<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("SweetNotes"))
-            )
-            .AddGraphQLServer()
-            .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled);
-            
-            // .AddMutationType(d => d.Name("Mutation"))
-
-            // .AddGlobalObjectIdentification();
+            );
         
         return services;
     }
