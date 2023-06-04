@@ -21,7 +21,7 @@ public class SpecialSomeone
     [StringLength(50)]
     public string? Nickname { get; set; }
 
+    public int UserId { get; set; } // TODO: Remove from GraphQL Schema
     public User User { get; set; }
-
     public ICollection<Note> Notes { get; set; }
 }

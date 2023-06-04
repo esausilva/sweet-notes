@@ -1,4 +1,4 @@
-namespace Application.Commands;
+namespace Application.Commands.UserSignup;
 
 public record CreateUserSignupCommand
 (

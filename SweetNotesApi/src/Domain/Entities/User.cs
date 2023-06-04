@@ -20,14 +20,13 @@ public class User
     
     [Required] 
     [StringLength(60)]
-    public string Password { get; set; }
+    public string Password { get; set; } // TODO: Remove from GraphQL Schema
     // https://code-maze.com/dotnet-secure-passwords-bcrypt/
 
     [Required]
     public DateTime SignedUpUTC { get; set; }
 
     public ICollection<Note> Notes { get; set; } = new List<Note>();
-
     public ICollection<SpecialSomeone> SpecialSomeones { get; set; } = 
         new List<SpecialSomeone>();
 }

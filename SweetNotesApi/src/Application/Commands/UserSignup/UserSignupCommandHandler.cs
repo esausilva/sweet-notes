@@ -3,18 +3,22 @@ using Data.Config;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Commands;
+namespace Application.Commands.UserSignup;
 
-public sealed class UserSignupCommandRequestHandler : ICommandRequest<CreateUserSignupCommand, int>
+public sealed class UserSignupCommandHandler : ICommandRequest<CreateUserSignupCommand, int>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
-    public UserSignupCommandRequestHandler(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+    public UserSignupCommandHandler(IDbContextFactory<ApplicationDbContext> dbContextFactory)
     {
         _dbContextFactory = dbContextFactory;
     }
 
-    async Task<int> ICommandRequest<CreateUserSignupCommand, int>.Handle(CreateUserSignupCommand request)
+    async Task<int> ICommandRequest<CreateUserSignupCommand, int>.Handle
+    (
+        CreateUserSignupCommand request,
+        CancellationToken cancellationToken
+    )
     {
         var user = new User
         {
@@ -24,12 +28,12 @@ public sealed class UserSignupCommandRequestHandler : ICommandRequest<CreateUser
             Password = request.Password
         };
         
-        await using var dbContext = await _dbContextFactory.CreateDbContextAsync();
+        await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
         dbContext.Add(user);
         
         try
         {
-            await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync(cancellationToken);
 
             return user.Id;
         }

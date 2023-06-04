@@ -32,6 +32,7 @@ public static class UserModelBuilderExtensions
             .Entity<User>()
             .HasMany(x => x.SpecialSomeones)
             .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
             .IsRequired();
         
         return builder;

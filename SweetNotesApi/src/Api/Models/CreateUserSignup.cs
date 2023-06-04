@@ -2,11 +2,11 @@ namespace Api.Models;
 
 public record CreateUserSignup
 {
-    private readonly string _password;
     public string FirstName { get; init; }
     public string LastName { get; init; }
     public string EmailAddress { get; init; }
 
+    private readonly string _password;
     public string Password
     {
         get => _password;

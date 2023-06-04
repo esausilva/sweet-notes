@@ -11,9 +11,8 @@ public class Note
     public string Message { get; set; }
     
     [Required]
-    public DateTime CreatedUtc { get; set; }
+    public DateTime CreatedUTC { get; set; }
     
     public User User { get; set; }
-    
     public SpecialSomeone SpecialSomeone { get; set; }
 }

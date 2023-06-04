@@ -13,13 +13,13 @@ public static class NoteModelBuilderExtensions
 
         builder
             .Entity<Note>()
-            .Property(x => x.CreatedUtc)
+            .Property(x => x.CreatedUTC)
             .HasDefaultValueSql("(now() at time zone 'utc')")
             .ValueGeneratedOnAdd();
 
         builder
             .Entity<Note>()
-            .HasIndex(x => x.CreatedUtc, "IX_Note_CreatedUTC")
+            .HasIndex(x => x.CreatedUTC, "IX_Note_CreatedUTC")
             .IsDescending();
 
         builder

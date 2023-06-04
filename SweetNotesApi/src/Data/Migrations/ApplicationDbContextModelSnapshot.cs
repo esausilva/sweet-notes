@@ -55,7 +55,7 @@ namespace Data.Migrations
                     b.HasIndex(new[] { "CreatedUTC" }, "IX_Note_CreatedUTC")
                         .IsDescending();
 
-                    b.ToTable("Notes");
+                    b.ToTable("Notes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.SpecialSomeone", b =>
@@ -92,7 +92,7 @@ namespace Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SpecialSomeone");
+                    b.ToTable("SpecialSomeone", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -133,7 +133,7 @@ namespace Data.Migrations
                     b.HasIndex(new[] { "EmailAddress" }, "IX_User_Unique_EmailAddress")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Note", b =>

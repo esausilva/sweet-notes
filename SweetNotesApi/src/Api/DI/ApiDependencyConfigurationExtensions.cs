@@ -7,7 +7,7 @@ public static class ApiDependencyConfigurationExtensions
         configuration.SetBasePath(Directory.GetCurrentDirectory());
         configuration.AddJsonFile("appsettings.json");
         
-        Console.WriteLine(configuration.GetDebugView()); // Useful for troubleshooting multiple configuration hierarchies
+        Console.WriteLine(configuration.GetDebugView());
         
         return configuration;
     }
