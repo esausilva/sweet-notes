@@ -1,4 +1,3 @@
-using Data.Extensions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +11,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // TODO: Refactor model builders
-        // https://www.youtube.com/watch?v=v19arLqQkP8&list=WL&index=9 20:22, 25:16
-        modelBuilder
-            .ConfigureUserModel()
-            .ConfigureNoteModel()
-            .ConfigureSpecialSomeoneModel();
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
     public DbSet<Note> Notes { get; set; } = default!;

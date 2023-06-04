@@ -1,31 +1,26 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Extensions;
+namespace Data.Config;
 
-public static class NoteModelBuilderExtensions
+public class NoteModelConfigurations : IEntityTypeConfiguration<Note>
 {
-    public static ModelBuilder ConfigureNoteModel(this ModelBuilder builder)
+    public void Configure(EntityTypeBuilder<Note> builder)
     {
         builder
-            .Entity<Note>()
             .HasKey(x => x.Id);
 
         builder
-            .Entity<Note>()
             .Property(x => x.CreatedUTC)
             .HasDefaultValueSql("(now() at time zone 'utc')")
             .ValueGeneratedOnAdd();
 
         builder
-            .Entity<Note>()
             .HasIndex(x => x.CreatedUTC, "IX_Note_CreatedUTC")
             .IsDescending();
 
         builder
-            .Entity<Note>()
             .HasOne(x => x.SpecialSomeone);
-        
-        return builder;
     }
 }

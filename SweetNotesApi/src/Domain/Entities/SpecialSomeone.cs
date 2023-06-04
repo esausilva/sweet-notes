@@ -19,7 +19,7 @@ public class SpecialSomeone
     public string LastName { get; set; }
 
     [StringLength(50)]
-    public string? Nickname { get; set; }
+    public string? Nickname { get; set; } // TODO: Can be null in GraphQL mutation
 
     public int UserId { get; set; } // TODO: Remove from GraphQL Schema
     public User User { get; set; }
