@@ -4,5 +4,5 @@ public record CreateSpecialSomeoneCommand
 (
     string FirstName,
     string LastName,
-    string NickName   
+    string? NickName = default
 );
