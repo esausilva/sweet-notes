@@ -10,6 +10,9 @@ public class SpecialSomeoneModelConfigurations : IEntityTypeConfiguration<Specia
     {
         builder
             .HasKey(x => x.Id);
+        
+        builder
+            .HasAlternateKey(x => x.UniqueIdentifier);
 
         builder
             .HasMany(x => x.Notes);

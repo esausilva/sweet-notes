@@ -1,6 +1,7 @@
 using Data.Config;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Application.Helpers.StringHelpers;
 
 namespace Application.Commands.SpecialSomeone;
 
@@ -24,7 +25,7 @@ public class CreateSpecialSomeoneCommandHandler :
             FirstName = request.FirstName,
             LastName = request.LastName,
             Nickname = request.NickName,
-            UniqueIdentifier = "345ty67u8i9o0p;ngh", // TODO: Generate automatically fixed-length
+            UniqueIdentifier = GenerateRandomUrlSafeString($"{request.FirstName}{request.LastName}"),
             UserId = userId
         };
         
