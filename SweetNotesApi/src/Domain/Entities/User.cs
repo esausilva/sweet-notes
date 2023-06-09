@@ -20,7 +20,7 @@ public class User
     
     [Required] 
     [StringLength(60)]
-    public string Password { get; set; } // TODO: Remove from GraphQL Schema
+    public string Password { get; set; }
     // https://code-maze.com/dotnet-secure-passwords-bcrypt/
 
     [Required]

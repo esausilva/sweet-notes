@@ -1,4 +1,5 @@
 using Api.GraphQLEndpoints.SpecialSomeone;
+using Api.GraphQLEndpoints.User;
 using Data.Config;
 
 namespace Api.DI;
@@ -19,7 +20,10 @@ public static class GraphQLConfigurationExtensions
             .AddTypeExtension<SpecialSomeoneQueries>()
 
             .AddMutationType(d => d.Name("Mutation"))
-            .AddTypeExtension<SpecialSomeoneMutations>();
+            .AddTypeExtension<SpecialSomeoneMutations>()
+
+            .AddType<SpecialSomeoneType>()
+            .AddType<UserType>();
 
             // .AddGlobalObjectIdentification();
         
