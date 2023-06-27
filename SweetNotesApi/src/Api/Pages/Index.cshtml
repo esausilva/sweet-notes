@@ -1,0 +1,96 @@
+@page
+@model Api.Pages.Index
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <h1>Signup</h1>
+        <form method="post" id="signup-form">
+            First Name <br>
+            <input type="text" name="FirstName" /> <br>
+            Last Name <br>
+            <input type="text" name="LastName" /> <br>
+            EmailAddress <br>
+            <input type="text" name="EmailAddress" /> <br>
+            Password <br>
+            <input type="text" name="Password" />
+            <button id="signup-button">Signup</button>
+        </form>
+        
+        <h1>Login</h1>
+            <form method="post" id="login-form">
+                EmailAddress <br>
+                <input type="text" name="EmailAddress" /> <br>
+                Password <br>
+                <input type="text" name="Password" />
+                <button id="login-button">Login</button>
+            </form>
+        <script type="text/javascript">
+            const submitButton = document.querySelector('#login-button');
+            const signupButton = document.querySelector('#signup-button');
+            
+            submitButton.addEventListener("click", async (event) => {
+                event.preventDefault();
+                
+                const form = document.querySelector('#login-form');
+                const emailAddress = form.elements.namedItem('EmailAddress').value;
+                const password = form.elements.namedItem('Password').value;
+                const response = await fetch(
+                    "http://localhost:5068/user/login", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        redirect: "follow",
+                        body: JSON.stringify({emailAddress,password})
+                    }
+                );
+                
+                if (response.status === 200){
+                    window.location.href = "/graphql";
+                }
+                else 
+                {
+                    alert("invalid credentials")
+                }
+            });
+            
+            signupButton.addEventListener("click", async (event) => {
+                event.preventDefault();
+                
+                const form = document.querySelector('#signup-form');
+                const firstName = form.elements.namedItem('FirstName').value;
+                const lastName = form.elements.namedItem('LastName').value;
+                const emailAddress = form.elements.namedItem('EmailAddress').value;
+                const password = form.elements.namedItem('Password').value;
+                const response = await fetch(
+                    "http://localhost:5068/user/signup", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        redirect: "follow",
+                        body: JSON.stringify({firstName,lastName,emailAddress,password})
+                    }
+                );
+                
+                if (response.status === 200){
+                    window.location.href = "/graphql";
+                }
+                else 
+                {
+                    alert("invalid credentials")
+                }
+            });
+        </script>
+    </body>
+</html>

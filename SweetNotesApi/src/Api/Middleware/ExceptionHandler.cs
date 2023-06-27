@@ -1,3 +1,4 @@
+using Api.Exceptions;
 using Application.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -25,27 +26,44 @@ public static class ExceptionHandler
     {
         IResult problemResult;
         
-        if (exceptionHandlerPathFeature?.Error is UserAlreadyExistsException)
+        switch (exceptionHandlerPathFeature?.Error)
         {
-            var details = new ProblemDetails
+            case UserAlreadyExistsException:
             {
-                Type = "https://httpstatuses.com/409",
-                Title = "User already exists.",
-                Status = StatusCodes.Status409Conflict
-            };
+                var details = new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/409",
+                    Title = "User already exists.",
+                    Status = StatusCodes.Status409Conflict
+                };
 
-            problemResult = Results.Problem(details);
-        }
-        else
-        {
-            var details = new ProblemDetails
+                problemResult = Results.Problem(details);
+                break;
+            }
+            case UnauthorizedException:
             {
-                Type = "https://httpstatuses.com/500",
-                Title = "An error occurred while processing your request.",
-                Status = StatusCodes.Status500InternalServerError
-            };
+                var details = new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/401",
+                    Title = "User not authorized.",
+                    Status = StatusCodes.Status401Unauthorized
+                };
+
+                problemResult = Results.Problem(details);
+                break;
+            }
+            default:
+            {
+                var details = new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/500",
+                    Title = "An error occurred while processing your request.",
+                    Status = StatusCodes.Status500InternalServerError
+                };
             
-            problemResult = Results.Problem(details);
+                problemResult = Results.Problem(details);
+                break;
+            }
         }
 
         return problemResult;

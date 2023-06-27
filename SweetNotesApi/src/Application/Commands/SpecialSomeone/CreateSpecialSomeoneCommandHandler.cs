@@ -6,7 +6,7 @@ using static Application.Helpers.StringHelpers;
 namespace Application.Commands.SpecialSomeone;
 
 public class CreateSpecialSomeoneCommandHandler : 
-    ICommandRequest<CreateSpecialSomeoneCommand, Domain.Entities.SpecialSomeone>
+    ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
@@ -16,24 +16,24 @@ public class CreateSpecialSomeoneCommandHandler :
     }
     
     async Task<Domain.Entities.SpecialSomeone>
-        ICommandRequest<CreateSpecialSomeoneCommand, Domain.Entities.SpecialSomeone>
-        .Handle(CreateSpecialSomeoneCommand request, CancellationToken cancellationToken)
+        ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone>
+        .Handle((CreateSpecialSomeoneCommand command, int userId) request, CancellationToken cancellationToken)
     {
-        const int userId = 49; // TODO: Get from user authorization claims
+        var (firstName, lastName, nickName) = request.command;
         var specialSomeone = new Domain.Entities.SpecialSomeone
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Nickname = request.NickName,
-            UniqueIdentifier = GenerateRandomUrlSafeString($"{request.FirstName}{request.LastName}"),
-            UserId = userId
+            FirstName = firstName,
+            LastName = lastName,
+            Nickname = nickName,
+            UniqueIdentifier = GenerateRandomUrlSafeString($"{firstName}{lastName}"),
+            UserId = request.userId
         };
         
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
         
         dbContext.Add(specialSomeone);
         await dbContext.SaveChangesAsync(cancellationToken);
-        dbContext.Find<User>(userId);
+        await dbContext.FindAsync<User>(request.userId);
 
         specialSomeone.Notes = new List<Note>();
 

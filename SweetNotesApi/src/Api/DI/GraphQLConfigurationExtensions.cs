@@ -14,6 +14,7 @@ public static class GraphQLConfigurationExtensions
     {
         services
             .AddGraphQLServer()
+            .AddAuthorization()
             .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
 
             .AddQueryType(d => d.Name("Query"))
@@ -25,7 +26,7 @@ public static class GraphQLConfigurationExtensions
             .AddType<SpecialSomeoneType>()
             .AddType<UserType>();
 
-            // .AddGlobalObjectIdentification();
+            // .AddGlobalObjectIdentification(); // TODO: Add Node
         
         return services;
     }
