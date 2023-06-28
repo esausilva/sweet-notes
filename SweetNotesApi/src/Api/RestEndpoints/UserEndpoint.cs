@@ -1,11 +1,12 @@
 using System.Security.Claims;
 using Api.Auth;
 using Api.Exceptions;
-using Api.Models;
+using Api.RestEndpoints.Models;
 using Application.Commands;
 using Application.Commands.UserLogin;
 using Application.Commands.UserSignup;
 using Domain.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -31,12 +32,17 @@ public static class UserEndpoint
 
     private static async Task<IResult> PostUserSignupAsync
     (
+        IValidator<CreateUserSignup> validator,
         HttpContext context,
         CreateUserSignup userSignup, 
         ICommandRequest<CreateUserSignupCommand, int> commandRequest, 
         CancellationToken cancellationToken
     )
     {
+        var validationResult = await validator.ValidateAsync(userSignup, cancellationToken);
+        if (validationResult.IsValid is false) 
+            throw new ApiValidationException(validationResult.ToDictionary());
+
         var command = new CreateUserSignupCommand
         (
             FirstName: userSignup.FirstName,
@@ -53,19 +59,22 @@ public static class UserEndpoint
 
     private static async Task<IResult> PostUserLoginAsync
     (
+        IValidator<UserLogin> validator,
         HttpContext context,
         UserLogin userLogin,
         ICommandRequest<UserLoginCommand, User?> commandRequest,
         CancellationToken cancellationToken
     )
     {
+        var validationResult = await validator.ValidateAsync(userLogin, cancellationToken);
+        if (validationResult.IsValid is false)
+            throw new ApiValidationException(validationResult.ToDictionary());
+        
         var command = new UserLoginCommand(userLogin.EmailAddress, userLogin.Password);
         var user = await commandRequest.Handle(command, cancellationToken);
         
         if (user is null)
-        {
             throw new UnauthorizedException();
-        }
         
         await CreateSignin(context, userLogin.EmailAddress, user.FirstName, user.LastName, user.Id.ToString());
 

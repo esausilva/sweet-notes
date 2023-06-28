@@ -1,4 +1,4 @@
-namespace Api.Models;
+namespace Api.RestEndpoints.Models;
 
 public record CreateUserSignup
 {
@@ -10,6 +10,8 @@ public record CreateUserSignup
     public string Password
     {
         get => _password;
-        init => _password = BCrypt.Net.BCrypt.EnhancedHashPassword(value);
+        init => _password = string.IsNullOrWhiteSpace(value) 
+            ? value 
+            : BCrypt.Net.BCrypt.EnhancedHashPassword(value);
     }
 }

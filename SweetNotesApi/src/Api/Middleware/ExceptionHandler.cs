@@ -34,7 +34,7 @@ public static class ExceptionHandler
                 {
                     Type = "https://httpstatuses.com/409",
                     Title = "User already exists.",
-                    Status = StatusCodes.Status409Conflict
+                    Status = StatusCodes.Status409Conflict,
                 };
 
                 problemResult = Results.Problem(details);
@@ -50,6 +50,18 @@ public static class ExceptionHandler
                 };
 
                 problemResult = Results.Problem(details);
+                break;
+            }
+            case ApiValidationException:
+            {
+                var exp = (ApiValidationException)exceptionHandlerPathFeature!.Error;
+                
+                problemResult = Results.ValidationProblem
+                (
+                    exp.Errors,
+                    type: "https://httpstatuses.com/400",
+                    statusCode: StatusCodes.Status400BadRequest
+                );
                 break;
             }
             default:
