@@ -14,6 +14,7 @@ public static class GraphQLConfigurationExtensions
     {
         services
             .AddGraphQLServer()
+            .AddFairyBread()
             .AddAuthorization()
             .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
 

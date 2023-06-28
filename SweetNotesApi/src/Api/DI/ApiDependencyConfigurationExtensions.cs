@@ -1,4 +1,6 @@
 using Api.Auth.Services.ClaimsReaderService;
+using Api.Validation;
+using FluentValidation;
 
 namespace Api.DI;
 
@@ -21,7 +23,8 @@ public static class ApiDependencyConfigurationExtensions
     )
     {
         services
-            .AddSingleton<IClaimsReader, ClaimsReader>();
+            .AddSingleton<IClaimsReader, ClaimsReader>()
+            .AddValidatorsFromAssemblyContaining<CreateSpecialSomeoneCommandValidator>();
 
         return services;
     }
