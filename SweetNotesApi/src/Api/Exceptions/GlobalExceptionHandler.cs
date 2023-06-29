@@ -1,27 +1,22 @@
-using Api.Exceptions;
 using Application.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Middleware;
+namespace Api.Exceptions;
 
-public static class ExceptionHandler
+public static class GlobalExceptionHandler
 {
-    public static WebApplication ConfigureExceptionHandler(this WebApplication app)
+    public static void Configure(IApplicationBuilder builder)
     {
-        app.UseExceptionHandler(handler => handler.Run(
-            async context =>
-            {
-                var exceptionHandlerPathFeature =
-                    context.Features.Get<IExceptionHandlerPathFeature>();
+        builder.Run(async context => 
+        {
+            var exceptionHandlerPathFeature =
+                context.Features.Get<IExceptionHandlerPathFeature>();
 
-                await ProblemDetailsFactory(exceptionHandlerPathFeature).ExecuteAsync(context);
-            })
-        );
-        
-        return app;
+            await ProblemDetailsFactory(exceptionHandlerPathFeature).ExecuteAsync(context);
+        });
     }
-
+    
     private static IResult ProblemDetailsFactory(IExceptionHandlerPathFeature? exceptionHandlerPathFeature)
     {
         IResult problemResult;

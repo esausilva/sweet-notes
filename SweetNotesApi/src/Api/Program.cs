@@ -1,5 +1,5 @@
 ﻿using Api.DI;
-using Api.Middleware;
+using Api.Exceptions;
 using Api.RestEndpoints;
 using Application.DI;
 using Data.DI;
@@ -23,12 +23,11 @@ services
     .AddCookie(CookieOptions.Configure);
 
 var app = builder.Build();
-app.ConfigureExceptionHandler();
+app.UseExceptionHandler(GlobalExceptionHandler.Configure);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
-app.MapGraphQL()
-    .RequireAuthorization();
+app.MapGraphQL();
 app.MapGroup("/user")
     .MapUserEndpoint();
 app.Run();
