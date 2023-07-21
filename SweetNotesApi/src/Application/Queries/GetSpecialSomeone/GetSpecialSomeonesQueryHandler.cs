@@ -1,7 +1,7 @@
 // using Data.Config;
 // using Microsoft.EntityFrameworkCore;
 //
-// namespace Application.Queries.SpecialSomeone;
+// namespace Application.Queries.GetSpecialSomeone;
 //
 // public class GetSpecialSomeonesQueryHandler : IQueryRequest<GetSpecialSomeoneQuery, List<Domain.Entities.SpecialSomeone>>
 // {

@@ -1,0 +1,13 @@
+using Domain.Entities;
+
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
+
+public class SpecialSomeoneType : ObjectType<SpecialSomeone>
+{
+    protected override void Configure(IObjectTypeDescriptor<SpecialSomeone> descriptor)
+    {
+        descriptor
+            .Field(x => x.UserId)
+            .Ignore();
+    }
+}

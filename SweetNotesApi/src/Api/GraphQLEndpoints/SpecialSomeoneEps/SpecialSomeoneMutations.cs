@@ -1,20 +1,21 @@
 using System.Security.Claims;
 using Api.Auth.Services.ClaimsReaderService;
 using Application.Commands;
-using Application.Commands.SpecialSomeone;
+using Application.Commands.CreateSpecialSomeone;
+using Domain.Entities;
 using HotChocolate.Authorization;
 
-namespace Api.GraphQLEndpoints.SpecialSomeone;
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 
 [ExtendObjectType(Name = "Mutation")]
 public class SpecialSomeoneMutations
 {
-    private readonly ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone> _commandRequest;
+    private readonly ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone> _commandRequest;
     private readonly IClaimsReader _claimsReader;
 
     public SpecialSomeoneMutations
     (
-        ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone> commandRequest,
+        ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone> commandRequest,
         IClaimsReader claimsReader
     )
     {

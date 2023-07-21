@@ -1,4 +1,4 @@
-namespace Application.Commands.SpecialSomeone;
+namespace Application.Commands.CreateSpecialSomeone;
 
 public record CreateSpecialSomeoneCommand
 (

@@ -1,9 +1,10 @@
 using System.Security.Claims;
 using Api.Auth.Services.ClaimsReaderService;
-using Application.Queries.SpecialSomeone;
+using Application.Queries.GetSpecialSomeone;
+using Domain.Entities;
 using HotChocolate.Authorization;
 
-namespace Api.GraphQLEndpoints.SpecialSomeone;
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 
 [ExtendObjectType(Name = "Query")]
 public class SpecialSomeoneQueries
@@ -16,7 +17,7 @@ public class SpecialSomeoneQueries
     }
     
     [Authorize]
-    public async Task<Domain.Entities.SpecialSomeone[]> GetSpecialSomeonesForUser
+    public async Task<SpecialSomeone[]> GetSpecialSomeonesForUser
     (
         ClaimsPrincipal claimsPrincipal,
         SpecialSomeoneByUserIdDataLoader specialSomeonesByUserId,

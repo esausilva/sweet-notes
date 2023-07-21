@@ -1,4 +1,4 @@
-using Application.Commands.SpecialSomeone;
+using Application.Commands.CreateSpecialSomeone;
 using FluentValidation;
 
 namespace Api.Validation;

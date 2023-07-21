@@ -1,10 +1,11 @@
 using Api.GraphQLEndpoints.Common;
+using Domain.Entities;
 
-namespace Api.GraphQLEndpoints.SpecialSomeone;
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 
 public class CreateSpecialSomeonePayload : SpecialSomeonePayloadBase
 {
-    public CreateSpecialSomeonePayload(Domain.Entities.SpecialSomeone specialSomeone) 
+    public CreateSpecialSomeonePayload(SpecialSomeone specialSomeone) 
         : base(specialSomeone)
     { }
 

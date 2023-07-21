@@ -1,10 +1,11 @@
 using Data.Config;
+using Domain.Entities;
 using GreenDonut;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Queries.SpecialSomeone;
+namespace Application.Queries.GetSpecialSomeone;
 
-public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, Domain.Entities.SpecialSomeone>
+public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
@@ -18,7 +19,7 @@ public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, Domain.En
         _dbContextFactory = dbContextFactory;
     }
 
-    protected override async Task<ILookup<int, Domain.Entities.SpecialSomeone>> LoadGroupedBatchAsync
+    protected override async Task<ILookup<int, SpecialSomeone>> LoadGroupedBatchAsync
     (
         IReadOnlyList<int> keys, 
         CancellationToken cancellationToken

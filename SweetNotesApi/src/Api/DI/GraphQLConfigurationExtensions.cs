@@ -1,5 +1,5 @@
-using Api.GraphQLEndpoints.SpecialSomeone;
-using Api.GraphQLEndpoints.User;
+using Api.GraphQLEndpoints.SpecialSomeoneEps;
+using Api.GraphQLEndpoints.UserEps;
 using Data.Config;
 
 namespace Api.DI;

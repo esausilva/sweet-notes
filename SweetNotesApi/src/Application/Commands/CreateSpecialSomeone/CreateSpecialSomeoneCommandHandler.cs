@@ -3,10 +3,10 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using static Application.Helpers.StringHelpers;
 
-namespace Application.Commands.SpecialSomeone;
+namespace Application.Commands.CreateSpecialSomeone;
 
 public class CreateSpecialSomeoneCommandHandler : 
-    ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone>
+    ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
@@ -15,12 +15,15 @@ public class CreateSpecialSomeoneCommandHandler :
         _dbContextFactory = dbContextFactory;
     }
     
-    async Task<Domain.Entities.SpecialSomeone>
-        ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), Domain.Entities.SpecialSomeone>
-        .Handle((CreateSpecialSomeoneCommand command, int userId) request, CancellationToken cancellationToken)
+    async Task<SpecialSomeone> ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone>
+        .Handle
+        (
+            (CreateSpecialSomeoneCommand command, int userId) request, 
+            CancellationToken cancellationToken
+        )
     {
         var (firstName, lastName, nickName) = request.command;
-        var specialSomeone = new Domain.Entities.SpecialSomeone
+        var specialSomeone = new SpecialSomeone
         {
             FirstName = firstName,
             LastName = lastName,
