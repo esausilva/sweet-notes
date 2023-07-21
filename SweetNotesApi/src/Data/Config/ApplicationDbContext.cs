@@ -15,4 +15,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Note> Notes { get; set; } = default!;
+    public DbSet<SpecialSomeone> SpecialSomeone { get; set; } = default!;
 }

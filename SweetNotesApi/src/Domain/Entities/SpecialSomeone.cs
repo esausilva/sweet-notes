@@ -23,5 +23,5 @@ public class SpecialSomeone
 
     public int UserId { get; set; }
     public User User { get; set; }
-    public ICollection<Note> Notes { get; set; }
+    public ICollection<Note> Notes { get; set; } = new List<Note>();
 }
