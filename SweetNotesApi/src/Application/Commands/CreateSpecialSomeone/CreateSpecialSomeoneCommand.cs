@@ -5,4 +5,7 @@ public record CreateSpecialSomeoneCommand
     string FirstName,
     string LastName,
     string? NickName = default
-);
+)
+{
+    public int UserId { get; set; }
+}

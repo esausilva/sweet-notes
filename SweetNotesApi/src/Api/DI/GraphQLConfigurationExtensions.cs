@@ -1,7 +1,8 @@
 using Api.GraphQLEndpoints.NoteEps;
 using Api.GraphQLEndpoints.NoteEps.Types;
 using Api.GraphQLEndpoints.SpecialSomeoneEps;
-using Api.GraphQLEndpoints.UserEps;
+using Api.GraphQLEndpoints.SpecialSomeoneEps.Types;
+using Api.GraphQLEndpoints.UserEps.Types;
 using Data.Config;
 
 namespace Api.DI;
@@ -30,7 +31,8 @@ public static class GraphQLConfigurationExtensions
             .AddType<SpecialSomeoneType>()
             .AddType<UserType>()
             .AddType<NoteType>()
-            .AddType<CreateNoteInputType>();
+            .AddType<CreateNoteInputType>()
+            .AddType<CreateSpecialSomeoneInputType>();
 
             // .AddGlobalObjectIdentification(); // TODO: Add Node
         

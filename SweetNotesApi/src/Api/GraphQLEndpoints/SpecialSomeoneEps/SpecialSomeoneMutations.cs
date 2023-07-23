@@ -10,12 +10,12 @@ namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 [ExtendObjectType(Name = "Mutation")]
 public class SpecialSomeoneMutations
 {
-    private readonly ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone> _commandRequest;
+    private readonly ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone> _commandRequest;
     private readonly IClaimsReader _claimsReader;
 
     public SpecialSomeoneMutations
     (
-        ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone> commandRequest,
+        ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone> commandRequest,
         IClaimsReader claimsReader
     )
     {
@@ -31,8 +31,8 @@ public class SpecialSomeoneMutations
         CancellationToken cancellationToken
     )
     {
-        var userId = _claimsReader.GetClaims(claimsPrincipal).UserId;
-        var specialSomeone = await _commandRequest.Handle((input, userId), cancellationToken);
+        input.UserId = _claimsReader.GetClaims(claimsPrincipal).UserId;
+        var specialSomeone = await _commandRequest.Handle(input, cancellationToken);
         
         return new CreateSpecialSomeonePayload(specialSomeone);
     }

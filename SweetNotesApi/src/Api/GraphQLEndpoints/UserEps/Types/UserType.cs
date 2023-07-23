@@ -1,6 +1,6 @@
 using Domain.Entities;
 
-namespace Api.GraphQLEndpoints.UserEps;
+namespace Api.GraphQLEndpoints.UserEps.Types;
 
 public class UserType : ObjectType<User>
 {

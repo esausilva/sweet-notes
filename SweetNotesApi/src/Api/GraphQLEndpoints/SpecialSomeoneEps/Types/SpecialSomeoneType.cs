@@ -1,6 +1,6 @@
 using Domain.Entities;
 
-namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps.Types;
 
 public class SpecialSomeoneType : ObjectType<SpecialSomeone>
 {

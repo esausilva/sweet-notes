@@ -5,8 +5,7 @@ using static Application.Helpers.StringHelpers;
 
 namespace Application.Commands.CreateSpecialSomeone;
 
-public class CreateSpecialSomeoneCommandHandler : 
-    ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone>
+public class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     
@@ -15,28 +14,27 @@ public class CreateSpecialSomeoneCommandHandler :
         _dbContextFactory = dbContextFactory;
     }
     
-    async Task<SpecialSomeone> ICommandRequest<(CreateSpecialSomeoneCommand command, int userId), SpecialSomeone>
-        .Handle
-        (
-            (CreateSpecialSomeoneCommand command, int userId) request, 
-            CancellationToken cancellationToken
-        )
+    async Task<SpecialSomeone> ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone>.Handle
+    (
+        CreateSpecialSomeoneCommand command, 
+        CancellationToken cancellationToken
+    )
     {
-        var (firstName, lastName, nickName) = request.command;
+        var (firstName, lastName, nickName) = command;
         var specialSomeone = new SpecialSomeone
         {
             FirstName = firstName,
             LastName = lastName,
             Nickname = nickName,
             UniqueIdentifier = GenerateRandomUrlSafeString($"{firstName}{lastName}"),
-            UserId = request.userId
+            UserId = command.UserId
         };
         
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
         
-        dbContext.Add(specialSomeone);
+        await dbContext.AddAsync(specialSomeone, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
-        await dbContext.FindAsync<User>(request.userId);
+        await dbContext.FindAsync<User>(command.UserId);
 
         return specialSomeone;
     }
