@@ -1,3 +1,5 @@
+using Api.GraphQLEndpoints.NoteEps;
+using Api.GraphQLEndpoints.NoteEps.Types;
 using Api.GraphQLEndpoints.SpecialSomeoneEps;
 using Api.GraphQLEndpoints.UserEps;
 using Data.Config;
@@ -23,9 +25,12 @@ public static class GraphQLConfigurationExtensions
 
             .AddMutationType(d => d.Name("Mutation"))
             .AddTypeExtension<SpecialSomeoneMutations>()
+            .AddTypeExtension<NoteMutations>()
 
             .AddType<SpecialSomeoneType>()
-            .AddType<UserType>();
+            .AddType<UserType>()
+            .AddType<NoteType>()
+            .AddType<CreateNoteInputType>();
 
             // .AddGlobalObjectIdentification(); // TODO: Add Node
         

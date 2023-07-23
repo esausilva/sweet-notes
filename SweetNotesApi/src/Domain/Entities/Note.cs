@@ -12,7 +12,10 @@ public class Note
     
     [Required]
     public DateTime CreatedUTC { get; set; }
-    
+
+    public int UserId { get; set; }
     public User User { get; set; }
+
+    public int SpecialSomeoneId { get; set; }
     public SpecialSomeone SpecialSomeone { get; set; }
 }

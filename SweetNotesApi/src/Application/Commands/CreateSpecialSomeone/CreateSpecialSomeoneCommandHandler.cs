@@ -38,8 +38,6 @@ public class CreateSpecialSomeoneCommandHandler :
         await dbContext.SaveChangesAsync(cancellationToken);
         await dbContext.FindAsync<User>(request.userId);
 
-        specialSomeone.Notes = new List<Note>();
-
         return specialSomeone;
     }
 }
