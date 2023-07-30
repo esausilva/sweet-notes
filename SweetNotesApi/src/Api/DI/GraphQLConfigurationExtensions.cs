@@ -23,6 +23,7 @@ public static class GraphQLConfigurationExtensions
 
             .AddQueryType(d => d.Name("Query"))
             .AddTypeExtension<SpecialSomeoneQueries>()
+            .AddTypeExtension<NoteQueries>()
 
             .AddMutationType(d => d.Name("Mutation"))
             .AddTypeExtension<SpecialSomeoneMutations>()
@@ -32,9 +33,14 @@ public static class GraphQLConfigurationExtensions
             .AddType<UserType>()
             .AddType<NoteType>()
             .AddType<CreateNoteInputType>()
-            .AddType<CreateSpecialSomeoneInputType>();
+            .AddType<CreateSpecialSomeoneInputType>()
 
-            // .AddGlobalObjectIdentification(); // TODO: Add Node
+            .AddFiltering()
+            .AddSorting()
+
+            .AddType<SpecialSomeoneFilterInputType>();
+
+        // .AddGlobalObjectIdentification(); // TODO: Add Node
         
         return services;
     }
