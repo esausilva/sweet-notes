@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Api.Auth.Services.ClaimsReaderService;
+using Api.GraphQLEndpoints.SpecialSomeoneEps.Types;
 using Application.Queries.GetSpecialSomeone;
 using Domain.Entities;
 using HotChocolate.Authorization;
@@ -17,6 +18,7 @@ public class SpecialSomeoneQueries
     }
     
     [Authorize]
+    [UseSorting(typeof(SpecialSomeoneSortInputType))]
     public async Task<SpecialSomeone[]> GetSpecialSomeonesForUser
     (
         ClaimsPrincipal claimsPrincipal,

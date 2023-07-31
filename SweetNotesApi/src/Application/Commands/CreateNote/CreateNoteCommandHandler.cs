@@ -33,6 +33,12 @@ public class CreateNoteCommandHandler : ICommandRequest<CreateNoteCommand, Note>
         await dbContext.FindAsync<User>(command.UserId);
         await dbContext.FindAsync<SpecialSomeone>(command.SpecialSomeoneId);
 
+        // await dbContext.Notes
+        //     .Where(x => x.Id == note.Id)
+        //     .Include(x => x.User)
+        //     .Include(x => x.SpecialSomeone)
+        //     .ToListAsync(cancellationToken);
+
         return note;
     }
 }

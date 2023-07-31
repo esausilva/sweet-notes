@@ -27,10 +27,11 @@ public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, SpecialSo
     {
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
-        // TODO: Load notes
+        // TODO: Maybe add noteCount to SpecialSomeone and use that
         var specialSomeones = await dbContext.SpecialSomeone
             .Where(x => keys.Contains(x.UserId))
             .Include(x => x.User)
+            .Include(x => x.Notes)
             .ToListAsync(cancellationToken);
 
         return specialSomeones.ToLookup(x => x.UserId);
