@@ -28,6 +28,7 @@ public class CreateNoteCommandHandler : ICommandRequest<CreateNoteCommand, Note>
         
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
+        // TODO: Migrate .FindAsync to DataLoaders?
         await dbContext.AddAsync(note, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
         await dbContext.FindAsync<User>(command.UserId);

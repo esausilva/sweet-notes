@@ -28,6 +28,7 @@ public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, SpecialSo
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         // TODO: Maybe add noteCount to SpecialSomeone and use that
+        // TODO: Migrate .Include statements to DataLoaders?
         var specialSomeones = await dbContext.SpecialSomeone
             .Where(x => keys.Contains(x.UserId))
             .Include(x => x.User)

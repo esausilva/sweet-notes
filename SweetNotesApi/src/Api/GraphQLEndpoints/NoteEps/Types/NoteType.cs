@@ -7,6 +7,10 @@ public class NoteType : ObjectType<Note>
     protected override void Configure(IObjectTypeDescriptor<Note> descriptor)
     {
         descriptor
+            .ImplementsNode()
+            .IdField(x => x.Id);
+        
+        descriptor
             .Field(x => x.UserId)
             .Ignore();
         

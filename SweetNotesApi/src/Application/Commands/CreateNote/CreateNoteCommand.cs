@@ -1,6 +1,14 @@
+using Domain.Entities;
+using HotChocolate.Types.Relay;
+
 namespace Application.Commands.CreateNote;
 
-public record CreateNoteCommand(string Message, int SpecialSomeoneId)
+public record CreateNoteCommand
 {
-    public int UserId { get; set;  }
+    public string Message { get; init; }
+    
+    [ID(nameof(SpecialSomeone))]
+    public int SpecialSomeoneId { get; init; } 
+    
+    public int UserId { get; set; }
 }

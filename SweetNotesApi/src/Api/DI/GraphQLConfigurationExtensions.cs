@@ -35,12 +35,13 @@ public static class GraphQLConfigurationExtensions
             .AddType<CreateNoteInputType>()
             .AddType<CreateSpecialSomeoneInputType>()
 
+            .AddGlobalObjectIdentification()
+
             .AddFiltering()
             .AddSorting()
 
             .AddType<SpecialSomeoneFilterInputType>();
-
-        // .AddGlobalObjectIdentification(); // TODO: Add Node
+            
         
         return services;
     }
