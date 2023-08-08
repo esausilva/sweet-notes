@@ -1,7 +1,7 @@
 using Api.GraphQLEndpoints.Common;
 using Domain.Entities;
 
-namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
+namespace Api.GraphQLEndpoints.SpecialSomeoneEps.ResponsePayload;
 
 public class CreateSpecialSomeonePayload : SpecialSomeonePayloadBase
 {

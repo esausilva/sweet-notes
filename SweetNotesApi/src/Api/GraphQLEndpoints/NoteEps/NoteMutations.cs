@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Api.Auth.Services.ClaimsReaderService;
+using Api.GraphQLEndpoints.NoteEps.ResponsePayload;
 using Application.Commands;
 using Application.Commands.CreateNote;
 using Domain.Entities;

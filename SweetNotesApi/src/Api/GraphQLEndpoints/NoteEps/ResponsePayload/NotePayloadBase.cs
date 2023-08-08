@@ -1,7 +1,7 @@
 using Api.GraphQLEndpoints.Common;
 using Domain.Entities;
 
-namespace Api.GraphQLEndpoints.NoteEps;
+namespace Api.GraphQLEndpoints.NoteEps.ResponsePayload;
 
 public class NotePayloadBase : Payload
 {
