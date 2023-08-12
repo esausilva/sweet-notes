@@ -5,7 +5,7 @@ using static Application.Helpers.StringHelpers;
 
 namespace Application.Commands.CreateSpecialSomeone;
 
-public class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone>
+public sealed class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     

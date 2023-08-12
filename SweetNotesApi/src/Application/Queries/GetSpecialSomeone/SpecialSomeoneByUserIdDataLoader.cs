@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.GetSpecialSomeone;
 
-public class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, SpecialSomeone>
+public sealed class SpecialSomeoneByUserIdDataLoader : GroupedDataLoader<int, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     

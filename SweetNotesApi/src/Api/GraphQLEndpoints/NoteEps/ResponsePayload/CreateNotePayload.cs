@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.NoteEps.ResponsePayload;
 
-public class CreateNotePayload : NotePayloadBase
+public sealed class CreateNotePayload : NotePayloadBase
 {
     public CreateNotePayload(Note note) 
         : base(note)

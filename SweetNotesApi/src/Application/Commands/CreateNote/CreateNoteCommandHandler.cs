@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Commands.CreateNote;
 
-public class CreateNoteCommandHandler : ICommandRequest<CreateNoteCommand, Note>
+public sealed class CreateNoteCommandHandler : ICommandRequest<CreateNoteCommand, Note>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
 

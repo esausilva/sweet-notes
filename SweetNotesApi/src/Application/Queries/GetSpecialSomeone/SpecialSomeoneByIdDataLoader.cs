@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.GetSpecialSomeone;
 
-public class SpecialSomeoneByIdDataLoader : BatchDataLoader<int, SpecialSomeone>
+public sealed class SpecialSomeoneByIdDataLoader : BatchDataLoader<int, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     

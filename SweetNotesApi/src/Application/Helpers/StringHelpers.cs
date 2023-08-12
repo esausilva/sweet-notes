@@ -1,6 +1,6 @@
 namespace Application.Helpers;
 
-public static class StringHelpers
+internal static class StringHelpers
 {
     public static string GenerateRandomUrlSafeString(string append, int length = 45)
     {

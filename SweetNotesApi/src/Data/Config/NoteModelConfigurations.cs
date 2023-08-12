@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Config;
 
-public class NoteModelConfigurations : IEntityTypeConfiguration<Note>
+public sealed class NoteModelConfigurations : IEntityTypeConfiguration<Note>
 {
     public void Configure(EntityTypeBuilder<Note> builder)
     {

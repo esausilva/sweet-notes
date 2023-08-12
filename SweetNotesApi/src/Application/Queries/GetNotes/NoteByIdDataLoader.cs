@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.GetNotes;
 
-public class NoteByIdDataLoader : BatchDataLoader<int, Note>
+public sealed class NoteByIdDataLoader : BatchDataLoader<int, Note>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.GetUser;
 
-public class UserByIdDataLoader : BatchDataLoader<int, User>
+public sealed class UserByIdDataLoader : BatchDataLoader<int, User>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
     

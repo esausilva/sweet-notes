@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.UserEps.Types;
 
-public class UserType : ObjectType<User>
+public sealed class UserType : ObjectType<User>
 {
     protected override void Configure(IObjectTypeDescriptor<User> descriptor)
     {

@@ -9,7 +9,7 @@ using HotChocolate.Authorization;
 namespace Api.GraphQLEndpoints.NoteEps;
 
 [ExtendObjectType("Mutation")]
-public class NoteMutations
+public sealed class NoteMutations
 {
     private readonly ICommandRequest<CreateNoteCommand, Note> _commandRequest;
     private readonly IClaimsReader _claimsReader;

@@ -3,7 +3,7 @@ using Api.Auth.Claims.Configuration;
 
 namespace Api.Auth.Services.ClaimsReaderService;
 
-public class ClaimsReader : IClaimsReader
+public sealed class ClaimsReader : IClaimsReader
 {
     UserClaims IClaimsReader.GetClaims(ClaimsPrincipal claimsPrincipal)
     {

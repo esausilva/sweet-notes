@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.UserLogin;
 
-public class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
+public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
 
