@@ -3,8 +3,9 @@ using Api.Auth;
 using Api.Exceptions;
 using Api.RestEndpoints.Models;
 using Application.Commands;
-using Application.Commands.UserLogin;
 using Application.Commands.UserSignup;
+using Application.Queries;
+using Application.Queries.UserLogin;
 using Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
@@ -62,7 +63,7 @@ public static class UserEndpoint
         IValidator<UserLogin> validator,
         HttpContext context,
         UserLogin userLogin,
-        ICommandRequest<UserLoginCommand, User?> commandRequest,
+        IQueryRequest<UserLoginQuery, User?> queryRequest,
         CancellationToken cancellationToken
     )
     {
@@ -70,8 +71,8 @@ public static class UserEndpoint
         if (validationResult.IsValid is false)
             throw new ApiValidationException(validationResult.ToDictionary());
         
-        var command = new UserLoginCommand(userLogin.EmailAddress, userLogin.Password);
-        var user = await commandRequest.Handle(command, cancellationToken);
+        var query = new UserLoginQuery(userLogin.EmailAddress, userLogin.Password);
+        var user = await queryRequest.Handle(query, cancellationToken);
         
         if (user is null)
             throw new UnauthorizedException();

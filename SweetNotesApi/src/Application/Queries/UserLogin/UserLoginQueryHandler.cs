@@ -2,20 +2,20 @@ using Data.Config;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Commands.UserLogin;
+namespace Application.Queries.UserLogin;
 
-public class UserLoginCommandHandler : ICommandRequest<UserLoginCommand, User?>
+public class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
 
-    public UserLoginCommandHandler(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+    public UserLoginQueryHandler(IDbContextFactory<ApplicationDbContext> dbContextFactory)
     {
         _dbContextFactory = dbContextFactory;
     }
 
-    async Task<User?> ICommandRequest<UserLoginCommand, User?>.Handle
+    async Task<User?> IQueryRequest<UserLoginQuery, User?>.Handle
     (
-        UserLoginCommand command, 
+        UserLoginQuery query, 
         CancellationToken cancellationToken
     )
     {
@@ -23,10 +23,10 @@ public class UserLoginCommandHandler : ICommandRequest<UserLoginCommand, User?>
 
         var userSet = dbContext.Set<User>();
         var user = await userSet
-            .Where(x => x.EmailAddress == command.EmailAddress)
+            .Where(x => x.EmailAddress == query.EmailAddress)
             .FirstOrDefaultAsync(cancellationToken);
 
-        if (user is not null && BCrypt.Net.BCrypt.EnhancedVerify(command.Password, user!.Password))
+        if (user is not null && BCrypt.Net.BCrypt.EnhancedVerify(query.Password, user!.Password))
         {
             return user;
         }

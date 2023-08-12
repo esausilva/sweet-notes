@@ -1,5 +1,6 @@
 using System.Reflection;
 using Application.Commands;
+using Application.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,15 +24,15 @@ public static class ApplicationDependencyConfigurationExtensions
                 services.AddTransient(serviceType, assignedTypes);
             });
         
-        // Assembly.GetExecutingAssembly()
-        //     .GetTypes()
-        //     .Where(item => item.GetInterfaces()
-        //         .Where(i => i.IsGenericType).Any(i => i.GetGenericTypeDefinition() == typeof(IQueryRequest<,>)) && !item.IsAbstract && !item.IsInterface)
-        //     .ToList()
-        //     .ForEach(assignedTypes => {
-        //         var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(IQueryRequest<,>));
-        //         services.AddTransient(serviceType, assignedTypes);
-        //     });
+        Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(item => item.GetInterfaces()
+                .Where(i => i.IsGenericType).Any(i => i.GetGenericTypeDefinition() == typeof(IQueryRequest<,>)) && !item.IsAbstract && !item.IsInterface)
+            .ToList()
+            .ForEach(assignedTypes => {
+                var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(IQueryRequest<,>));
+                services.AddTransient(serviceType, assignedTypes);
+            });
         
         return services;
     }
