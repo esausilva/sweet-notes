@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.NoteEps;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public class NoteQueries
 {
     [UsePaging(IncludeTotalCount = true)]

@@ -7,7 +7,7 @@ using HotChocolate.Authorization;
 
 namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public class SpecialSomeoneQueries
 {
     private readonly IClaimsReader _claimsReader;

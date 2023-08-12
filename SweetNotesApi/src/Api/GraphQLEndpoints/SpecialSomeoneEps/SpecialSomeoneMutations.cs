@@ -8,7 +8,7 @@ using HotChocolate.Authorization;
 
 namespace Api.GraphQLEndpoints.SpecialSomeoneEps;
 
-[ExtendObjectType(Name = "Mutation")]
+[ExtendObjectType("Mutation")]
 public class SpecialSomeoneMutations
 {
     private readonly ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone> _commandRequest;
