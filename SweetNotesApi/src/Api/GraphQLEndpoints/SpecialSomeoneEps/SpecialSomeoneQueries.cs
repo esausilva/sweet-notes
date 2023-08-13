@@ -17,7 +17,6 @@ public sealed class SpecialSomeoneQueries
         _claimsReader = claimsReader;
     }
     
-    // TODO: Add NoteCount prop to SpecialSomeone
     [Authorize]
     [UseSorting(typeof(SpecialSomeoneSortInputType))]
     public async Task<SpecialSomeone[]> GetSpecialSomeonesForUser

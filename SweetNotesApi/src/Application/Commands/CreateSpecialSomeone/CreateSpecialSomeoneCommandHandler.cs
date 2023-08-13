@@ -34,7 +34,6 @@ public sealed class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateS
         
         await dbContext.AddAsync(specialSomeone, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
-        await dbContext.FindAsync<User>(command.UserId);
 
         return specialSomeone;
     }
