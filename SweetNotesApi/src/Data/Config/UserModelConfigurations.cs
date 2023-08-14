@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Config;
 
-public sealed class UserModelConfigurations : IEntityTypeConfiguration<User>
+internal sealed class UserModelConfigurations : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {

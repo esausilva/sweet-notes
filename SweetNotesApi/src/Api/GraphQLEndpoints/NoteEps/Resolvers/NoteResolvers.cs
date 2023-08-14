@@ -1,6 +1,6 @@
 using Application.Queries.GetSpecialSomeone;
 using Application.Queries.GetUser;
-using Data.Config;
+using Data;
 using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.NoteEps.Resolvers;

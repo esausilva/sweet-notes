@@ -21,7 +21,6 @@ public class User
     [Required] 
     [StringLength(60)]
     public string Password { get; set; }
-    // https://code-maze.com/dotnet-secure-passwords-bcrypt/
 
     [Required]
     public DateTime SignedUpUTC { get; set; }

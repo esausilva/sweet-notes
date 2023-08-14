@@ -1,4 +1,4 @@
-using Data.Config;
+using Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using static Application.Helpers.StringHelpers;

@@ -3,7 +3,7 @@ using Api.GraphQLEndpoints.NoteEps.Types;
 using Api.GraphQLEndpoints.SpecialSomeoneEps;
 using Api.GraphQLEndpoints.SpecialSomeoneEps.Types;
 using Api.GraphQLEndpoints.UserEps.Types;
-using Data.Config;
+using Data;
 
 namespace Api.DI;
 

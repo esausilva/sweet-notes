@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Config;
 
-public sealed class SpecialSomeoneModelConfigurations : IEntityTypeConfiguration<SpecialSomeone>
+internal sealed class SpecialSomeoneModelConfigurations : IEntityTypeConfiguration<SpecialSomeone>
 {
     public void Configure(EntityTypeBuilder<SpecialSomeone> builder)
     {

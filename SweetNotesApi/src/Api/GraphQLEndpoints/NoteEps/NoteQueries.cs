@@ -1,5 +1,5 @@
 using Api.GraphQLEndpoints.NoteEps.Types;
-using Data.Config;
+using Data;
 using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.NoteEps;

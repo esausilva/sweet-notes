@@ -1,7 +1,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Config;
+namespace Data;
 
 public sealed class ApplicationDbContext : DbContext
 {

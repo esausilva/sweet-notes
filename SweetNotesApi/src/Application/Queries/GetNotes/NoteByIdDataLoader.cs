@@ -1,4 +1,4 @@
-using Data.Config;
+using Data;
 using Domain.Entities;
 using GreenDonut;
 using Microsoft.EntityFrameworkCore;

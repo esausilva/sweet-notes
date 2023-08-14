@@ -1,5 +1,5 @@
 using Application.Exceptions;
-using Data.Config;
+using Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

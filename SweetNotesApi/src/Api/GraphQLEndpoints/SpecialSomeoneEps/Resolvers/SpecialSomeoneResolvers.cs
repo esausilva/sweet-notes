@@ -1,6 +1,6 @@
 using Application.Queries.GetNotes;
 using Application.Queries.GetUser;
-using Data.Config;
+using Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
