@@ -3,11 +3,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { MainLayout } from '../app/MainLayout';
-import { ISignupForm, IFormFieldData } from './interfaces';
+import { SignupForm, FormFieldData } from './types';
 
 import styles from './index.module.scss';
 
-const initialFormState: ISignupForm = {
+const initialFormState: SignupForm = {
   firstName: '',
   lastName: '',
   email: '',
@@ -15,9 +15,9 @@ const initialFormState: ISignupForm = {
 };
 
 const formReducer = (
-  state: ISignupForm,
-  { name, value }: IFormFieldData,
-): ISignupForm => {
+  state: SignupForm,
+  { name, value }: FormFieldData,
+): SignupForm => {
   return {
     ...state,
     [name]: value,

@@ -3,19 +3,19 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { MainLayout } from '../app/MainLayout';
-import { IFormFieldData, ILoginForm } from './interfaces';
+import { FormFieldData, LoginForm } from './types';
 
 import styles from './index.module.scss';
 
-const initialFormState: ILoginForm = {
+const initialFormState: LoginForm = {
   email: '',
   password: '',
 };
 
 const formReducer = (
-  state: ILoginForm,
-  { name, value }: IFormFieldData,
-): ILoginForm => {
+  state: LoginForm,
+  { name, value }: FormFieldData,
+): LoginForm => {
   return {
     ...state,
     [name]: value,
@@ -35,18 +35,17 @@ export default function Index(): JSX.Element {
   ): Promise<void> => {
     event.preventDefault();
 
-    // const res = await fetch('http://localhost:5068/user/login', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   cache: 'no-store',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({}),
-    // });
+    const res = await fetch('http://localhost:5068/user/login', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-    // console.log(res);
-    console.log(formData);
+    console.log(res);
   };
 
   return (

@@ -1,4 +1,4 @@
-export interface IFormFieldData {
+export type FormFieldData = {
   name: string;
   value: string | number;
-}
+};
