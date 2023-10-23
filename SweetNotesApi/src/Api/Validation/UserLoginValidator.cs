@@ -9,7 +9,8 @@ public class UserLoginValidator : AbstractValidator<UserLogin>
     {
         RuleFor(c => c.EmailAddress)
             .NotEmpty()
-            .EmailAddress();
+            .EmailAddress()
+            .MaximumLength(256);
 
         RuleFor(c => c.Password)
             .NotEmpty();

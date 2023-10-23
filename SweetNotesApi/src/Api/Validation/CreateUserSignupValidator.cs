@@ -8,14 +8,17 @@ public class CreateUserSignupValidator : AbstractValidator<CreateUserSignup>
     public CreateUserSignupValidator()
     {
         RuleFor(c => c.FirstName)
-            .NotEmpty();
-        
+            .NotEmpty()
+            .MaximumLength(200);
+
         RuleFor(c => c.LastName)
-            .NotEmpty();
-        
+            .NotEmpty()
+            .MaximumLength(200);
+
         RuleFor(c => c.EmailAddress)
             .NotEmpty()
-            .EmailAddress();
+            .EmailAddress()
+            .MaximumLength(256);
 
         RuleFor(c => c.Password)
             .NotEmpty();

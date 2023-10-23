@@ -1,6 +1,8 @@
 using Api.Auth.Services.ClaimsReaderService;
+using Api.Security;
 using Api.Validation;
 using FluentValidation;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Api.DI;
 

@@ -1,0 +1,18 @@
+import { ApiError } from '../../pages/types/';
+
+export function useRenderErrorList(errors: ApiError): JSX.Element {
+  const errorKeys = Object.keys(errors);
+
+  if (errorKeys.length > 0) {
+    var errorList = errorKeys.map(key => errors[key]).flat();
+    return (
+      <div id="error-list">
+        <ul>
+          {errorList.map((error, idx) => (
+            <li key={`error-${idx}`}>{error}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  } else return <div></div>;
+}

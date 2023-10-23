@@ -1,10 +1,11 @@
-﻿using Api.DI;
+﻿using Api.Auth.Cookie;
+using Api.DI;
 using Api.Exceptions;
 using Api.RestEndpoints;
+using Api.Security;
 using Application.DI;
 using Data.DI;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using CookieOptions = Api.Auth.Cookie.CookieOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +18,15 @@ services
     .ConfigureApplicationDependencies(configuration)
     .ConfigureDataDependencies(configuration)
     .ConfigureGraphQLDependencies(configuration)
+    .AddCors(Cors.Configure(configuration))
     .AddRazorPages();
 services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(CookieOptions.Configure);
+    .AddCookie(AuthCookie.Configure);
 
 var app = builder.Build();
 app.UseExceptionHandler(GlobalExceptionHandler.Configure);
+app.UseCors(Cors.FrontEndPolicyName);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
