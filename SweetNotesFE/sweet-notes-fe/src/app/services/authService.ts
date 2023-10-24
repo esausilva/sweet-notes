@@ -1,5 +1,5 @@
-import { ObjectLiteral, ApiResult } from '../../pages/types';
-import { fetchPost } from '../Helpers/fetchHelpers';
+import { ObjectLiteral, ApiResult } from '@/type/index';
+import { fetchPost } from '@/helper/fetchHelpers';
 
 export async function authenticate(
   route: string,

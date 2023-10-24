@@ -1,0 +1,12 @@
+@import '../../styles/colors.scss';
+
+main {
+  display: grid;
+  place-items: center;
+  background-color: lighten($color: papayawhip, $amount: 5);
+  height: 100vh;
+}
+
+#error-list {
+  color: $danger-color;
+}

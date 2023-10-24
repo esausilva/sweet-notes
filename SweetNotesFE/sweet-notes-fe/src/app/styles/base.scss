@@ -1,0 +1,46 @@
+h1 {
+  font-size: 2.7rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  padding: .3rem;
+  margin: 0;
+}
+
+a {
+  color: $link-color;
+
+  &:hover {
+    color: $link-color-hover;
+  }
+}
+
+input, button {
+  border-radius: .2rem;
+  border: 1px solid gray;
+}
+
+.button--primary {
+  background-color: $primary-color;
+  border-color: darken($color: $primary-color, $amount: 5);
+  color: $button-font-color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-color-hover;
+    border-color: darken($color: $primary-color-hover, $amount: 5);
+  }
+}

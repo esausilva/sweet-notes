@@ -1,4 +1,4 @@
-import { ApiError } from '../../pages/types/';
+import { ApiError } from '@/type/index';
 
 export function useRenderErrorList(errors: ApiError): JSX.Element {
   const errorKeys = Object.keys(errors);

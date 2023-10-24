@@ -1,4 +1,4 @@
-import { ObjectLiteral } from '../../pages/types';
+import { ObjectLiteral } from '@/type/index';
 
 const rootUrl = process.env.NEXT_PUBLIC_BACKEND_ROOT_URI;
 

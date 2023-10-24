@@ -2,10 +2,10 @@ import { FormEvent, useReducer, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { MainLayout } from '../app/MainLayout';
-import { SignupForm, FormFieldData, ApiError } from './types';
-import { authenticate } from '../app/services/authService';
-import { useRenderErrorList } from '../app/hooks/useRenderErrorList';
+import { MainLayout } from '@/layout/MainLayout';
+import { SignupForm, FormFieldData, ApiError } from '@/type/index';
+import { authenticate } from '@/service/authService';
+import { useRenderErrorList } from '@/hook/useRenderErrorList';
 
 import styles from './index.module.scss';
 

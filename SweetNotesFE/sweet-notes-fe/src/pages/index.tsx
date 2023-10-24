@@ -2,10 +2,10 @@ import { FormEvent, useReducer, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { MainLayout } from '../app/MainLayout';
-import { FormFieldData, LoginForm, ApiError } from './types';
-import { authenticate } from '../app/services/authService';
-import { useRenderErrorList } from '../app/hooks/useRenderErrorList';
+import { MainLayout } from '@/layout/MainLayout';
+import { FormFieldData, LoginForm, ApiError } from '@/type/index';
+import { authenticate } from '@/service/authService';
+import { useRenderErrorList } from '@/hook/useRenderErrorList';
 
 import styles from './index.module.scss';
 
@@ -73,7 +73,9 @@ export default function Index(): JSX.Element {
           <label htmlFor="password">Password</label>
           <input type="password" name="password" onChange={handleChange} />
 
-          <button type="submit">Login</button>
+          <button className="button--primary" type="submit">
+            Login
+          </button>
         </form>
         <Link href="/signup">Need an account?</Link>
       </section>
