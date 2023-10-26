@@ -4,12 +4,13 @@
     "baseUrl": "src",
     "paths": {
       "@/component/*": ["app/components/*"],
+      "@/constants": ["app/constants/index"],
       "@/service/*": ["app/services/*"],
       "@/layout/*": ["app/components/layouts/*"],
       "@/helper/*": ["app/helpers/*"],
       "@/style/*": ["app/styles/*"],
       "@/hook/*": ["app/hooks/*"],
-      "@/type/*": ["app/types/*"]
+      "@/types": ["app/types/index"]
     },
     "lib": [
       "dom",

@@ -8,7 +8,8 @@ public static class AuthCookie
     {
         options.ExpireTimeSpan = TimeSpan.FromDays(7);
         options.Cookie.HttpOnly = true;
-        options.Cookie.Name = "SweetNotesCookie";
+        //options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // TODO: Uncomment when working with HTTPS locally
+        options.Cookie.Name = "SweetNotesAuthCookie";
         options.Cookie.IsEssential = true;
         options.Events.OnRedirectToLogin = context =>
         {
