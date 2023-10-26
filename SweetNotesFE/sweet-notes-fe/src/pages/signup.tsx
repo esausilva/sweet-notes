@@ -1,5 +1,4 @@
 import { FormEvent, useReducer, useState } from 'react';
-import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -8,24 +7,9 @@ import { MainLayout } from '@/layout/MainLayout';
 import { SignupForm, FormFieldData, ApiError } from '@/types';
 import { authenticate } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';
-import { AUTH_COOKIE_NAME, USER_ADMIN_ROUTE } from '@/constants';
+import { USER_ADMIN_ROUTE } from '@/constants';
 
 import styles from './index.module.scss';
-
-export const getServerSideProps = (async context => {
-  const authCookie = context.req.cookies[AUTH_COOKIE_NAME];
-
-  if (authCookie) {
-    return {
-      redirect: {
-        destination: USER_ADMIN_ROUTE,
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: {} };
-}) satisfies GetServerSideProps<{}>;
 
 const initialFormState: SignupForm = {
   firstName: '',
