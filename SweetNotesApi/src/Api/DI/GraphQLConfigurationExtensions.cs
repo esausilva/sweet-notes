@@ -42,7 +42,6 @@ public static class GraphQLConfigurationExtensions
 
             .AddType<SpecialSomeoneFilterInputType>();
             
-        
         return services;
     }
 }

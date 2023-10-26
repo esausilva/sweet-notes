@@ -11,7 +11,7 @@ public static class ApiDependencyConfigurationExtensions
     public static ConfigurationManager GetApiConfigurations(this ConfigurationManager configuration)
     {
         configuration.SetBasePath(Directory.GetCurrentDirectory());
-        configuration.AddJsonFile("appsettings.json");
+        configuration.AddJsonFile("appsettings.json", optional: false);
         
         Console.WriteLine(configuration.GetDebugView());
         
@@ -25,7 +25,7 @@ public static class ApiDependencyConfigurationExtensions
     )
     {
         services
-            .AddSingleton<IClaimsReader, ClaimsReader>()
+            .AddScoped<IClaimsReader, ClaimsReader>()
             .AddValidatorsFromAssemblyContaining<CreateSpecialSomeoneCommandValidator>();
 
         return services;
