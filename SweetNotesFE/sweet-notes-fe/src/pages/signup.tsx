@@ -30,7 +30,7 @@ const formReducer = (
 
 export default function Signup(): JSX.Element {
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
-  const [errors, setErrors] = useState({} as ApiError);
+  const [errors, setErrors] = useState<ApiError>({});
   const router = useRouter();
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {

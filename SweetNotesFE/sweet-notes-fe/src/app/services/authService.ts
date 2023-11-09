@@ -1,4 +1,4 @@
-import { ObjectLiteral, ApiResult } from '@/type/index';
+import { ObjectLiteral, ApiResult } from '@/types';
 import { fetchPost } from '@/helper/fetchHelpers';
 
 export async function authenticate(
