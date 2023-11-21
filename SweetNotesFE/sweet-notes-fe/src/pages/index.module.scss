@@ -1,5 +1,10 @@
+@import '@/style/mixins.scss';
+
 #form-wrapper {
-  width: 50%;
+  width: 90%;
+  @include mediaMedium {
+    width: 50%;
+  }
 }
 
 #login-form {

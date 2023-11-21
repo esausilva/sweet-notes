@@ -1,0 +1,19 @@
+@import '@/style/breaks.scss';
+
+@mixin mediaSmall {
+  @media (min-width: #{$media-small}) {
+      @content;
+  }
+}
+
+@mixin mediaMedium {
+  @media (min-width: #{$media-medium}) {
+      @content;
+  }
+}
+
+@mixin mediaLarge {
+  @media (min-width: #{$media-large}) {
+      @content;
+  }
+}
