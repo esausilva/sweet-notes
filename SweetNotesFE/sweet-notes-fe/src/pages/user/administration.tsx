@@ -1,13 +1,36 @@
 import Head from 'next/head';
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
-export default function UserAdmin(): JSX.Element {
+import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
+import { fetchGet } from '@/helper/fetchHelpers';
+import { Me } from '@/types';
+import { AUTH_COOKIE_NAME } from '@/constants';
+
+import styles from './administration.module.scss';
+
+export default function UserAdmin({ me }: { me: Me }): JSX.Element {
   return (
-    <div>
+    <UserAdminLayout me={me}>
       <Head>
         <title>Admin | Sweet Notes</title>
       </Head>
 
-      <h1>Admin</h1>
-    </div>
+      <p>Body</p>
+    </UserAdminLayout>
   );
 }
+
+export const getServerSideProps = (async context => {
+  const cookie = context.req.cookies[AUTH_COOKIE_NAME];
+  const response: Response = await fetchGet({
+    route: 'user/me',
+    headers: {
+      cookie: `${AUTH_COOKIE_NAME}=${cookie}`,
+    },
+  });
+  const me: Me = await response.json();
+
+  return { props: { me } };
+}) satisfies GetServerSideProps<{
+  me: Me;
+}>;

@@ -6,8 +6,12 @@ export async function authenticate(
   body: ObjectLiteral,
 ): Promise<ApiResult> {
   try {
-    const response: Response = await fetchPost(route, body, {
-      credentials: 'include',
+    const response: Response = await fetchPost({
+      route,
+      body,
+      fetchOptions: {
+        credentials: 'include',
+      },
     });
 
     if (response.status !== 200) {

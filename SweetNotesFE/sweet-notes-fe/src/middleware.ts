@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { USER_ADMIN_ROUTE } from '@/constants';
+import { USER_ADMIN_ROUTE, AUTH_COOKIE_NAME } from '@/constants';
 
 export function middleware(request: NextRequest) {
-  const authCookie = request.cookies.get('SweetNotesAuthCookie');
+  const authCookie = request.cookies.get(AUTH_COOKIE_NAME);
   const origin = request.nextUrl.origin;
 
   switch (request.nextUrl.pathname) {

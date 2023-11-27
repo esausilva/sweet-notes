@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using Api.Auth;
+using Api.Auth.Claims.Configuration;
+using Api.Auth.Services.ClaimsReaderService;
 using Api.Exceptions;
 using Api.RestEndpoints.Models;
 using Application.Commands;
@@ -21,8 +23,17 @@ public static class UserEndpoint
         group.MapPost("signup", PostUserSignupAsync);
         group.MapPost("login", PostUserLoginAsync);
         group.MapGet("logout", GetUserLogoutAsync);
+        group.MapGet("me", GetMeAsync);
 
         return group;
+    }
+
+    [Authorize]
+    private static Task<UserClaims> GetMeAsync(HttpContext context, IClaimsReader claimsReader)
+    {
+        var claims = claimsReader.GetClaims(context.User);
+
+        return Task.FromResult(claims);
     }
 
     [Authorize]

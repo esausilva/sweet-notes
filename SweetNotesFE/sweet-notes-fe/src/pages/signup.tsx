@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { MainLayout } from '@/layout/MainLayout';
+import { MainLayout } from '@/component/layouts/MainEntryLayout';
 import { SignupForm, FormFieldData, ApiError } from '@/types';
 import { authenticate } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';

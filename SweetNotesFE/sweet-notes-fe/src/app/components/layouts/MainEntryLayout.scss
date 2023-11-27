@@ -1,9 +1,9 @@
 @import '@/style/app.scss';
 
-main {
+.wrapper__main-entry {
   display: grid;
   place-items: center;
-  background-color: lighten($color: papayawhip, $amount: 5);
+  background-color: $background;
   height: 100vh;
 }
 

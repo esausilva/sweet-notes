@@ -1,3 +1,11 @@
+@import './mixins.scss';
+
+body {
+  color: $font-color;
+  letter-spacing: 0.07rem;
+  font-size: 1.6rem;
+}
+
 h1 {
   font-size: 2.7rem;
 }
@@ -8,6 +16,40 @@ h2 {
 
 h3 {
   font-size: 2rem;
+}
+
+@include mediaMedium {
+  body {
+    font-size: 1.7rem;
+  }
+  h1 {
+    font-size: 3.5rem;
+  }
+  
+  h2 {
+    font-size: 3.7rem;
+  }
+  
+  h3 {
+    font-size: 3.2rem;
+  }
+}
+
+@include mediaLarge {
+  body {
+    font-size: 1.9rem;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 4.2rem;
+  }
+
+  h3 {
+    font-size: 3.7rem;
+  }
 }
 
 p, h1, h2, h3, h4, h5, h6 {
