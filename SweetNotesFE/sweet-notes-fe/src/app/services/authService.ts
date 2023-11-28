@@ -1,8 +1,9 @@
 import { ObjectLiteral, ApiResult } from '@/types';
 import { fetchPost } from '@/helper/fetchHelpers';
+import { Routes } from '@/constants';
 
 export async function authenticate(
-  route: string,
+  route: Routes,
   body: ObjectLiteral,
 ): Promise<ApiResult> {
   try {

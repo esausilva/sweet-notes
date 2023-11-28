@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { USER_ADMIN_ROUTE, AUTH_COOKIE_NAME } from '@/constants';
+import { Routes, AUTH_COOKIE_NAME } from '@/constants';
 
 export function middleware(request: NextRequest) {
   const authCookie = request.cookies.get(AUTH_COOKIE_NAME);
@@ -9,17 +9,17 @@ export function middleware(request: NextRequest) {
 
   switch (request.nextUrl.pathname) {
     case '/':
-    case '/signup':
+    case `/${Routes.SIGNUP}`:
       if (authCookie)
-        return NextResponse.redirect(`${origin}${USER_ADMIN_ROUTE}`);
+        return NextResponse.redirect(`${origin}/${Routes.USER_ADMINISTRATION}`);
       break;
 
-    case '/user':
+    case `/${Routes.USER}`:
       if (authCookie)
-        return NextResponse.redirect(`${origin}${USER_ADMIN_ROUTE}`);
+        return NextResponse.redirect(`${origin}/${Routes.USER_ADMINISTRATION}`);
       return NextResponse.redirect(origin);
 
-    case USER_ADMIN_ROUTE:
+    case `/${Routes.USER_ADMINISTRATION}`:
       if (authCookie === undefined) return NextResponse.redirect(origin);
       break;
   }

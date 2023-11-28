@@ -7,7 +7,7 @@ import { MainLayout } from '@/component/layouts/MainEntryLayout';
 import { FormFieldData, LoginForm, ApiError } from '@/types';
 import { authenticate } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';
-import { USER_ADMIN_ROUTE } from '@/constants';
+import { Routes } from '@/constants';
 
 import styles from './index.module.scss';
 
@@ -39,12 +39,12 @@ export default function Index(): JSX.Element {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    var result = await authenticate('user/login', {
+    var result = await authenticate(Routes.USER_LOGIN, {
       emailAddress: formData.email,
       password: formData.password,
     });
 
-    if (result.status === 200) router.push(USER_ADMIN_ROUTE);
+    if (result.status === 200) router.push(Routes.USER_ADMINISTRATION);
     if (result.errors) setErrors(result.errors);
   };
 
