@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
+import { Header } from '@/component/administration/Header';
 import { fetchGet } from '@/helper/fetchHelpers';
 import { Me } from '@/types';
 import { AUTH_COOKIE_NAME, Routes } from '@/constants';
@@ -10,7 +11,7 @@ import styles from './administration.module.scss';
 
 export default function UserAdmin({ me }: { me: Me }): JSX.Element {
   return (
-    <UserAdminLayout me={me}>
+    <UserAdminLayout header={<Header me={me} />}>
       <Head>
         <title>Admin | Sweet Notes</title>
       </Head>
