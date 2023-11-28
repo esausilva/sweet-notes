@@ -8,6 +8,6 @@ TODOs:
 
 ## Back End
 
-- [ ] Extract UserEndpoint.cs into separate classes
+- [x] Extract UserEndpoint.cs into separate classes
 - [ ] Look for opportunities to introduce a IDateTimeProvider and remove concrete implementations of DateTime
 - [ ] Refactor exceptions to use Result Pattern with NuGet ErrorOr
