@@ -13,7 +13,7 @@ export function UserAdminLayout({
   return (
     <div className={`${inter.className} wrapper__main-admin`}>
       {header}
-      <main>{children}</main>
+      <main className="main-admin">{children}</main>
     </div>
   );
 }

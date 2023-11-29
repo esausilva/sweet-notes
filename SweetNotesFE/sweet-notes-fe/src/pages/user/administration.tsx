@@ -3,6 +3,8 @@ import type { GetServerSideProps } from 'next';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
 import { Header } from '@/component/administration/Header';
+import { SpecialSomeones } from '@/component/administration/SpecialSomeones';
+import { Notes } from '@/component/administration/Notes';
 import { fetchGet } from '@/helper/fetchHelpers';
 import { Me } from '@/types';
 import { AUTH_COOKIE_NAME, Routes } from '@/constants';
@@ -15,8 +17,9 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
       <Head>
         <title>Admin | Sweet Notes</title>
       </Head>
-
-      <p>Body</p>
+      <SpecialSomeones />
+      <div className={styles.separator}></div>
+      <Notes />
     </UserAdminLayout>
   );
 }

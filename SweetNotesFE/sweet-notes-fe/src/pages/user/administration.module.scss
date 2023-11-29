@@ -1,0 +1,11 @@
+@import '@/style/mixins.scss';
+
+.separator {
+  grid-area: separator;
+  border-bottom: 1px solid #878787;
+  
+  @include mediaMedium {
+    border-bottom: 0px;
+    border-left: 1px solid #878787;
+  }
+}
