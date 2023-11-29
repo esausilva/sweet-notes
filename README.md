@@ -5,6 +5,7 @@ TODOs:
 ## Front End
 
 - [x] Refactor all routes to constant files in an object
+- [ ] Disable Login / Signup button after pressing
 
 ## Back End
 
