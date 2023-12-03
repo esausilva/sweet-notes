@@ -1,9 +1,10 @@
 @import './mixins.scss';
+@import './variables.scss';
 
 body {
   color: $font-color;
   letter-spacing: 0.07rem;
-  font-size: 1.6rem;
+  font-size: $body--font-size;
 }
 
 h1 {
@@ -11,44 +12,46 @@ h1 {
 }
 
 h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
+  margin-bottom: 1em;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 @include mediaMedium {
   body {
-    font-size: 1.7rem;
+    font-size: $body--font-size_medium;
   }
   h1 {
     font-size: 3.5rem;
   }
   
   h2 {
-    font-size: 3.7rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5em;
   }
   
   h3 {
-    font-size: 3.2rem;
+    font-size: 2rem;
   }
 }
 
 @include mediaLarge {
   body {
-    font-size: 1.9rem;
+    font-size: $body--font-size_large;
   }
   h1 {
     font-size: 4rem;
   }
 
   h2 {
-    font-size: 4.2rem;
+    font-size: 2.9rem;
   }
 
   h3 {
-    font-size: 3.7rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -58,22 +61,24 @@ p, h1, h2, h3, h4, h5, h6 {
 
 input, button, textarea, select {
   font: inherit;
-  padding: .3rem;
+  padding: .5rem 1rem;
   margin: 0;
+  border: 1px solid gray;
+  border-radius: .2rem;
+}
+
+input, textarea, select {
+  background-color: #fff;
 }
 
 a {
   color: $link-color;
-
+  
   &:hover {
     color: $link-color-hover;
   }
 }
 
-input, button {
-  border-radius: .2rem;
-  border: 1px solid gray;
-}
 
 .button--primary {
   background-color: $primary-color;
