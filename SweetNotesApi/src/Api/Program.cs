@@ -22,7 +22,7 @@ services
     .AddRazorPages();
 services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(AuthCookie.Configure);
+     .AddCookie(AuthCookie.Configure());
 
 var app = builder.Build();
 app.UseExceptionHandler(GlobalExceptionHandler.Configure);

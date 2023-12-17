@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rimraf .next"
+    "clean": "rimraf .next",
+    "gql:codegen": "graphql-codegen --config codegen.ts",
+    "gql:codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@tanstack/react-query": "^5.8.9",
     "@types/node": "20.10.0",
     "@types/react": "18.2.39",
@@ -17,6 +20,8 @@
     "boring-avatars": "^1.10.1",
     "eslint": "8.54.0",
     "eslint-config-next": "14.0.3",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "next": "14.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -24,7 +29,11 @@
     "typescript": "5.3.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@parcel/watcher": "^2.3.0",
     "@tanstack/eslint-plugin-query": "^5.8.4",
+    "@tanstack/react-query-devtools": "^5.12.2",
     "rimraf": "^5.0.5"
   }
 }

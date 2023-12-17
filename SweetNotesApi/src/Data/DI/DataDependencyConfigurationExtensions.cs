@@ -15,7 +15,15 @@ public static class DataDependencyConfigurationExtensions
     {
         services
             .AddPooledDbContextFactory<ApplicationDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("SweetNotes"))
+                {
+                    options
+                        .UseNpgsql(configuration.GetConnectionString("SweetNotes"));
+
+#if DEBUG
+                    options
+                        .EnableDetailedErrors();
+#endif
+                }
             );
         
         return services;

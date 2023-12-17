@@ -1,5 +1,6 @@
 @import './mixins.scss';
 @import './variables.scss';
+@import './colors.scss';
 
 body {
   color: $font-color;
@@ -85,9 +86,15 @@ a {
   border-color: darken($color: $primary-color, $amount: 5);
   color: $button-font-color;
   cursor: pointer;
-
+  
   &:hover {
     background-color: $primary-color-hover;
     border-color: darken($color: $primary-color-hover, $amount: 5);
+  }
+  
+  &:disabled {
+    background-color: $button-disabled;
+    border-color: darken($color: $button-disabled, $amount: 5);
+    cursor: not-allowed;
   }
 }

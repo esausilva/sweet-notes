@@ -11,7 +11,8 @@
       "@/helper/*": ["app/helpers/*"],
       "@/style/*": ["app/styles/*"],
       "@/hook/*": ["app/hooks/*"],
-      "@/types": ["app/types/index"]
+      "@/types": ["app/types/index"],
+      "@/gql/*": ["gql/*"]
     },
     "lib": [
       "dom",
