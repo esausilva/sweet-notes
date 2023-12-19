@@ -19,11 +19,11 @@ export const fetchPost = async ({
   });
 };
 
-export const fetchGet = async function ({
+export const fetchGet = async ({
   route,
   fetchOptions = {},
   headers = {},
-}: IFetchGet): Promise<Response> {
+}: IFetchGet): Promise<Response> => {
   return await fetch(`${rootUrl}/${route}`, {
     method: 'GET',
     mode: 'cors',

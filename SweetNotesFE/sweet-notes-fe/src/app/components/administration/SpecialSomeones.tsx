@@ -1,19 +1,11 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { GraphQLClient } from 'graphql-request';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { graphql } from '@/gql/gql';
 
 import { GetSpecialSomeoneId } from '@/component/administration/helpers';
+import { GraphQLClient } from '@/helper/graphQlClient';
 
 import styles from './SpecialSomeones.module.scss';
-
-const graphQLClient = new GraphQLClient(
-  `${process.env.NEXT_PUBLIC_BACKEND_ROOT_URI}/graphql`,
-  {
-    credentials: `include`,
-    mode: `cors`,
-  },
-);
 
 const specialSomeones = graphql(`
   query SpecialSomeone {
@@ -27,12 +19,35 @@ const specialSomeones = graphql(`
   }
 `);
 
+const createNote = graphql(`
+  mutation createNote($message: String!, $specialSomeoneId: ID!) {
+    createNote(
+      input: { message: $message, specialSomeoneId: $specialSomeoneId }
+    ) {
+      note {
+        id
+      }
+    }
+  }
+`);
+
 export function SpecialSomeones(): JSX.Element {
   const messageCountMax = 150;
 
   const { data, isLoading } = useQuery({
     queryKey: ['specialSomeones'],
-    queryFn: async () => await graphQLClient.request(specialSomeones, {}),
+    queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
+  });
+
+  const { isError, isSuccess, isPending, mutate } = useMutation({
+    mutationFn: async () =>
+      await GraphQLClient.request(createNote, {
+        message: note.message,
+        specialSomeoneId: specialSomeone.id,
+      }),
+    onSuccess: () => {
+      setNote({ message: '', count: 0 });
+    },
   });
 
   const [specialSomeone, setSpecialSomeone] = useState<{
@@ -68,10 +83,16 @@ export function SpecialSomeones(): JSX.Element {
     });
   };
 
-  const handleTextArea = (event: FormEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: FormEvent<HTMLTextAreaElement>) => {
     const message = event.currentTarget.value;
     const count = event.currentTarget.value.length;
-    setNote({ message, count });
+
+    if (count <= messageCountMax) setNote({ message, count });
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    mutate();
   };
 
   return (
@@ -91,14 +112,21 @@ export function SpecialSomeones(): JSX.Element {
           <a href="#">Add Special Someone</a>
         </p>
       </div>
-      <form className={styles.noteForm} action="">
+      <form className={styles.noteForm} onSubmit={handleSubmit}>
         <label>Note</label>
-        <textarea name="note" onChange={handleTextArea}></textarea>
-        <p className={styles.annotation}>10 / {messageCountMax}</p>
+        <textarea
+          name="note"
+          onChange={handleChange}
+          disabled={isPending}
+          value={note.message}
+        />
+        <p className={styles.annotation}>
+          {note.count} / {messageCountMax}
+        </p>
         <button
           className="button--primary"
           type="submit"
-          disabled={buttonDisabled}
+          disabled={buttonDisabled || isPending}
         >
           Send Note
         </button>

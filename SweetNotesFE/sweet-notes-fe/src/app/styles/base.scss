@@ -70,6 +70,10 @@ input, button, textarea, select {
 
 input, textarea, select {
   background-color: #fff;
+
+  &:disabled {
+    background-color: $button-disabled;
+  }
 }
 
 a {
