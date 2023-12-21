@@ -39,14 +39,18 @@ export function SpecialSomeones(): JSX.Element {
     queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
   });
 
-  const { isError, isSuccess, isPending, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: async () =>
       await GraphQLClient.request(createNote, {
         message: note.message,
         specialSomeoneId: specialSomeone.id,
       }),
-    onSuccess: () => {
+    onSuccess: (data, variables, context) => {
       setNote({ message: '', count: 0 });
+      setFormErrors('');
+    },
+    onError: (error, variables, context) => {
+      setFormErrors(error?.message.substring(0, error?.message.indexOf(':')));
     },
   });
 
@@ -61,6 +65,8 @@ export function SpecialSomeones(): JSX.Element {
     message: '',
     count: 0,
   });
+
+  const [formErrors, setFormErrors] = useState<string>('');
 
   useEffect(() => {
     if (isLoading === false && data?.specialSomeonesForUser.length! > 0) {
@@ -98,6 +104,7 @@ export function SpecialSomeones(): JSX.Element {
   return (
     <section className={styles.specialSomeones}>
       <h2>Special Someones</h2>
+
       <div className={styles.specialSomeoneDropdownWrapper}>
         <select onChange={handleSelect}>
           {data?.specialSomeonesForUser.map(ss => (
@@ -112,7 +119,10 @@ export function SpecialSomeones(): JSX.Element {
           <a href="#">Add Special Someone</a>
         </p>
       </div>
+
       <form className={styles.noteForm} onSubmit={handleSubmit}>
+        {formErrors ? <div id="error-list">{formErrors}</div> : <></>}
+
         <label>Note</label>
         <textarea
           name="note"
@@ -123,6 +133,7 @@ export function SpecialSomeones(): JSX.Element {
         <p className={styles.annotation}>
           {note.count} / {messageCountMax}
         </p>
+
         <button
           className="button--primary"
           type="submit"
@@ -131,6 +142,7 @@ export function SpecialSomeones(): JSX.Element {
           Send Note
         </button>
       </form>
+
       <p>
         Share this unique link with your <em>Special Someone</em> to access your
         notes to them:
