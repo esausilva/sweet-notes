@@ -87,6 +87,7 @@ export function SpecialSomeones(): JSX.Element {
       uniqueIdentifier,
       id: GetSpecialSomeoneId(data!, uniqueIdentifier),
     });
+    setFormErrors('');
   };
 
   const handleChange = (event: FormEvent<HTMLTextAreaElement>) => {
