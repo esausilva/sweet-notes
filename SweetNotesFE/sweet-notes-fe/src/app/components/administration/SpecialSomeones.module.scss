@@ -1,6 +1,4 @@
-@import '@/style/variables.scss';
 @import '@/style/mixins.scss';
-@import '@/style/colors.scss';
 
 .special-someones {
   grid-area: specialsomeone;
@@ -11,25 +9,6 @@
 
   select {
     width: 100%;
-  }
-}
-
-.special-someone-dropdown-wrapper {
-  margin-bottom: 1em;
-}
-
-.annotation {
-  text-align: right;
-  margin-top: .3em;
-  font-size: calc($body--font-size - .2rem);
-  color: $annotation-color;
-  
-  @include mediaMedium {
-    font-size: calc($body--font-size_medium - .2rem);
-  }
-  
-  @include mediaLarge {
-    font-size: calc($body--font-size_large - .3rem);
   }
 }
 

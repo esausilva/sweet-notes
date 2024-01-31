@@ -1,23 +1,12 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { graphql } from '@/gql/gql';
 
-import { GetSpecialSomeoneId } from '@/component/administration/helpers';
+import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers';
 import { GraphQLClient } from '@/helper/graphQlClient';
+import { ISpecialSomeones } from '@/interfaces';
 
 import styles from './SpecialSomeones.module.scss';
-
-const specialSomeones = graphql(`
-  query SpecialSomeone {
-    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {
-      id
-      uniqueIdentifier
-      firstName
-      lastName
-      nickname
-    }
-  }
-`);
 
 const createNote = graphql(`
   mutation createNote($message: String!, $specialSomeoneId: ID!) {
@@ -31,13 +20,12 @@ const createNote = graphql(`
   }
 `);
 
-export function SpecialSomeones(): JSX.Element {
+export function SpecialSomeones({
+  children,
+  specialSomeone,
+  queryResult,
+}: ISpecialSomeones): JSX.Element {
   const messageCountMax = 150;
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['specialSomeones'],
-    queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
-  });
 
   const { isPending, mutate } = useMutation({
     mutationFn: async () =>
@@ -54,11 +42,6 @@ export function SpecialSomeones(): JSX.Element {
     },
   });
 
-  const [specialSomeone, setSpecialSomeone] = useState<{
-    uniqueIdentifier: string;
-    id: string;
-  }>({ uniqueIdentifier: '', id: '' });
-
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
 
   const [note, setNote] = useState<{ message: string; count: number }>({
@@ -69,26 +52,16 @@ export function SpecialSomeones(): JSX.Element {
   const [formErrors, setFormErrors] = useState<string>('');
 
   useEffect(() => {
-    if (isLoading === false && data?.specialSomeonesForUser.length! > 0) {
-      const uniqueIdentifier =
-        data?.specialSomeonesForUser[0].uniqueIdentifier!;
-      setSpecialSomeone({
-        uniqueIdentifier,
-        id: GetSpecialSomeoneId(data!, uniqueIdentifier),
-      });
-      setButtonDisabled(false);
-    }
-    return () => {};
-  }, [isLoading]);
+    if (IsDoneLoadingSpecialSomeones(queryResult)) setButtonDisabled(false);
+    else setButtonDisabled(true);
 
-  const handleSelect = (event: FormEvent<HTMLSelectElement>) => {
-    const uniqueIdentifier = event.currentTarget.value;
-    setSpecialSomeone({
-      uniqueIdentifier,
-      id: GetSpecialSomeoneId(data!, uniqueIdentifier),
-    });
+    return () => {};
+  }, [queryResult.isLoading]);
+
+  useEffect(() => {
     setFormErrors('');
-  };
+    return () => {};
+  }, [specialSomeone]);
 
   const handleChange = (event: FormEvent<HTMLTextAreaElement>) => {
     const message = event.currentTarget.value;
@@ -106,20 +79,7 @@ export function SpecialSomeones(): JSX.Element {
     <section className={styles.specialSomeones}>
       <h2>Special Someones</h2>
 
-      <div className={styles.specialSomeoneDropdownWrapper}>
-        <select onChange={handleSelect}>
-          {data?.specialSomeonesForUser.map(ss => (
-            <option value={`${ss.uniqueIdentifier}`} key={ss.uniqueIdentifier}>
-              {`${ss.firstName} 
-              ${ss?.nickname ? `"${ss.nickname}"` : ''} 
-              ${ss.lastName}`}
-            </option>
-          ))}
-        </select>
-        <p className={styles.annotation}>
-          <a href="#">Add Special Someone</a>
-        </p>
-      </div>
+      {children}
 
       <form className={styles.noteForm} onSubmit={handleSubmit}>
         {formErrors ? <div id="error-list">{formErrors}</div> : <></>}
@@ -131,7 +91,7 @@ export function SpecialSomeones(): JSX.Element {
           disabled={isPending}
           value={note.message}
         />
-        <p className={styles.annotation}>
+        <p className="annotation">
           {note.count} / {messageCountMax}
         </p>
 

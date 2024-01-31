@@ -13,8 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n": types.SpecialSomeoneDocument,
     "\n  mutation createNote($message: String!, $specialSomeoneId: ID!) {\n    createNote(\n      input: { message: $message, specialSomeoneId: $specialSomeoneId }\n    ) {\n      note {\n        id\n      }\n    }\n  }\n": types.CreateNoteDocument,
+    "\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n": types.SpecialSomeoneDocument,
 };
 
 /**
@@ -34,11 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n"): (typeof documents)["\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createNote($message: String!, $specialSomeoneId: ID!) {\n    createNote(\n      input: { message: $message, specialSomeoneId: $specialSomeoneId }\n    ) {\n      note {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createNote($message: String!, $specialSomeoneId: ID!) {\n    createNote(\n      input: { message: $message, specialSomeoneId: $specialSomeoneId }\n    ) {\n      note {\n        id\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createNote($message: String!, $specialSomeoneId: ID!) {\n    createNote(\n      input: { message: $message, specialSomeoneId: $specialSomeoneId }\n    ) {\n      note {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createNote($message: String!, $specialSomeoneId: ID!) {\n    createNote(\n      input: { message: $message, specialSomeoneId: $specialSomeoneId }\n    ) {\n      note {\n        id\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n"): (typeof documents)["\n  query SpecialSomeone {\n    specialSomeonesForUser(order: { firstName: ASC, lastName: ASC }) {\n      id\n      uniqueIdentifier\n      firstName\n      lastName\n      nickname\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
