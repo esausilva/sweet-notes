@@ -25,7 +25,7 @@ public sealed class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateS
         {
             FirstName = firstName,
             LastName = lastName,
-            Nickname = nickName,
+            Nickname = string.Equals(nickName?.Trim(), string.Empty) ? null : nickName,
             UniqueIdentifier = GenerateRandomUrlSafeString($"{firstName}{lastName}"),
             UserId = command.UserId
         };

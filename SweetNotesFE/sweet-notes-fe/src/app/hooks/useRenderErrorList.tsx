@@ -14,5 +14,5 @@ export function useRenderErrorList(errors: ApiError): JSX.Element {
         </ul>
       </div>
     );
-  } else return <div></div>;
+  } else return <></>;
 }

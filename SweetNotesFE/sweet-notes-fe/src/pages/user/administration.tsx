@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent, useEffect, useRef, LegacyRef } from 'react';
 import type { GetServerSideProps } from 'next';
 import { useQuery } from '@tanstack/react-query';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
 import { Header } from '@/component/administration/Header';
 import { SpecialSomeones } from '@/component/administration/SpecialSomeones';
+import { AddSpecialSomeone } from '@/component/administration/AddSpecialSomeone';
 import { Notes } from '@/component/administration/Notes';
 import { fetchGet } from '@/helper/fetchHelpers';
 import { Me } from '@/types';
@@ -17,6 +18,7 @@ import {
   IsDoneLoadingSpecialSomeones,
 } from '@/component/administration/helpers';
 
+import 'react-responsive-modal/styles.css';
 import styles from './administration.module.scss';
 
 const specialSomeones = graphql(`
@@ -32,6 +34,8 @@ const specialSomeones = graphql(`
 `);
 
 export default function UserAdmin({ me }: { me: Me }): JSX.Element {
+  const addSpecialSomeoneButtonRef = useRef<HTMLButtonElement>(null);
+
   const queryResult = useQuery({
     queryKey: ['specialSomeones'],
     queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
@@ -41,14 +45,6 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
     uniqueIdentifier: string;
     id: string;
   }>({ uniqueIdentifier: '', id: '' });
-
-  const handleSelect = (event: FormEvent<HTMLSelectElement>) => {
-    const uniqueIdentifier = event.currentTarget.value;
-    setSpecialSomeone({
-      uniqueIdentifier,
-      id: GetSpecialSomeoneId(queryResult.data!, uniqueIdentifier),
-    });
-  };
 
   useEffect(() => {
     if (IsDoneLoadingSpecialSomeones(queryResult)) {
@@ -61,6 +57,14 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
     }
     return () => {};
   }, [queryResult.isLoading]);
+
+  const handleSelect = (event: FormEvent<HTMLSelectElement>) => {
+    const uniqueIdentifier = event.currentTarget.value;
+    setSpecialSomeone({
+      uniqueIdentifier,
+      id: GetSpecialSomeoneId(queryResult.data!, uniqueIdentifier),
+    });
+  };
 
   return (
     <UserAdminLayout header={<Header me={me} />}>
@@ -85,18 +89,27 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
             ))}
           </select>
           <p className="annotation">
-            <a href="#">Add Special Someone</a>
+            <a
+              href="#"
+              onClick={() => addSpecialSomeoneButtonRef.current?.click()}
+            >
+              Add Special Someone
+            </a>
           </p>
         </div>
       </SpecialSomeones>
       <div className={styles.separator}></div>
       <Notes />
+      <AddSpecialSomeone
+        buttonRef={addSpecialSomeoneButtonRef}
+        specialSomeoneRefetch={queryResult.refetch}
+      />
     </UserAdminLayout>
   );
 }
 
-export const getServerSideProps = (async context => {
-  const cookie = context.req.cookies[AUTH_COOKIE_NAME];
+export const getServerSideProps = (async ({ req }) => {
+  const cookie = req.cookies[AUTH_COOKIE_NAME];
   const response: Response = await fetchGet({
     route: Routes.USER_ME,
     headers: {

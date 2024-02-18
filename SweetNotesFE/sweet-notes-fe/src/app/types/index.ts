@@ -6,3 +6,4 @@ export * from './ApiResult';
 export * from './Me';
 export * from './GraphQLError';
 export * from './SpecialSomeoneQueryResult';
+export * from './CreateSpecialSomeoneForm';

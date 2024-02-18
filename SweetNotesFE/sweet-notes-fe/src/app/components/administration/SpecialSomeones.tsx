@@ -1,9 +1,9 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { graphql } from '@/gql/gql';
 
 import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers';
 import { GraphQLClient } from '@/helper/graphQlClient';
+import { graphql } from '@/gql/gql';
 import { ISpecialSomeones } from '@/interfaces';
 
 import styles from './SpecialSomeones.module.scss';

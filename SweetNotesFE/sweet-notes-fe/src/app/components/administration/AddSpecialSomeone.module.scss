@@ -1,0 +1,24 @@
+.title {
+  margin: 1.3em 0 .5em 0;
+}
+
+.add-special-someone-form {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  button {
+    margin-top: .5em;
+  }
+}
+
+.modal {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.success {
+  align-self: center;
+  color: #389e0d;
+}
