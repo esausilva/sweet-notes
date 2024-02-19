@@ -7,7 +7,7 @@ TODOs:
 - [x] Refactor all routes to constant files in an object
 - [ ] Disable Login / Signup button after pressing
 - [x] Switch `error-list` from an `id` to a `class`
-- [ ] Migrate Note textarea to use `useRenderGraphQLErrorList`
+- [x] Migrate Note textarea to use `useRenderGraphQLErrorList`
 - [ ] Find a way to refactor CSS into more concise way
 
 ## Back End
