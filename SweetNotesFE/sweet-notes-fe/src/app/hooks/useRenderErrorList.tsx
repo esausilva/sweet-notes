@@ -6,7 +6,7 @@ export function useRenderErrorList(errors: ApiError): JSX.Element {
   if (errorKeys.length > 0) {
     var errorList = errorKeys.map(key => errors[key]).flat();
     return (
-      <div id="error-list">
+      <div className="error-list">
         <ul>
           {errorList.map((error, idx) => (
             <li key={`error-${idx}`}>{error}</li>

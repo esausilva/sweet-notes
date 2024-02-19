@@ -5,7 +5,7 @@ export function useRenderGraphQLErrorList({
 }: GraphQLError): JSX.Element {
   if (errors.length > 0) {
     return (
-      <div id="error-list">
+      <div className="error-list">
         <ul>
           {errors.map((error, idx) => (
             <li key={`error-${idx}`}>{error.message}</li>

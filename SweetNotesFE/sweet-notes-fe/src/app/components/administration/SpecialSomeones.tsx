@@ -82,7 +82,7 @@ export function SpecialSomeones({
       {children}
 
       <form className={styles.noteForm} onSubmit={handleSubmit}>
-        {formErrors ? <div id="error-list">{formErrors}</div> : <></>}
+        {formErrors ? <div className="error-list">{formErrors}</div> : <></>}
 
         <label>Note</label>
         <textarea

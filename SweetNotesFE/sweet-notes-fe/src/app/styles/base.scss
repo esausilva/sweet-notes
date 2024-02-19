@@ -103,13 +103,17 @@ a {
   }
 }
 
-#error-list {
+.error-list {
   color: $danger-color;
   display: flex;
   justify-content: center;
   
   ul {
     list-style-type: none;
+
+    li {
+      margin-bottom: .2em;
+    }
   }
 }
 
