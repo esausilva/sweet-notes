@@ -5,6 +5,8 @@ import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers
 import { GraphQLClient } from '@/helper/graphQlClient';
 import { graphql } from '@/gql/gql';
 import { ISpecialSomeones } from '@/interfaces';
+import { GraphQLErrorResponse, GraphQLError } from '@/types';
+import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
 
 import styles from './SpecialSomeones.module.scss';
 
@@ -35,10 +37,12 @@ export function SpecialSomeones({
       }),
     onSuccess: (data, variables, context) => {
       setNote({ message: '', count: 0 });
-      setFormErrors('');
+      setFormErrors({
+        errors: [],
+      });
     },
-    onError: (error, variables, context) => {
-      setFormErrors(error?.message.substring(0, error?.message.indexOf(':')));
+    onError: (error: GraphQLErrorResponse, variables, context) => {
+      setFormErrors(error.response);
     },
   });
 
@@ -49,7 +53,9 @@ export function SpecialSomeones({
     count: 0,
   });
 
-  const [formErrors, setFormErrors] = useState<string>('');
+  const [formErrors, setFormErrors] = useState<GraphQLError>({
+    errors: [],
+  });
 
   useEffect(() => {
     if (IsDoneLoadingSpecialSomeones(queryResult)) setButtonDisabled(false);
@@ -59,7 +65,9 @@ export function SpecialSomeones({
   }, [queryResult.isLoading]);
 
   useEffect(() => {
-    setFormErrors('');
+    setFormErrors({
+      errors: [],
+    });
     return () => {};
   }, [specialSomeone]);
 
@@ -82,7 +90,7 @@ export function SpecialSomeones({
       {children}
 
       <form className={styles.noteForm} onSubmit={handleSubmit}>
-        {formErrors ? <div className="error-list">{formErrors}</div> : <></>}
+        {useRenderGraphQLErrorList(formErrors)}
 
         <label>Note</label>
         <textarea
