@@ -9,6 +9,9 @@ TODOs:
 - [x] Switch `error-list` from an `id` to a `class`
 - [x] Migrate Note textarea to use `useRenderGraphQLErrorList`
 - [ ] Find a way to refactor CSS into more concise way
+- [ ] Fix initial loading of Notes not showing
+- [ ] Go through CSS codebase to ensure font sizes are set to rem and not to em
+- [ ] Query SpecialSomeoneForUser and Notes fire up when changing tabs. Should not happen
 
 ## Back End
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers';
 import { GraphQLClient } from '@/helper/graphQlClient';
@@ -7,6 +7,7 @@ import { graphql } from '@/gql/gql';
 import { ISpecialSomeones } from '@/interfaces';
 import { GraphQLErrorResponse, GraphQLError } from '@/types';
 import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
+import { QueryKeys, MutationKeys } from '@/constants';
 
 import styles from './SpecialSomeones.module.scss';
 
@@ -30,6 +31,7 @@ export function SpecialSomeones({
   const messageCountMax = 150;
 
   const { isPending, mutate } = useMutation({
+    mutationKey: [MutationKeys.CREATE_NOTE],
     mutationFn: async () =>
       await GraphQLClient.request(createNote, {
         message: note.message,
@@ -40,6 +42,9 @@ export function SpecialSomeones({
       setFormErrors({
         errors: [],
       });
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES],
+      });
     },
     onError: (error: GraphQLErrorResponse, variables, context) => {
       setFormErrors(error.response);
@@ -47,6 +52,7 @@ export function SpecialSomeones({
   });
 
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const queryClient = useQueryClient();
 
   const [note, setNote] = useState<{ message: string; count: number }>({
     message: '',

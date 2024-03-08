@@ -1,4 +1,47 @@
+@import '@/style/mixins.scss'; 
+@import '@/style/variables.scss'; 
+@import '@/style/colors.scss'; 
+@import '@/style/mixins.scss'; 
+
 .notes {
   grid-area: notes;
-  background: yellow;
+
+  h2 {
+    text-align: center;
+  }
+}
+
+
+.notes-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1em;;
+
+  span {
+    @include annotation;
+  }  
+
+  li {
+    margin-bottom: .7em;
+  }
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+
+  @include mediaMedium {
+    justify-content: flex-start;
+  }
+  
+  p {
+    margin-right: 5px;
+  }
+}
+
+.divider {
+  border-top: $border;
+  margin-top: 1em;
 }

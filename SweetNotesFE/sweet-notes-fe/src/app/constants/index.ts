@@ -8,3 +8,13 @@ export enum Routes {
   USER_LOGIN = 'user/login',
   USER_ME = 'user/me',
 }
+
+export enum QueryKeys {
+  SPECIAL_SOMEONES = 'specialSomeones',
+  SPECIAL_SOMEONE_NOTES = 'specialSomeoneNotes',
+}
+
+export enum MutationKeys {
+  CREATE_NOTE = 'createNote',
+  CREATE_SPECIAL_SOMEONE = 'createSpecialSomeone',
+}

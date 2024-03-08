@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, FormEvent, useEffect, useRef, LegacyRef } from 'react';
+import { useState, FormEvent, useEffect, useRef } from 'react';
 import type { GetServerSideProps } from 'next';
 import { useQuery } from '@tanstack/react-query';
 
@@ -10,7 +10,7 @@ import { AddSpecialSomeone } from '@/component/administration/AddSpecialSomeone'
 import { Notes } from '@/component/administration/Notes';
 import { fetchGet } from '@/helper/fetchHelpers';
 import { Me } from '@/types';
-import { AUTH_COOKIE_NAME, Routes } from '@/constants';
+import { AUTH_COOKIE_NAME, Routes, QueryKeys } from '@/constants';
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/graphQlClient';
 import {
@@ -37,7 +37,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
   const addSpecialSomeoneButtonRef = useRef<HTMLButtonElement>(null);
 
   const queryResult = useQuery({
-    queryKey: ['specialSomeones'],
+    queryKey: [QueryKeys.SPECIAL_SOMEONES],
     queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
   });
 
@@ -71,6 +71,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
       <Head>
         <title>Admin | Sweet Notes</title>
       </Head>
+
       <SpecialSomeones
         queryResult={queryResult}
         specialSomeone={specialSomeone}
@@ -98,12 +99,12 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
           </p>
         </div>
       </SpecialSomeones>
+
       <div className={styles.separator}></div>
-      <Notes />
-      <AddSpecialSomeone
-        buttonRef={addSpecialSomeoneButtonRef}
-        specialSomeoneRefetch={queryResult.refetch}
-      />
+
+      <Notes specialSomeoneIdentifier={specialSomeone.uniqueIdentifier} />
+
+      <AddSpecialSomeone buttonRef={addSpecialSomeoneButtonRef} />
     </UserAdminLayout>
   );
 }

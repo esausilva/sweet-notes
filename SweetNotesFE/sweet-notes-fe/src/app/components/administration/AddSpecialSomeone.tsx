@@ -1,6 +1,6 @@
 import { useState, LegacyRef, useReducer, FormEvent } from 'react';
 import { Modal } from 'react-responsive-modal';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/graphQlClient';
@@ -13,6 +13,7 @@ import {
 import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
 import { IAddSpecialSomeone } from '@/interfaces';
 import styles from './AddSpecialSomeone.module.scss';
+import { QueryKeys, MutationKeys } from '@/constants';
 
 const createSpecialSomeone = graphql(`
   mutation createSpecialSomeone(
@@ -33,7 +34,7 @@ const createSpecialSomeone = graphql(`
 const initialFormState: CreateSpecialSomeoneForm = {
   firstName: '',
   lastName: '',
-  nickName: undefined,
+  nickName: '',
 };
 
 const formReducer = (
@@ -48,7 +49,6 @@ const formReducer = (
 
 export function AddSpecialSomeone({
   buttonRef,
-  specialSomeoneRefetch,
 }: IAddSpecialSomeone): JSX.Element {
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -56,8 +56,10 @@ export function AddSpecialSomeone({
   const [formErrors, setFormErrors] = useState<GraphQLError>({
     errors: [],
   });
+  const queryClient = useQueryClient();
 
   const { isPending, mutate, isSuccess } = useMutation({
+    mutationKey: [MutationKeys.CREATE_SPECIAL_SOMEONE],
     mutationFn: async () =>
       await GraphQLClient.request(createSpecialSomeone, {
         firstName: formData.firstName,
@@ -70,7 +72,7 @@ export function AddSpecialSomeone({
         errors: [],
       });
       setButtonDisabled(false);
-      specialSomeoneRefetch();
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.SPECIAL_SOMEONES] });
     },
     onError: (error: GraphQLErrorResponse) => {
       setFormErrors(error.response);
@@ -96,8 +98,8 @@ export function AddSpecialSomeone({
 
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => {
-    clearForm();
     setOpenModal(false);
+    clearForm();
   };
 
   return (

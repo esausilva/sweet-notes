@@ -120,14 +120,6 @@ a {
 .annotation {
   text-align: right;
   margin-top: .3em;
-  font-size: calc($body--font-size - .2rem);
-  color: $annotation-color;
-  
-  @include mediaMedium {
-    font-size: calc($body--font-size_medium - .2rem);
-  }
-  
-  @include mediaLarge {
-    font-size: calc($body--font-size_large - .3rem);
-  }
+
+  @include annotation;
 }

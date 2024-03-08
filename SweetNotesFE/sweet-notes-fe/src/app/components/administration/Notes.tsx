@@ -1,5 +1,92 @@
-import styles from './Notes.module.scss';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import DatePicker from 'react-datepicker';
 
-export function Notes(): JSX.Element {
-  return <section className={styles.notes}>Notes</section>;
+import { graphql } from '@/gql/gql';
+import { GraphQLClient } from '@/helper/graphQlClient';
+import { QueryKeys } from '@/constants';
+import {
+  FromUtcToLocal,
+  GetFirstAndLastDaysOfTheMonth,
+} from '@/component/administration/helpers';
+
+import styles from './Notes.module.scss';
+import 'react-datepicker/dist/react-datepicker.css';
+
+const specialSomeoneNotes = graphql(`
+  query Notes($uniqueIdentifier: String!, $from: DateTime!, $to: DateTime!) {
+    notes(
+      where: {
+        specialSomeone: { uniqueIdentifier: { eq: $uniqueIdentifier } }
+        and: [{ createdUTC: { gte: $from } }, { createdUTC: { lte: $to } }]
+      }
+      order: { createdUTC: DESC }
+    ) {
+      totalCount
+      nodes {
+        message
+        createdUTC
+      }
+    }
+  }
+`);
+
+export function Notes({
+  specialSomeoneIdentifier,
+}: {
+  specialSomeoneIdentifier: string;
+}): JSX.Element {
+  const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
+
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES],
+    queryFn: async () =>
+      await GraphQLClient.request(specialSomeoneNotes, {
+        uniqueIdentifier: specialSomeoneIdentifier,
+        from: GetFirstAndLastDaysOfTheMonth(filterMonth!).firstDay,
+        to: GetFirstAndLastDaysOfTheMonth(filterMonth!).lastDay,
+      }),
+  });
+
+  useEffect(() => {
+    if (specialSomeoneIdentifier !== '') {
+      refetch();
+    }
+    return () => {};
+  }, [specialSomeoneIdentifier]);
+
+  useEffect(() => {
+    refetch();
+    return () => {};
+  }, [filterMonth]);
+
+  return (
+    <section className={styles.notes}>
+      <h2>Notes</h2>
+
+      <div className={styles.filter}>
+        <p>Filter By: </p>
+        <DatePicker
+          selected={filterMonth}
+          onChange={date => setFilterMonth(date)}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
+        />
+      </div>
+
+      <p>Notes sent this month: {data?.notes?.totalCount}</p>
+
+      <hr className={styles.divider} />
+
+      <ul className={styles.notesList}>
+        {isLoading && <p>Loading...</p>}
+        {data?.notes?.nodes?.map((note, idx) => (
+          <li key={`note-${idx}`}>
+            <span>{FromUtcToLocal(note.createdUTC)}</span> <br />
+            {note.message}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
