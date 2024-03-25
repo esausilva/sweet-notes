@@ -39,19 +39,19 @@ export function Notes({
   const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
 
   const { data, refetch, isLoading } = useQuery({
-    queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES],
+    queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES, specialSomeoneIdentifier],
     queryFn: async () =>
       await GraphQLClient.request(specialSomeoneNotes, {
         uniqueIdentifier: specialSomeoneIdentifier,
         from: GetFirstAndLastDaysOfTheMonth(filterMonth!).firstDay,
         to: GetFirstAndLastDaysOfTheMonth(filterMonth!).lastDay,
       }),
+    enabled: !!specialSomeoneIdentifier,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    if (specialSomeoneIdentifier !== '') {
-      refetch();
-    }
+    if (specialSomeoneIdentifier !== '') refetch();
     return () => {};
   }, [specialSomeoneIdentifier]);
 

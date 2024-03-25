@@ -39,6 +39,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
   const queryResult = useQuery({
     queryKey: [QueryKeys.SPECIAL_SOMEONES],
     queryFn: async () => await GraphQLClient.request(specialSomeones, {}),
+    refetchOnWindowFocus: false,
   });
 
   const [specialSomeone, setSpecialSomeone] = useState<{

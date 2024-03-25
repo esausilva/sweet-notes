@@ -22,6 +22,9 @@ export function middleware(request: NextRequest) {
     case `/${Routes.USER_ADMINISTRATION}`:
       if (authCookie === undefined) return NextResponse.redirect(origin);
       break;
+
+    case `/${Routes.SPECIAL_SOMEONE}`:
+      return NextResponse.redirect(`${origin}`);
   }
 }
 

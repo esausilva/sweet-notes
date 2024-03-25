@@ -1,0 +1,102 @@
+@import '@/style/colors.scss';
+@import '@/style/mixins.scss';
+@import '@/style/variables.scss';
+
+
+.main {
+  background: #666;
+  min-height: 100vh;
+}
+
+.body {
+  padding: 1em;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $background;
+  height: 90px;
+  
+  @include mediaMedium {
+    height: 140px;
+  }
+}
+
+.loading {
+  color: $background;
+}
+
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+  color: $background;
+  
+  @include mediaMedium {
+    justify-content: flex-start;
+  }
+  
+  p {
+    margin-right: 5px;
+    font-weight: 400;
+  }
+}
+
+.notes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  li {
+    color: #000;
+    background: #ffc;
+    display: block;
+    padding: .8em;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    transform: rotate(-6deg);
+    transition: transform .15s linear;
+    overflow: auto;
+    margin: 1.7em;
+    height: 15em;
+    width: 15em;
+
+    span {
+      @include annotation;
+      color: darken($color: $annotation-color, $amount: 30);
+    }
+  }
+  
+  li:nth-child(even) {
+    transform: rotate(4deg);
+    position: relative;
+    top: 5px;
+    background: #cfc;
+  }
+
+  li:nth-child(3n) {
+    transform: rotate(-3deg);
+    position: relative;
+    top: -5px;
+    background: #ccf;
+  }
+
+  li:nth-child(5n) {
+    transform: rotate(5deg);
+    position: relative;
+    top: -10px;
+  }
+
+  li:hover,
+  li:focus{
+    box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    transform: scale(1.25);
+    position:relative;
+    z-index:5;
+  }
+}
