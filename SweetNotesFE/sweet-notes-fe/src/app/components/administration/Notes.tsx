@@ -74,7 +74,7 @@ export function Notes({
         />
       </div>
 
-      <p>Notes sent this month: {data?.notes?.totalCount}</p>
+      <p>Notes sent this month: {data?.notes?.totalCount ?? 0}</p>
 
       <hr className={styles.divider} />
 

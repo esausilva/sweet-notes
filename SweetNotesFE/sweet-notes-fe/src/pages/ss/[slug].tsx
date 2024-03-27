@@ -37,10 +37,8 @@ const specialSomeoneNotes = graphql(`
 
 /*
 TODO:
-
-  Handle not found special someone
-  Handle no notes
   Create Special Someone Name REST endpoint
+    Handle not found special someone
 */
 
 export default function Page(): JSX.Element {
@@ -75,15 +73,18 @@ export default function Page(): JSX.Element {
       </header>
 
       <div className={styles.body}>
-        <div className={styles.filter}>
-          <p>Filter By: </p>
-          <DatePicker
-            selected={filterMonth}
-            onChange={date => setFilterMonth(date)}
-            dateFormat="MM/yyyy"
-            showMonthYearPicker
-          />
-        </div>
+        <section className={styles.bodyTop}>
+          <div className={styles.filter}>
+            <p>Filter By: </p>
+            <DatePicker
+              selected={filterMonth}
+              onChange={date => setFilterMonth(date)}
+              dateFormat="MM/yyyy"
+              showMonthYearPicker
+            />
+          </div>
+          <p>Total Notes For This Month: {data?.notes?.totalCount ?? 0}</p>
+        </section>
 
         <ul className={styles.notes}>
           {isLoading && <p className={styles.loading}>Loading...</p>}

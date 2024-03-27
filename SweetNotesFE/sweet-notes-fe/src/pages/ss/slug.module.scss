@@ -25,26 +25,40 @@
   }
 }
 
-.loading {
-  color: $background;
-}
+.body-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  
+  @include mediaMedium {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
+  p {
+    color: $background;
+  }
+}
 
 .filter {
   display: flex;
   align-items: center;
-  justify-content: center;
   margin-bottom: 1em;
-  color: $background;
   
   @include mediaMedium {
-    justify-content: flex-start;
+    margin-bottom: initial;
   }
   
   p {
     margin-right: 5px;
     font-weight: 400;
   }
+}
+
+.loading {
+  color: $background;
 }
 
 .notes {
