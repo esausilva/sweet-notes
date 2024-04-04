@@ -25,6 +25,7 @@ TODOs:
 	- https://github.com/ghost1face/base62
 - [ ] Create REST endpoint to get Special Someone's Name
 - [ ] Encrypt notes
+- [ ] Re-organize RestEndpoints. Separate folders, append Request to models that need it
 
 ### Misc
 

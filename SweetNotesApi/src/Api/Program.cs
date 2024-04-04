@@ -1,7 +1,7 @@
 ﻿using Api.Auth.Cookie;
 using Api.DI;
 using Api.Exceptions;
-using Api.RestEndpoints;
+using Api.Extensions;
 using Api.Security;
 using Application.DI;
 using Data.DI;
@@ -31,6 +31,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapGraphQL();
-app.MapGroup("/user")
-    .MapUserEndpoint();
+app.ConfigureEndpoints();
 app.Run();

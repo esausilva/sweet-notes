@@ -123,8 +123,11 @@ export function SpecialSomeones({
         notes to them:
       </p>
       <p>
-        <a href="#" target="_blank">
-          https://domain.com/ss/{`${specialSomeone.uniqueIdentifier}`}
+        <a
+          href={`http://localhost:3050/ss/${specialSomeone.uniqueIdentifier}`}
+          target="_blank"
+        >
+          http://localhost:3050/ss/{`${specialSomeone.uniqueIdentifier}`}
         </a>
       </p>
       <p className={styles.annotation}>

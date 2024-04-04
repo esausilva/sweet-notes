@@ -47,6 +47,18 @@ public static class GlobalExceptionHandler
                 problemResult = Results.Problem(details);
                 break;
             }
+            case NotFoundException:
+            {
+                var details = new ProblemDetails
+                {
+                    Type = "https://httpstatuses.com/404",
+                    Title = "Special Someone Not Found.",
+                    Status = StatusCodes.Status404NotFound
+                };
+
+                problemResult = Results.Problem(details);
+                break;
+            }
             case ApiValidationException:
             {
                 var exp = (ApiValidationException)exceptionHandlerPathFeature!.Error;
