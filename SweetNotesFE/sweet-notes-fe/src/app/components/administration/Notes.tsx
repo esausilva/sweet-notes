@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
 
 import { graphql } from '@/gql/gql';
-import { GraphQLClient } from '@/helper/graphQlClient';
+import { GraphQLClient } from '@/helper/networkHelpers';
 import { QueryKeys } from '@/constants';
 import {
   FromUtcToLocal,

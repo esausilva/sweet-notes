@@ -3,7 +3,7 @@ import { Modal } from 'react-responsive-modal';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { graphql } from '@/gql/gql';
-import { GraphQLClient } from '@/helper/graphQlClient';
+import { GraphQLClient } from '@/helper/networkHelpers';
 import {
   CreateSpecialSomeoneForm,
   FormFieldData,

@@ -1,8 +1,10 @@
+import { GraphQLClient as GQLClient } from 'graphql-request';
+
 import { IFetchPost, IFetchGet } from '@/interfaces';
 
 const rootUrl = process.env.NEXT_PUBLIC_BACKEND_ROOT_URI;
 
-export const fetchPost = async ({
+export const FetchPost = async ({
   route,
   body,
   fetchOptions = {},
@@ -19,7 +21,7 @@ export const fetchPost = async ({
   });
 };
 
-export const fetchGet = async ({
+export const FetchGet = async ({
   route,
   fetchOptions = {},
   headers = {},
@@ -36,4 +38,7 @@ export const fetchGet = async ({
   });
 };
 
-// TODO: Exports should start with capital letter
+export const GraphQLClient = new GQLClient(`${rootUrl}/graphql`, {
+  credentials: `include`,
+  mode: `cors`,
+});

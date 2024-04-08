@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { MainLayout } from '@/component/layouts/MainEntryLayout';
 import { FormFieldData, LoginForm, ApiError } from '@/types';
-import { authenticate } from '@/service/authService';
+import { Authenticate } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';
 import { Routes } from '@/constants';
 
@@ -39,7 +39,7 @@ export default function Index(): JSX.Element {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    var result = await authenticate(Routes.USER_LOGIN, {
+    var result = await Authenticate(Routes.USER_LOGIN, {
       emailAddress: formData.email,
       password: formData.password,
     });

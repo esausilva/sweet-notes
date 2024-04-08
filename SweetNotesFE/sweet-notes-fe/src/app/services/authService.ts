@@ -1,13 +1,13 @@
-import { ObjectLiteral, ApiResult } from '@/types';
-import { fetchPost } from '@/helper/fetchHelpers';
+import { ObjectLiteral, ApiErrorResponse } from '@/types';
+import { FetchPost } from '@/helper/networkHelpers';
 import { Routes } from '@/constants';
 
-export async function authenticate(
+export async function Authenticate(
   route: Routes,
   body: ObjectLiteral,
-): Promise<ApiResult> {
+): Promise<ApiErrorResponse> {
   try {
-    const response: Response = await fetchPost({
+    const response: Response = await FetchPost({
       route,
       body,
       fetchOptions: {
@@ -16,11 +16,10 @@ export async function authenticate(
     });
 
     if (response.status !== 200) {
-      const result: ApiResult = await response.json();
+      const result: ApiErrorResponse = await response.json();
       return result;
     }
   } catch (error) {
-    console.error(error);
     return {
       title: `${error}`,
       status: 500,

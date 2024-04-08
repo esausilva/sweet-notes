@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers';
-import { GraphQLClient } from '@/helper/graphQlClient';
+import { GraphQLClient } from '@/helper/networkHelpers';
 import { graphql } from '@/gql/gql';
 import { ISpecialSomeones } from '@/interfaces';
 import { GraphQLErrorResponse, GraphQLError } from '@/types';

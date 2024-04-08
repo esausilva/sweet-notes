@@ -8,12 +8,11 @@ import { Header } from '@/component/administration/Header';
 import { SpecialSomeones } from '@/component/administration/SpecialSomeones';
 import { AddSpecialSomeone } from '@/component/administration/AddSpecialSomeone';
 import { Notes } from '@/component/administration/Notes';
-import { fetchGet } from '@/helper/fetchHelpers';
+import { FetchGet, GraphQLClient } from '@/helper/networkHelpers';
 import { FormatSpecialSomeoneName } from '@/helper/index';
 import { Me } from '@/types';
 import { AUTH_COOKIE_NAME, Routes, QueryKeys } from '@/constants';
 import { graphql } from '@/gql/gql';
-import { GraphQLClient } from '@/helper/graphQlClient';
 import {
   GetSpecialSomeoneId,
   IsDoneLoadingSpecialSomeones,
@@ -111,7 +110,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
 
 export const getServerSideProps = (async ({ req }) => {
   const cookie = req.cookies[AUTH_COOKIE_NAME];
-  const response: Response = await fetchGet({
+  const response: Response = await FetchGet({
     route: Routes.USER_ME,
     headers: {
       cookie: `${AUTH_COOKIE_NAME}=${cookie}`,

@@ -5,7 +5,7 @@ TODOs:
 ## Front End
 
 - [x] Refactor all routes to constant files in an object
-- [ ] Disable Login / Signup button after pressing
+- [ ] Disable Login / Signup button after pressing using react-query
 - [x] Switch `error-list` from an `id` to a `class`
 - [x] Migrate Note textarea to use `useRenderGraphQLErrorList`
 - [ ] Find a way to refactor CSS into more concise way
@@ -35,4 +35,5 @@ https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-
 https://www.npmjs.com/package/randomcolor
 https://css-tricks.com/re-pleasing-color-palettes/
 https://tanstack.com/query/latest/docs/framework/react/guides/window-focus-refetching
+
 just use the queryClient directly

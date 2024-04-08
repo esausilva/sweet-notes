@@ -7,11 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
 
 import { graphql } from '@/gql/gql';
-import { GraphQLClient } from '@/helper/graphQlClient';
+import { GraphQLClient, FetchGet } from '@/helper/networkHelpers';
 import { QueryKeys, Routes } from '@/constants';
-import { fetchGet } from '@/helper/fetchHelpers';
 import { FormatSpecialSomeoneName, ShouldReturnNotFound } from '@/helper/index';
-import { SpecialSomeoneName, ApiResult } from '@/types';
+import { SpecialSomeoneName, ApiErrorResponse } from '@/types';
 import {
   GetFirstAndLastDaysOfTheMonth,
   FromUtcToLocal,
@@ -42,7 +41,7 @@ const specialSomeoneNotes = graphql(`
 export default function Page({
   specialSomeone,
 }: {
-  specialSomeone: SpecialSomeoneName | ApiResult;
+  specialSomeone: SpecialSomeoneName | ApiErrorResponse;
 }): JSX.Element {
   const router = useRouter();
   const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
@@ -65,7 +64,7 @@ export default function Page({
   }, [filterMonth]);
 
   const SpecialSomeoneNameOrNotFound = (
-    specialSomeone: SpecialSomeoneName | ApiResult,
+    specialSomeone: SpecialSomeoneName | ApiErrorResponse,
   ): string => {
     return ShouldReturnNotFound(specialSomeone)
       ? `Special Someone Not Found`
@@ -120,12 +119,13 @@ export default function Page({
 }
 
 export const getServerSideProps = (async ({ query }) => {
-  const response: Response = await fetchGet({
+  const response: Response = await FetchGet({
     route: `${Routes.SPECIAL_SOMEONE_NAME}/${query.slug}`,
   });
-  const specialSomeone: SpecialSomeoneName | ApiResult = await response.json();
+  const specialSomeone: SpecialSomeoneName | ApiErrorResponse =
+    await response.json();
 
   return { props: { specialSomeone } };
 }) satisfies GetServerSideProps<{
-  specialSomeone: SpecialSomeoneName | ApiResult;
+  specialSomeone: SpecialSomeoneName | ApiErrorResponse;
 }>;

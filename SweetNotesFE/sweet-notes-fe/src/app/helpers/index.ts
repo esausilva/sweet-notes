@@ -1,4 +1,4 @@
-import { SpecialSomeoneName, ApiResult } from '@/types';
+import { SpecialSomeoneName, ApiErrorResponse } from '@/types';
 
 export function FormatSpecialSomeoneName(
   specialSomeoneName: SpecialSomeoneName,
@@ -9,10 +9,10 @@ export function FormatSpecialSomeoneName(
 }
 
 export function ShouldReturnNotFound(
-  specialSomeone: SpecialSomeoneName | ApiResult,
+  specialSomeone: SpecialSomeoneName | ApiErrorResponse,
 ): boolean {
   return (
-    (specialSomeone as ApiResult).status === 400 ||
-    (specialSomeone as ApiResult).status === 404
+    (specialSomeone as ApiErrorResponse).status === 400 ||
+    (specialSomeone as ApiErrorResponse).status === 404
   );
 }

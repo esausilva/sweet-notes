@@ -2,7 +2,7 @@ export * from './FormData';
 export * from './LoginForm';
 export * from './SignupForm';
 export * from './ObjectLiteral';
-export * from './ApiResult';
+export * from './ApiErrorResponse';
 export * from './Me';
 export * from './GraphQLError';
 export * from './SpecialSomeoneQueryResult';
