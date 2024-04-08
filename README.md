@@ -12,8 +12,9 @@ TODOs:
 - [x] Fix initial loading of Notes not showing
 - [ ] Go through CSS codebase to ensure font sizes are set to rem and not to em
 - [x] Query SpecialSomeoneForUser and Notes fire up when changing tabs. Should not happen
-- [ ] Call REST endpoint to get Special Someone's Name
+- [x] Call REST endpoint to get Special Someone's Name
 - [ ] Reuse as much as possible date picker between **[slug].tsx** and **Notes.tsx**
+- [ ] Put a "refresh" button in `/ss/[slug]` route
 
 ## Back End
 
@@ -23,9 +24,10 @@ TODOs:
 - [ ] Replace Special Someone UniqueId with ID Generator + Base62
 	- https://github.com/RobThree/IdGen
 	- https://github.com/ghost1face/base62
-- [ ] Create REST endpoint to get Special Someone's Name
+- [x] Create REST endpoint to get Special Someone's Name
 - [ ] Encrypt notes
 - [ ] Re-organize RestEndpoints. Separate folders, append Request to models that need it
+- [ ] Implement rate limiter in `special-someone-name/{identifier}` route
 
 ### Misc
 

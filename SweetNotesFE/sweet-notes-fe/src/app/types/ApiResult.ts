@@ -7,3 +7,5 @@ export type ApiResult = {
 export type ApiError = {
   [key: string]: string[];
 };
+
+// TODO: Rename to ApiErrorResponse

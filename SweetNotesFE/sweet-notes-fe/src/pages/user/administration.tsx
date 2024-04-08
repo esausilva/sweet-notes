@@ -9,6 +9,7 @@ import { SpecialSomeones } from '@/component/administration/SpecialSomeones';
 import { AddSpecialSomeone } from '@/component/administration/AddSpecialSomeone';
 import { Notes } from '@/component/administration/Notes';
 import { fetchGet } from '@/helper/fetchHelpers';
+import { FormatSpecialSomeoneName } from '@/helper/index';
 import { Me } from '@/types';
 import { AUTH_COOKIE_NAME, Routes, QueryKeys } from '@/constants';
 import { graphql } from '@/gql/gql';
@@ -84,9 +85,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
                 value={`${ss.uniqueIdentifier}`}
                 key={ss.uniqueIdentifier}
               >
-                {`${ss.firstName} 
-              ${ss?.nickname ? `"${ss.nickname}"` : ''} 
-              ${ss.lastName}`}
+                {FormatSpecialSomeoneName(ss)}
               </option>
             ))}
           </select>

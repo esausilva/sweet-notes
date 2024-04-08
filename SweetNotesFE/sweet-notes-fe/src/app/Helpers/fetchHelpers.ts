@@ -35,3 +35,5 @@ export const fetchGet = async ({
     ...fetchOptions,
   });
 };
+
+// TODO: Exports should start with capital letter

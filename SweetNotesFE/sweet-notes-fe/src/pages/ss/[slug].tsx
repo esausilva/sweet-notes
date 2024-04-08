@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import type { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
@@ -7,7 +8,10 @@ import DatePicker from 'react-datepicker';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/graphQlClient';
-import { QueryKeys } from '@/constants';
+import { QueryKeys, Routes } from '@/constants';
+import { fetchGet } from '@/helper/fetchHelpers';
+import { FormatSpecialSomeoneName, ShouldReturnNotFound } from '@/helper/index';
+import { SpecialSomeoneName, ApiResult } from '@/types';
 import {
   GetFirstAndLastDaysOfTheMonth,
   FromUtcToLocal,
@@ -35,13 +39,11 @@ const specialSomeoneNotes = graphql(`
   }
 `);
 
-/*
-TODO:
-  Create Special Someone Name REST endpoint
-    Handle not found special someone
-*/
-
-export default function Page(): JSX.Element {
+export default function Page({
+  specialSomeone,
+}: {
+  specialSomeone: SpecialSomeoneName | ApiResult;
+}): JSX.Element {
   const router = useRouter();
   const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
 
@@ -62,14 +64,24 @@ export default function Page(): JSX.Element {
     return () => {};
   }, [filterMonth]);
 
+  const SpecialSomeoneNameOrNotFound = (
+    specialSomeone: SpecialSomeoneName | ApiResult,
+  ): string => {
+    return ShouldReturnNotFound(specialSomeone)
+      ? `Special Someone Not Found`
+      : `${FormatSpecialSomeoneName(
+          specialSomeone as SpecialSomeoneName,
+        )} Notes`;
+  };
+
   return (
     <main className={`${inter.className} ${styles.main}`}>
       <Head>
-        <title>[[SPECIAL SOMEONE NAME]] | Notes</title>
+        <title>{SpecialSomeoneNameOrNotFound(specialSomeone)}</title>
       </Head>
 
       <header className={styles.header}>
-        <h1>Special Someone Notes</h1>
+        <h1>{SpecialSomeoneNameOrNotFound(specialSomeone)}</h1>
       </header>
 
       <div className={styles.body}>
@@ -88,6 +100,13 @@ export default function Page(): JSX.Element {
 
         <ul className={styles.notes}>
           {isLoading && <p className={styles.loading}>Loading...</p>}
+
+          {ShouldReturnNotFound(specialSomeone) && !isLoading ? (
+            <p className={styles.notFound}>
+              Looks like the link you are trying to access is not valid!
+            </p>
+          ) : null}
+
           {data?.notes?.nodes?.map((note, idx) => (
             <li key={`note-${idx}`}>
               <span>{FromUtcToLocal(note.createdUTC)}</span> <br />
@@ -99,3 +118,14 @@ export default function Page(): JSX.Element {
     </main>
   );
 }
+
+export const getServerSideProps = (async ({ query }) => {
+  const response: Response = await fetchGet({
+    route: `${Routes.SPECIAL_SOMEONE_NAME}/${query.slug}`,
+  });
+  const specialSomeone: SpecialSomeoneName | ApiResult = await response.json();
+
+  return { props: { specialSomeone } };
+}) satisfies GetServerSideProps<{
+  specialSomeone: SpecialSomeoneName | ApiResult;
+}>;

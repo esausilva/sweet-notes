@@ -2,7 +2,7 @@ import { ObjectLiteral } from '@/types';
 import { Routes } from '@/constants';
 
 interface IFetchBase {
-  route: Routes;
+  route: Routes | string;
   fetchOptions?: ObjectLiteral;
 }
 

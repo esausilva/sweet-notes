@@ -8,6 +8,7 @@ export enum Routes {
   USER_LOGIN = 'user/login',
   USER_ME = 'user/me',
   SPECIAL_SOMEONE = 'ss',
+  SPECIAL_SOMEONE_NAME = 'special-someone-name',
 }
 
 export enum QueryKeys {

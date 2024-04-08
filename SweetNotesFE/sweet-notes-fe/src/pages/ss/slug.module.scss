@@ -61,6 +61,12 @@
   color: $background;
 }
 
+.not-found {
+  background-color: #ffccc7;
+  padding: 1em;
+  border-radius: 5px;
+}
+
 .notes {
   list-style: none;
   display: flex;
