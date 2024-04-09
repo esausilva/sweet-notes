@@ -1,6 +1,6 @@
-namespace Api.RestEndpoints.Models;
+namespace Api.RestEndpoints.UserEndpoints.Models;
 
-public record CreateUserSignup
+public record CreateUserSignupRequest
 {
     public string FirstName { get; init; }
     public string LastName { get; init; }

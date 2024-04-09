@@ -1,4 +1,5 @@
-using Api.RestEndpoints;
+using Api.RestEndpoints.SpecialSomeoneEndpoints;
+using Api.RestEndpoints.UserEndpoints;
 
 namespace Api.Extensions;
 

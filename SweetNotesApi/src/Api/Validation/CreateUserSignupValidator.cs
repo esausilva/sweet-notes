@@ -1,9 +1,9 @@
-using Api.RestEndpoints.Models;
+using Api.RestEndpoints.UserEndpoints.Models;
 using FluentValidation;
 
 namespace Api.Validation;
 
-public class CreateUserSignupValidator : AbstractValidator<CreateUserSignup>
+public class CreateUserSignupValidator : AbstractValidator<CreateUserSignupRequest>
 {
     public CreateUserSignupValidator()
     {

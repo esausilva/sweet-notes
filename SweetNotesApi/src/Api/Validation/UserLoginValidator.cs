@@ -1,9 +1,9 @@
-using Api.RestEndpoints.Models;
+using Api.RestEndpoints.UserEndpoints.Models;
 using FluentValidation;
 
 namespace Api.Validation;
 
-public class UserLoginValidator : AbstractValidator<UserLogin>
+public class UserLoginValidator : AbstractValidator<UserLoginRequest>
 {
     public UserLoginValidator()
     {

@@ -1,34 +1,35 @@
 using Api.Exceptions;
+using Api.RestEndpoints.UserEndpoints.Models;
 using Application.Queries;
 using Application.Queries.UserLogin;
 using Domain.Entities;
 using FluentValidation;
 using static Api.RestEndpoints.Helpers.UserEndpointHelpers;
 
-namespace Api.RestEndpoints;
+namespace Api.RestEndpoints.UserEndpoints;
 
 public static class UserLogin
 {
     public static async Task<IResult> PostAsync
     (
-        IValidator<Models.UserLogin> validator,
+        IValidator<UserLoginRequest> validator,
         HttpContext context,
-        Models.UserLogin userLogin,
+        UserLoginRequest request,
         IQueryRequest<UserLoginQuery, User?> queryRequest,
         CancellationToken cancellationToken
     )
     {
-        var validationResult = await validator.ValidateAsync(userLogin, cancellationToken);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (validationResult.IsValid is false)
             throw new ApiValidationException(validationResult.ToDictionary());
         
-        var query = new UserLoginQuery(userLogin.EmailAddress, userLogin.Password);
+        var query = new UserLoginQuery(request.EmailAddress, request.Password);
         var user = await queryRequest.Handle(query, cancellationToken);
         
         if (user is null)
             throw new UnauthorizedException();
         
-        await CreateSignin(context, userLogin.EmailAddress, user.FirstName, user.LastName, user.Id.ToString());
+        await CreateSignin(context, request.EmailAddress, user.FirstName, user.LastName, user.Id.ToString());
 
         return Results.Ok();
     }
