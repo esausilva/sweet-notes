@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Api.RestEndpoints.UserEndpoints;
+namespace Api.RestEndpoints.UserEps;
 
 public static class UserLogout
 {

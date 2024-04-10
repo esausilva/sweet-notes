@@ -1,3 +1,3 @@
-namespace Api.RestEndpoints.SpecialSomeoneEndpoints.Models;
+namespace Api.RestEndpoints.SpecialSomeoneEps.Models;
 
 public record SpecialSomeoneIdentifierRequest(string Identifier);

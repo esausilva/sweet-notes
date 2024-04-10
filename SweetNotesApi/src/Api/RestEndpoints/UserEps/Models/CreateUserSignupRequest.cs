@@ -1,4 +1,4 @@
-namespace Api.RestEndpoints.UserEndpoints.Models;
+namespace Api.RestEndpoints.UserEps.Models;
 
 public record CreateUserSignupRequest
 {

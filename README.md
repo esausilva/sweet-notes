@@ -27,7 +27,8 @@ TODOs:
 - [x] Create REST endpoint to get Special Someone's Name
 - [ ] Encrypt notes
 - [x] Re-organize RestEndpoints. Separate folders, append Request to models that need it
-- [ ] Implement rate limiter in `special-someone-name/{identifier}` route
+- [ ] Implement rate limiter in `special-someone-name/{identifier}` route. NoteQueries.cs, SpecialSomeoneName.cs
+- [ ] Implement some sort of captcha for spam user account creation
 
 ### Misc
 

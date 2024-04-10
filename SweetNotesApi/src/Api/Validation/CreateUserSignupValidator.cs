@@ -1,4 +1,4 @@
-using Api.RestEndpoints.UserEndpoints.Models;
+using Api.RestEndpoints.UserEps.Models;
 using FluentValidation;
 
 namespace Api.Validation;

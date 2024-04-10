@@ -1,11 +1,11 @@
 using Api.Exceptions;
-using Api.RestEndpoints.SpecialSomeoneEndpoints.Models;
+using Api.RestEndpoints.SpecialSomeoneEps.Models;
 using Application.Queries;
 using Application.Queries.GetSpecialSomeone;
 using Domain.Entities;
 using FluentValidation;
 
-namespace Api.RestEndpoints.SpecialSomeoneEndpoints;
+namespace Api.RestEndpoints.SpecialSomeoneEps;
 
 public static class SpecialSomeoneName
 {

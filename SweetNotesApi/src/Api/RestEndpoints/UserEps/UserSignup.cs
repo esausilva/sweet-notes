@@ -1,11 +1,11 @@
 using Api.Exceptions;
-using Api.RestEndpoints.UserEndpoints.Models;
+using Api.RestEndpoints.UserEps.Models;
 using Application.Commands;
 using Application.Commands.UserSignup;
 using FluentValidation;
 using static Api.RestEndpoints.Helpers.UserEndpointHelpers;
 
-namespace Api.RestEndpoints.UserEndpoints;
+namespace Api.RestEndpoints.UserEps;
 
 public static class UserSignup
 {

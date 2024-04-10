@@ -1,4 +1,4 @@
-namespace Api.RestEndpoints.UserEndpoints;
+namespace Api.RestEndpoints.UserEps;
 
 public static class UserEndpointBuilder
 {

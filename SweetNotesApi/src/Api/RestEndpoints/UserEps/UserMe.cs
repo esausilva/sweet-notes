@@ -1,8 +1,8 @@
 using Api.Auth.Services.ClaimsReaderService;
-using Api.RestEndpoints.UserEndpoints.Models;
+using Api.RestEndpoints.UserEps.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Api.RestEndpoints.UserEndpoints;
+namespace Api.RestEndpoints.UserEps;
 
 public static class UserMe
 {
