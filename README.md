@@ -14,7 +14,7 @@ TODOs:
 - [x] Query SpecialSomeoneForUser and Notes fire up when changing tabs. Should not happen
 - [x] Call REST endpoint to get Special Someone's Name
 - [ ] Reuse as much as possible date picker between **[slug].tsx** and **Notes.tsx**
-- [ ] Put a "refresh" button in `/ss/[slug]` route
+- [x] Put a "refresh" button in `/ss/[slug]` route
 
 ## Back End
 

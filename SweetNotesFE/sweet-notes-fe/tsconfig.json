@@ -5,13 +5,14 @@
     "paths": {
       "@/component/*": ["app/components/*"],
       "@/interfaces": ["app/interfaces/index"],
+      "@/resources/*": ["app/resources/*"],
       "@/constants": ["app/constants/index"],
       "@/service/*": ["app/services/*"],
       "@/layout/*": ["app/components/layouts/*"],
       "@/helper/*": ["app/helpers/*"],
       "@/style/*": ["app/styles/*"],
-      "@/hook/*": ["app/hooks/*"],
       "@/types": ["app/types/index"],
+      "@/hook/*": ["app/hooks/*"],
       "@/gql/*": ["gql/*"]
     },
     "lib": [

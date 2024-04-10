@@ -11,6 +11,7 @@ import { GraphQLClient, FetchGet } from '@/helper/networkHelpers';
 import { QueryKeys, Routes } from '@/constants';
 import { FormatSpecialSomeoneName, ShouldReturnNotFound } from '@/helper/index';
 import { SpecialSomeoneName, ApiErrorResponse } from '@/types';
+import { ReloadIcon } from '@/resources/ReloadIcon';
 import {
   GetFirstAndLastDaysOfTheMonth,
   FromUtcToLocal,
@@ -93,6 +94,7 @@ export default function Page({
               dateFormat="MM/yyyy"
               showMonthYearPicker
             />
+            <ReloadIcon className={styles.reload} onClick={() => refetch()} />
           </div>
           <p>Total Notes For This Month: {data?.notes?.totalCount ?? 0}</p>
         </section>
