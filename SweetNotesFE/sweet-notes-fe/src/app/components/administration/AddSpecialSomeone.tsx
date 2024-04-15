@@ -4,16 +4,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/networkHelpers';
+import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
+import { IAddSpecialSomeone } from '@/interfaces';
+import { QueryKeys, MutationKeys } from '@/constants';
+import { useSuccessToast } from '@/hook/useToast';
 import {
   CreateSpecialSomeoneForm,
   FormFieldData,
   GraphQLErrorResponse,
   GraphQLError,
 } from '@/types';
-import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
-import { IAddSpecialSomeone } from '@/interfaces';
+
 import styles from './AddSpecialSomeone.module.scss';
-import { QueryKeys, MutationKeys } from '@/constants';
 
 const createSpecialSomeone = graphql(`
   mutation createSpecialSomeone(
@@ -58,7 +60,7 @@ export function AddSpecialSomeone({
   });
   const queryClient = useQueryClient();
 
-  const { isPending, mutate, isSuccess } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationKey: [MutationKeys.CREATE_SPECIAL_SOMEONE],
     mutationFn: async () =>
       await GraphQLClient.request(createSpecialSomeone, {
@@ -67,7 +69,8 @@ export function AddSpecialSomeone({
         lastName: formData.lastName,
       }),
     onSuccess: (data, variables, context) => {
-      clearForm();
+      useSuccessToast(`'${formData.firstName} ${formData.lastName}' added!`);
+      onCloseModal();
       setFormErrors({
         errors: [],
       });
@@ -113,12 +116,9 @@ export function AddSpecialSomeone({
         }}
       >
         <h3 className={styles.title}>Add a Special Someone</h3>
+
         <form className={styles.addSpecialSomeoneForm} onSubmit={handleSubmit}>
           {useRenderGraphQLErrorList(formErrors)}
-
-          {isSuccess ? (
-            <span className={styles.success}>Successfully added!</span>
-          ) : null}
 
           <label htmlFor="firstName">First Name</label>
           <input
@@ -156,6 +156,7 @@ export function AddSpecialSomeone({
           </button>
         </form>
       </Modal>
+
       <button onClick={onOpenModal} ref={buttonRef} hidden={true}></button>
     </>
   );

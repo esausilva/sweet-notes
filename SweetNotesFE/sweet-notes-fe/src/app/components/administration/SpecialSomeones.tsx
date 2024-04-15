@@ -8,6 +8,7 @@ import { ISpecialSomeones } from '@/interfaces';
 import { GraphQLErrorResponse, GraphQLError } from '@/types';
 import { useRenderGraphQLErrorList } from '@/hook/useRenderGraphQLErrorList';
 import { QueryKeys, MutationKeys } from '@/constants';
+import { useSuccessToast } from '@/hook/useToast';
 
 import styles from './SpecialSomeones.module.scss';
 
@@ -38,6 +39,7 @@ export function SpecialSomeones({
         specialSomeoneId: specialSomeone.id,
       }),
     onSuccess: (data, variables, context) => {
+      useSuccessToast('Note added!');
       setNote({ message: '', count: 0 });
       setFormErrors({
         errors: [],

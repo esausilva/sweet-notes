@@ -16,7 +16,7 @@ TODOs:
 - [ ] Reuse as much as possible date picker between **[slug].tsx** and **Notes.tsx**
 - [x] Put a "refresh" button in `/ss/[slug]` route
 - [x] Show toast message in `/ss/[slug]` after pressing refresh button but no new notes were found
-- [ ] Show toast message in admin section after creating new notes
+- [x] Show toast message in admin section after creating new notes
 
 ## Back End
 
