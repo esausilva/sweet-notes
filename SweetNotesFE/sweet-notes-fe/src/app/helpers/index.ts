@@ -16,3 +16,11 @@ export function ShouldReturnNotFound(
     (specialSomeone as ApiErrorResponse).status === 404
   );
 }
+
+export function SpecialSomeoneNameOrNotFound(
+  specialSomeone: SpecialSomeoneName | ApiErrorResponse,
+): string {
+  return ShouldReturnNotFound(specialSomeone)
+    ? `Special Someone Not Found`
+    : `${FormatSpecialSomeoneName(specialSomeone as SpecialSomeoneName)} Notes`;
+}

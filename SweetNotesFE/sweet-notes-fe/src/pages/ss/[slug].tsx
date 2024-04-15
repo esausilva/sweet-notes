@@ -5,13 +5,18 @@ import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
+import { Toaster } from 'react-hot-toast';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient, FetchGet } from '@/helper/networkHelpers';
 import { QueryKeys, Routes } from '@/constants';
-import { FormatSpecialSomeoneName, ShouldReturnNotFound } from '@/helper/index';
 import { SpecialSomeoneName, ApiErrorResponse } from '@/types';
 import { ReloadIcon } from '@/resources/ReloadIcon';
+import { useWarningToast } from '@/hook/useToast';
+import {
+  SpecialSomeoneNameOrNotFound,
+  ShouldReturnNotFound,
+} from '@/helper/index';
 import {
   GetFirstAndLastDaysOfTheMonth,
   FromUtcToLocal,
@@ -46,8 +51,9 @@ export default function Page({
 }): JSX.Element {
   const router = useRouter();
   const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
+  const [notesCount, setNotesCount] = useState<number>(0);
 
-  const { data, refetch, isLoading } = useQuery({
+  const { data, refetch, isLoading, isRefetching, isFetched } = useQuery({
     queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES, router.query.slug],
     queryFn: async () =>
       await GraphQLClient.request(specialSomeoneNotes, {
@@ -64,14 +70,32 @@ export default function Page({
     return () => {};
   }, [filterMonth]);
 
-  const SpecialSomeoneNameOrNotFound = (
-    specialSomeone: SpecialSomeoneName | ApiErrorResponse,
-  ): string => {
-    return ShouldReturnNotFound(specialSomeone)
-      ? `Special Someone Not Found`
-      : `${FormatSpecialSomeoneName(
-          specialSomeone as SpecialSomeoneName,
-        )} Notes`;
+  useEffect(() => {
+    if (isFetched && !isRefetching) {
+      if (notesCount === data?.notes?.totalCount) {
+        useWarningToast('No new notes at this time!');
+      }
+
+      setNotesCount(data?.notes?.totalCount!);
+    }
+    return () => {};
+  }, [data?.notes?.totalCount, isRefetching, isFetched]);
+
+  const ShouldGetNewNotes = () => {
+    var filterDate = new Date(
+      filterMonth?.getFullYear()!,
+      filterMonth?.getMonth()!,
+    );
+    var todayTemp = new Date();
+    var today = new Date(todayTemp.getFullYear(), todayTemp.getMonth());
+
+    if (filterDate < today) {
+      useWarningToast('Sorry! Past months do not have new notes.');
+    } else if (filterDate > today) {
+      useWarningToast('Sorry! Future months do not have notes.');
+    } else {
+      refetch();
+    }
   };
 
   return (
@@ -94,7 +118,7 @@ export default function Page({
               dateFormat="MM/yyyy"
               showMonthYearPicker
             />
-            <ReloadIcon className={styles.reload} onClick={() => refetch()} />
+            <ReloadIcon className={styles.reload} onClick={ShouldGetNewNotes} />
           </div>
           <p>Total Notes For This Month: {data?.notes?.totalCount ?? 0}</p>
         </section>
@@ -116,6 +140,8 @@ export default function Page({
           ))}
         </ul>
       </div>
+
+      <Toaster />
     </main>
   );
 }
