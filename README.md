@@ -1,11 +1,9 @@
 # Sweet Notes
 
-TODOs:
-
 ## Front End
 
 - [x] Refactor all routes to constant files in an object
-- [ ] Disable Login / Signup button after pressing using react-query
+- [x] Disable Login / Signup button after pressing using react-query
 - [x] Switch `error-list` from an `id` to a `class`
 - [x] Migrate Note textarea to use `useRenderGraphQLErrorList`
 - [ ] Find a way to refactor CSS into more concise way
