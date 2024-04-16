@@ -31,6 +31,6 @@ public static class UserLogin
         
         await CreateSignin(context, request.EmailAddress, user.FirstName, user.LastName, user.Id.ToString());
 
-        return Results.Ok();
+        return Results.Ok(new {});
     }
 }

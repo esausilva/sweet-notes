@@ -18,3 +18,11 @@ export function useSuccessToast(message: string): void {
     },
   });
 }
+
+export function useErrorToast(message: string): void {
+  toast.error(message, {
+    style: {
+      borderRadius: '5px',
+    },
+  });
+}

@@ -4,10 +4,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { MainLayout } from '@/component/layouts/MainEntryLayout';
-import { SignupForm, FormFieldData, ApiError } from '@/types';
-import { Authenticate } from '@/service/authService';
+import { SignupForm, FormFieldData, ApiError, ApiErrorResponse } from '@/types';
+import { useAuthService } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';
-import { Routes } from '@/constants';
+import { Routes, MutationKeys } from '@/constants';
+import { useErrorToast } from '@/hook/useToast';
 
 import styles from './index.module.scss';
 
@@ -33,6 +34,17 @@ export default function Signup(): JSX.Element {
   const [errors, setErrors] = useState<ApiError>({});
   const router = useRouter();
 
+  const { mutateAsync, isPending } = useAuthService(
+    Routes.USER_SIGNUP,
+    MutationKeys.SIGNUP,
+    {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      emailAddress: formData.email,
+      password: formData.password,
+    },
+  );
+
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     const { name, value } = event.currentTarget;
     dispatch({ name, value });
@@ -43,15 +55,15 @@ export default function Signup(): JSX.Element {
   ): Promise<void> => {
     event.preventDefault();
 
-    var result = await Authenticate(Routes.USER_SIGNUP, {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      emailAddress: formData.email,
-      password: formData.password,
-    });
+    const data = await mutateAsync();
+    const responseBody = (await data.json()) as ApiErrorResponse;
 
-    if (result.status === 200) router.push(Routes.USER_ADMINISTRATION);
-    if (result.errors) setErrors(result.errors);
+    if (data.status === 200) router.push(Routes.USER_ADMINISTRATION);
+
+    if (responseBody.errors) setErrors(responseBody.errors);
+
+    if (data.status === 500)
+      useErrorToast(`${responseBody.title} Please contact support.`);
   };
 
   return (
@@ -67,18 +79,46 @@ export default function Signup(): JSX.Element {
           <>{useRenderErrorList(errors)}</>
 
           <label htmlFor="firstName">First Name</label>
-          <input type="text" name="firstName" onChange={handleChange} />
+          <input
+            type="text"
+            name="firstName"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.firstName}
+          />
 
           <label htmlFor="lastName">Last Name</label>
-          <input type="text" name="lastName" onChange={handleChange} />
+          <input
+            type="text"
+            name="lastName"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.lastName}
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="text" name="email" onChange={handleChange} />
+          <input
+            type="text"
+            name="email"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.email}
+          />
 
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" onChange={handleChange} />
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.password}
+          />
 
-          <button className="button--primary" type="submit">
+          <button
+            className="button--primary"
+            type="submit"
+            disabled={isPending}
+          >
             Signup
           </button>
         </form>

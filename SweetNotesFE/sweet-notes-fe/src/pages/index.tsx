@@ -4,10 +4,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { MainLayout } from '@/component/layouts/MainEntryLayout';
-import { FormFieldData, LoginForm, ApiError } from '@/types';
-import { Authenticate } from '@/service/authService';
+import { FormFieldData, LoginForm, ApiError, ApiErrorResponse } from '@/types';
+import { useAuthService } from '@/service/authService';
 import { useRenderErrorList } from '@/hook/useRenderErrorList';
-import { Routes } from '@/constants';
+import { Routes, MutationKeys } from '@/constants';
+import { useErrorToast } from '@/hook/useToast';
 
 import styles from './index.module.scss';
 
@@ -27,9 +28,18 @@ const formReducer = (
 };
 
 export default function Index(): JSX.Element {
+  const router = useRouter();
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [errors, setErrors] = useState<ApiError>({});
-  const router = useRouter();
+
+  const { mutateAsync, isPending } = useAuthService(
+    Routes.USER_LOGIN,
+    MutationKeys.LOGIN,
+    {
+      emailAddress: formData.email,
+      password: formData.password,
+    },
+  );
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     const { name, value } = event.currentTarget;
@@ -39,13 +49,15 @@ export default function Index(): JSX.Element {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    var result = await Authenticate(Routes.USER_LOGIN, {
-      emailAddress: formData.email,
-      password: formData.password,
-    });
+    const data = await mutateAsync();
+    const responseBody = (await data.json()) as ApiErrorResponse;
 
-    if (result.status === 200) router.push(Routes.USER_ADMINISTRATION);
-    if (result.errors) setErrors(result.errors);
+    if (data.status === 200) router.push(Routes.USER_ADMINISTRATION);
+
+    if (responseBody.errors) setErrors(responseBody.errors);
+
+    if (data.status === 500)
+      useErrorToast(`${responseBody.title} Please contact support.`);
   };
 
   return (
@@ -61,12 +73,28 @@ export default function Index(): JSX.Element {
           <>{useRenderErrorList(errors)}</>
 
           <label htmlFor="email">Email</label>
-          <input type="text" name="email" onChange={handleChange} />
+          <input
+            type="text"
+            name="email"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.email}
+          />
 
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" onChange={handleChange} />
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            disabled={isPending}
+            value={formData.password}
+          />
 
-          <button className="button--primary" type="submit">
+          <button
+            className="button--primary"
+            type="submit"
+            disabled={isPending}
+          >
             Login
           </button>
         </form>

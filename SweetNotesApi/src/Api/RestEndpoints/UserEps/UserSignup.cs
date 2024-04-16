@@ -33,6 +33,6 @@ public static class UserSignup
         
         await CreateSignin(context, request.EmailAddress, request.FirstName, request.LastName, userId.ToString());
 
-        return Results.Ok();
+        return Results.Ok(new {});
     }
 }

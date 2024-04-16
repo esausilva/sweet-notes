@@ -25,26 +25,30 @@ public static class GlobalExceptionHandler
         {
             case UserAlreadyExistsException:
             {
-                var details = new ProblemDetails
-                {
-                    Type = "https://httpstatuses.com/409",
-                    Title = "User already exists.",
-                    Status = StatusCodes.Status409Conflict,
-                };
-
-                problemResult = Results.Problem(details);
+                problemResult = Results.ValidationProblem
+                (
+                    type: "https://httpstatuses.com/409",
+                    title: "User already exists.",
+                    statusCode: StatusCodes.Status409Conflict,
+                    errors: new Dictionary<string, string[]>
+                    {
+                        { "account_exists", new[] { "Account already exists." } }
+                    }
+                );
                 break;
             }
             case UnauthorizedException:
             {
-                var details = new ProblemDetails
-                {
-                    Type = "https://httpstatuses.com/401",
-                    Title = "User not authorized.",
-                    Status = StatusCodes.Status401Unauthorized
-                };
-
-                problemResult = Results.Problem(details);
+                problemResult = Results.ValidationProblem
+                (
+                    type: "https://httpstatuses.com/401",
+                    title: "User not authorized.",
+                    statusCode: StatusCodes.Status401Unauthorized,
+                    errors: new Dictionary<string, string[]>
+                    {
+                        { "not_authorized", new[] { "Email or Password is incorrect." } }
+                    }
+                );
                 break;
             }
             case NotFoundException:

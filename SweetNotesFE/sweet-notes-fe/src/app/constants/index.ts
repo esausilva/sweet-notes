@@ -19,4 +19,6 @@ export enum QueryKeys {
 export enum MutationKeys {
   CREATE_NOTE = 'createNote',
   CREATE_SPECIAL_SOMEONE = 'createSpecialSomeone',
+  LOGIN = 'login',
+  SIGNUP = 'signup',
 }
