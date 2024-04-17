@@ -102,6 +102,9 @@ export function AddSpecialSomeone({
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => {
     setOpenModal(false);
+    setFormErrors({
+      errors: [],
+    });
     clearForm();
   };
 

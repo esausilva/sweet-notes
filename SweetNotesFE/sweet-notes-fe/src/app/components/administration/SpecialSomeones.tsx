@@ -66,11 +66,12 @@ export function SpecialSomeones({
   });
 
   useEffect(() => {
+    console.log(queryResult.isLoading);
     if (IsDoneLoadingSpecialSomeones(queryResult)) setButtonDisabled(false);
     else setButtonDisabled(true);
 
     return () => {};
-  }, [queryResult.isLoading]);
+  }, [queryResult]);
 
   useEffect(() => {
     setFormErrors({
