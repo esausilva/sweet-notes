@@ -58,7 +58,7 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
       });
     }
     return () => {};
-  }, [queryResult.isLoading]);
+  }, [queryResult.isLoading, queryResult.data]);
 
   const handleSelect = (event: FormEvent<HTMLSelectElement>) => {
     const uniqueIdentifier = event.currentTarget.value;
