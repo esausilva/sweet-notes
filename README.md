@@ -21,7 +21,7 @@
 - [x] Extract UserEndpoint.cs into separate classes
 - [ ] Look for opportunities to introduce a IDateTimeProvider and remove concrete implementations of DateTime
 - [ ] Refactor exceptions to use Result Pattern with NuGet ErrorOr
-- [ ] Replace Special Someone UniqueId with ID Generator + Base62
+- [x] Replace Special Someone UniqueId with ID Generator + Base62
 	- https://github.com/RobThree/IdGen
 	- https://github.com/ghost1face/base62
 - [x] Create REST endpoint to get Special Someone's Name

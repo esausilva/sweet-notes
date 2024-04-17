@@ -9,6 +9,6 @@ public class SpecialSomeoneIdentifierValidator : AbstractValidator<SpecialSomeon
     {
         RuleFor(s => s.Identifier)
             .NotEmpty()
-            .Length(45);
+            .Length(26);
     }
 }

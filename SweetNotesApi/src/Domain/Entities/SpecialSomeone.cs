@@ -7,7 +7,7 @@ public class SpecialSomeone
     public int Id { get; set; }
 
     [Required]
-    [StringLength(45)]
+    [StringLength(26)]
     public string UniqueIdentifier { get; set; }
     
     [Required]

@@ -1,3 +1,5 @@
+using Base62;
+
 namespace Application.Helpers;
 
 internal static class StringHelpers
@@ -19,5 +21,12 @@ internal static class StringHelpers
         );
         
         return randomString;
+    }
+    
+    public static string ConvertToBase62(long number)
+    {
+        var base62Converter = new Base62Converter();
+
+        return base62Converter.Encode(number.ToString());
     }
 }

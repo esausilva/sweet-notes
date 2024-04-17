@@ -1,5 +1,7 @@
 using System.Reflection;
 using Application.Commands;
+using Application.Providers;
+using Application.Providers.SnowflakeId;
 using Application.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,9 @@ public static class ApplicationDependencyConfigurationExtensions
                 var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(IQueryRequest<,>));
                 services.AddTransient(serviceType, assignedTypes);
             });
+
+        services
+            .AddSingleton<IUniqueIdProvider<long>, SnowflakeIdProvider>();
         
         return services;
     }
