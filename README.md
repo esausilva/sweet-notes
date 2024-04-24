@@ -20,7 +20,7 @@
 
 - [x] Extract UserEndpoint.cs into separate classes
 - [ ] Look for opportunities to introduce a IDateTimeProvider and remove concrete implementations of DateTime
-- [ ] Refactor exceptions to use Result Pattern with NuGet ErrorOr
+- [ ] Refactor exceptions to use Result Pattern with NuGet ErrorOr or OneOf
 - [x] Replace Special Someone UniqueId with ID Generator + Base62
 	- https://github.com/RobThree/IdGen
 	- https://github.com/ghost1face/base62
@@ -36,5 +36,7 @@ https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-
 https://www.npmjs.com/package/randomcolor
 https://css-tricks.com/re-pleasing-color-palettes/
 https://tanstack.com/query/latest/docs/framework/react/guides/window-focus-refetching
+https://nextjs.org/docs/pages/api-reference/next-cli
+https://dev.to/oluwadareseyi/deploying-to-your-local-ip-address-with-nextjs-1hoi
 
 just use the queryClient directly
