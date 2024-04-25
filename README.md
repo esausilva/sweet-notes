@@ -15,6 +15,7 @@
 - [x] Put a "refresh" button in `/ss/[slug]` route
 - [x] Show toast message in `/ss/[slug]` after pressing refresh button but no new notes were found
 - [x] Show toast message in admin section after creating new notes
+- [ ] Implement Delete Note
 
 ## Back End
 
@@ -29,6 +30,7 @@
 - [x] Re-organize RestEndpoints. Separate folders, append Request to models that need it
 - [ ] Implement rate limiter in `special-someone-name/{identifier}` route. NoteQueries.cs, SpecialSomeoneName.cs
 - [ ] Implement some sort of captcha for spam user account creation
+- [ ] Implement Delete Note
 
 ### Misc
 
