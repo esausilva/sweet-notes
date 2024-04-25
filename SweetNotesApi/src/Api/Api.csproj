@@ -12,11 +12,11 @@
       <PackageReference Include="FairyBread" Version="10.0.0" />
       <PackageReference Include="FluentValidation" Version="11.9.1" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
-      <PackageReference Include="HotChocolate.AspNetCore" Version="13.3.3" />
-      <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.3.3" />
-      <PackageReference Include="HotChocolate.Data" Version="13.3.3" />
-      <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.3.3" />
-      <PackageReference Include="HotChocolate.Utilities" Version="13.3.3" />
+      <PackageReference Include="HotChocolate.AspNetCore" Version="13.9.0" />
+      <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.9.0" />
+      <PackageReference Include="HotChocolate.Data" Version="13.9.0" />
+      <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.9.0" />
+      <PackageReference Include="HotChocolate.Utilities" Version="13.9.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.Core" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
