@@ -25,6 +25,10 @@ services
      .AddCookie(AuthCookie.Configure());
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+    app.ApplyMigrations();
+
 app.UseExceptionHandler(GlobalExceptionHandler.Configure);
 app.UseCors(Cors.FrontEndPolicyName);
 app.UseAuthentication();

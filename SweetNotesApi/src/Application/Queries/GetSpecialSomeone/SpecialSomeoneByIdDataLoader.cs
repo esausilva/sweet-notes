@@ -26,7 +26,7 @@ public sealed class SpecialSomeoneByIdDataLoader : BatchDataLoader<int, SpecialS
     )
     {
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
-
+        
         var specialSomeone = await dbContext.SpecialSomeone
             .Where(x => keys.Contains(x.Id))
             .ToDictionaryAsync(x => x.Id, cancellationToken);
