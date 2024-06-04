@@ -126,10 +126,11 @@ export function SpecialSomeones({
       </p>
       <p>
         <a
-          href={`http://localhost:3050/ss/${specialSomeone.uniqueIdentifier}`}
+          href={`${process.env.NEXT_PUBLIC_FRONTEND_URI}/ss/${specialSomeone.uniqueIdentifier}`}
           target="_blank"
         >
-          http://localhost:3050/ss/{`${specialSomeone.uniqueIdentifier}`}
+          {process.env.NEXT_PUBLIC_FRONTEND_URI}/ss/
+          {`${specialSomeone.uniqueIdentifier}`}
         </a>
       </p>
       <p className={styles.annotation}>

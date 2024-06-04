@@ -2,4 +2,4 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Security;
 
-public record CorsSettings(string FrontendOrigin);
+public record CorsSettings(string FrontendOrigin, string? FrontendOriginLocalNetwork);

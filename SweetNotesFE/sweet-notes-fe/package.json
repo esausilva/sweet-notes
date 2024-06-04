@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3050",
+    "dev:local-network": "next dev -p 3050 -H 192.168.0.82",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

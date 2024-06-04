@@ -19,6 +19,7 @@
   align-items: center;
   background-color: $background;
   height: 90px;
+  text-align: center;
   
   @include mediaMedium {
     height: 140px;

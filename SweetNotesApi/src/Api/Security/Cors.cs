@@ -9,13 +9,18 @@ public static class Cors
 
     public static Action<CorsOptions> Configure(IConfiguration configuration)
     {
-        var frontendOrigin = configuration
+        var corsSettings = configuration
             .GetSection(nameof(CorsSettings))
-            .Get<CorsSettings>()?
-            .FrontendOrigin;
+            .Get<CorsSettings>();
+        var frontendOrigin = corsSettings?.FrontendOrigin;
         
-        // TODO: Refactor to .ThrowIfNullOrWhiteSpace when migrating to .NET 8
-        ArgumentException.ThrowIfNullOrEmpty(frontendOrigin, nameof(frontendOrigin));
+        ArgumentException.ThrowIfNullOrWhiteSpace(frontendOrigin, nameof(frontendOrigin));
+        
+        var origins = new List<string?>
+        {
+            frontendOrigin,
+            corsSettings?.FrontendOriginLocalNetwork
+        };
 
         return options =>
         {
@@ -24,7 +29,7 @@ public static class Cors
                     policy =>
                     {
                         policy
-                            .WithOrigins(frontendOrigin)
+                            .WithOrigins(origins.Where(o => o is not null).ToArray()!)
                             .AllowAnyHeader()
                             .AllowCredentials();
                         policy.WithMethods(HttpVerbs.Post, HttpVerbs.Get);

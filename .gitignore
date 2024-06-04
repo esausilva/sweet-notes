@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 *.env
 .DS_Store
+
+# Docker
+.containers/
