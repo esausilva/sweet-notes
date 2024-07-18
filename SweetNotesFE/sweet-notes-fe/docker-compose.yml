@@ -1,0 +1,11 @@
+services:
+  sweetnotes.fe:
+    image: esausilva/sweetnotes.fe
+    container_name: SweetNotes.Fe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3050:3050'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

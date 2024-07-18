@@ -12,7 +12,7 @@ import { Notes } from '@/component/administration/Notes';
 import { FetchGet, GraphQLClient } from '@/helper/networkHelpers';
 import { FormatSpecialSomeoneName } from '@/helper/index';
 import { Me } from '@/types';
-import { AUTH_COOKIE_NAME, Routes, QueryKeys } from '@/constants';
+import { AUTH_COOKIE_NAME, Routes, QueryKeys, ApiRootUris } from '@/constants';
 import { graphql } from '@/gql/gql';
 import {
   GetSpecialSomeoneId,
@@ -115,6 +115,7 @@ export const getServerSideProps = (async ({ req }) => {
   const cookie = req.cookies[AUTH_COOKIE_NAME];
   const response: Response = await FetchGet({
     route: Routes.USER_ME,
+    rootUri: ApiRootUris.FOR_SERVER_SIDE,
     headers: {
       cookie: `${AUTH_COOKIE_NAME}=${cookie}`,
     },

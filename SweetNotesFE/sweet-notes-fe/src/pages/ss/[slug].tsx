@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient, FetchGet } from '@/helper/networkHelpers';
-import { QueryKeys, Routes } from '@/constants';
+import { QueryKeys, Routes, ApiRootUris } from '@/constants';
 import { SpecialSomeoneName, ApiErrorResponse } from '@/types';
 import { ReloadIcon } from '@/resources/ReloadIcon';
 import { useWarningToast } from '@/hook/useToast';
@@ -149,6 +149,7 @@ export default function Page({
 export const getServerSideProps = (async ({ query }) => {
   const response: Response = await FetchGet({
     route: `${Routes.SPECIAL_SOMEONE_NAME}/${query.slug}`,
+    rootUri: ApiRootUris.FOR_SERVER_SIDE,
   });
   const specialSomeone: SpecialSomeoneName | ApiErrorResponse =
     await response.json();

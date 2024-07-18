@@ -21,8 +21,8 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "esausilva/sweetnotes.api:dev"
     ports:
-    - "127.0.0.1:57020:57100"
-    - "127.0.0.1:57220:57300"
+    - "127.0.0.1:57002:57100"
+    - "127.0.0.1:57202:57300"
     volumes:
     - "/Users/esausilva/.microsoft/usersecrets:/home/app/.microsoft/usersecrets"
     - "/Users/esausilva/.nuget/packages:/home/app/.nuget/packages"
@@ -30,5 +30,5 @@ services:
     - "/Users/esausilva/Development/Projects/sweet-notes/SweetNotesApi:/src:rw"
     - "/Users/esausilva/.local/share/JetBrains/RiderRemoteDebugger/2023.3.3/Linux64:/opt/rider-debugger"
     - "/Applications/Rider.app/Contents/bin:/etc/opt/rider-debugger/backend-log.xml"
-    - "/Users/esausilva/Library/Logs/JetBrains/Rider2023.3/DebuggerWorker/JetBrains.Debugger.Worker.2024_6_03_21_47_36:/var/opt/rider-debugger:rw"
+    - "/Users/esausilva/Library/Logs/JetBrains/Rider2023.3/DebuggerWorker/JetBrains.Debugger.Worker.2024_7_18_18_02_45:/var/opt/rider-debugger:rw"
     working_dir: "/app"

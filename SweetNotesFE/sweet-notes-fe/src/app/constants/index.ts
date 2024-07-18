@@ -22,3 +22,8 @@ export enum MutationKeys {
   LOGIN = 'login',
   SIGNUP = 'signup',
 }
+
+export enum ApiRootUris {
+  FOR_CLIENT_SIDE,
+  FOR_SERVER_SIDE,
+}

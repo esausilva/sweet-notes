@@ -6,11 +6,13 @@
     "dev": "next dev -p 3050",
     "dev:local-network": "next dev -p 3050 -H 192.168.0.82",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3050",
     "lint": "next lint",
     "clean": "rimraf .next",
     "gql:codegen": "graphql-codegen --config codegen.ts",
-    "gql:codegen:watch": "graphql-codegen --watch"
+    "gql:codegen:watch": "graphql-codegen --watch",
+    "docker-build": "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
+    "docker-up": "docker-compose up"
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
@@ -40,5 +42,6 @@
     "@tanstack/react-query-devtools": "^5.29.2",
     "@types/react-datepicker": "^6.2.0",
     "rimraf": "^5.0.5"
-  }
+  },
+  "packageManager": "pnpm@8.6.12+sha1.a2f983fbf8f2531dc85db2a5d7f398063d51a6f3"
 }

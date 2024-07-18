@@ -11,7 +11,8 @@ public static class ApiDependencyConfigurationExtensions
     public static ConfigurationManager GetApiConfigurations(this ConfigurationManager configuration)
     {
         configuration.SetBasePath(Directory.GetCurrentDirectory());
-        configuration.AddJsonFile("appsettings.json", optional: false);
+        configuration.AddJsonFile("appsettings.json", optional: false)
+            .AddEnvironmentVariables();
         
         Console.WriteLine(configuration.GetDebugView());
         

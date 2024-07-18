@@ -1,8 +1,9 @@
 import { ObjectLiteral } from '@/types';
-import { Routes } from '@/constants';
+import { Routes, ApiRootUris } from '@/constants';
 
 interface IFetchBase {
   route: Routes | string;
+  rootUri?: ApiRootUris;
   fetchOptions?: ObjectLiteral;
 }
 
