@@ -1,6 +1,6 @@
 services:
   sweetnotes.fe:
-    image: esausilva/sweetnotes.fe
+    image: esausilva/sweetnotes.fe:latest
     container_name: SweetNotes.Fe
     build:
       context: .
