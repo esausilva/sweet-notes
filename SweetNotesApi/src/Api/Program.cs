@@ -26,8 +26,12 @@ services
 
 var app = builder.Build();
 
+app.UseHsts();
+
 if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
+// else
+//     app.UseHttpsRedirection();
 
 app.UseExceptionHandler(GlobalExceptionHandler.Configure);
 app.UseCors(Cors.FrontEndPolicyName);
