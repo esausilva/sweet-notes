@@ -2,6 +2,7 @@ using System.Reflection;
 using Application.Commands;
 using Application.Providers;
 using Application.Providers.SnowflakeId;
+using Application.Providers.Ulid;
 using Application.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,8 +37,12 @@ public static class ApplicationDependencyConfigurationExtensions
                 services.AddTransient(serviceType, assignedTypes);
             });
 
+        // Keeping for posterity
+        // services
+        //     .AddSingleton<IUniqueIdProvider<long>, SnowflakeIdProvider>();
+        
         services
-            .AddSingleton<IUniqueIdProvider<long>, SnowflakeIdProvider>();
+            .AddSingleton<IUniqueIdProvider<Ulid>, UlidProvider>();
         
         return services;
     }

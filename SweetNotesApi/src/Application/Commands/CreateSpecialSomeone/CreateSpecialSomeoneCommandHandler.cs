@@ -2,19 +2,18 @@ using Application.Providers;
 using Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using static Application.Helpers.StringHelpers;
 
 namespace Application.Commands.CreateSpecialSomeone;
 
 public sealed class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateSpecialSomeoneCommand, SpecialSomeone>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
-    private readonly IUniqueIdProvider<long> _idProvider;
+    private readonly IUniqueIdProvider<Ulid> _idProvider;
 
     public CreateSpecialSomeoneCommandHandler
     (
         IDbContextFactory<ApplicationDbContext> dbContextFactory, 
-        IUniqueIdProvider<long> snowflakeIdProvider
+        IUniqueIdProvider<Ulid> snowflakeIdProvider
     )
     {
         _idProvider = snowflakeIdProvider;
@@ -33,7 +32,7 @@ public sealed class CreateSpecialSomeoneCommandHandler : ICommandRequest<CreateS
             FirstName = firstName,
             LastName = lastName,
             Nickname = string.Equals(nickName?.Trim(), string.Empty) ? null : nickName,
-            UniqueIdentifier = ConvertToBase62(_idProvider.GenerateUniqueId()),
+            UniqueIdentifier = _idProvider.GenerateUniqueId().ToString(),
             UserId = command.UserId
         };
         
