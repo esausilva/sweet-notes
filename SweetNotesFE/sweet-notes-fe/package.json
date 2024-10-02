@@ -13,7 +13,7 @@
     "gql:codegen:watch": "graphql-codegen --watch",
     "docker-build": "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
     "docker-up": "docker-compose up",
-    "up:packages": "pnpm up -L -i "
+    "up:p": "pnpm up -L -i "
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
