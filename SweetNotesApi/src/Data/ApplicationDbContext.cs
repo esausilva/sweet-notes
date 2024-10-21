@@ -17,6 +17,6 @@ public sealed class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<Note> Notes { get; set; } = default!;
-    public DbSet<SpecialSomeone> SpecialSomeone { get; set; } = default!;
+    public DbSet<Note> Notes => Set<Note>();
+    public DbSet<SpecialSomeone> SpecialSomeone => Set<SpecialSomeone>();
 }

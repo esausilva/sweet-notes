@@ -21,6 +21,7 @@ public static class DataDependencyConfigurationExtensions
 #if DEBUG
                     options
                         .EnableDetailedErrors();
+                    //.LogTo(Console.WriteLine);
 #endif
                 }
             );
