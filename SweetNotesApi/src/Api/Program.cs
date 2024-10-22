@@ -14,6 +14,7 @@ configuration.GetApiConfigurations();
 
 var services = builder.Services;
 services
+    .ConfigureSettings(configuration)
     .ConfigureApiDependencies(configuration)
     .ConfigureApplicationDependencies(configuration)
     .ConfigureDataDependencies(configuration)
@@ -22,7 +23,7 @@ services
     .AddRazorPages();
 services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-     .AddCookie(AuthCookie.Configure());
+    .AddCookie(AuthCookie.Configure());
 
 var app = builder.Build();
 

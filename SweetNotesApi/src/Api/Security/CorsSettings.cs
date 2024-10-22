@@ -1,3 +1,7 @@
 namespace Api.Security;
 
-public record CorsSettings(string FrontendOrigin, string? FrontendOriginLocalNetwork);
+public record CorsSettings
+{
+    public string FrontendOrigin { get; init; }
+    public string? FrontendOriginLocalNetwork { get; init; }
+}

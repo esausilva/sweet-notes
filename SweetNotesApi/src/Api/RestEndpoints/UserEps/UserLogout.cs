@@ -1,14 +1,14 @@
+using Api.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Api.RestEndpoints.UserEps;
 
 public static class UserLogout
 {
-    [Authorize]
-    public static async Task GetAsync(HttpContext context)
+    public static async Task GetAsync(HttpContext context, CorsSettings corsSettings)
     {
         await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        context.Response.Redirect(corsSettings.FrontendOrigin);
     }
 }

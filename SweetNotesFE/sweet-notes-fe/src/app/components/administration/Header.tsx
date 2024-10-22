@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Avatar from 'boring-avatars';
 
 import { Me } from '@/types';
 import { HamburgerIcon } from '@/resources/HamburgerIcon';
+import { Routes } from '@/constants';
 
 import styles from './Header.module.scss';
 
 export function Header({ me }: { me: Me }): JSX.Element {
+  const router = useRouter();
   const [avatarSize, setAvatarSize] = useState<number>(90);
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
@@ -31,10 +35,17 @@ export function Header({ me }: { me: Me }): JSX.Element {
         </button>
         <ul className={styles.navigationItems}>
           <li>
+            <Link href={`/${Routes.USER_ADMINISTRATION}`}>Administration</Link>
+          </li>
+          <li>
             <a href="#">Update Password</a>
           </li>
           <li>
-            <a href="#">Logout</a>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_API_CLIENT_SIDE_ROOT_URI}/${Routes.USER_LOGOUT}`}
+            >
+              Logout
+            </Link>
           </li>
         </ul>
       </nav>

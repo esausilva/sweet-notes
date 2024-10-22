@@ -8,7 +8,7 @@ public static class ConfigureEndpointsExtensions
     public static void ConfigureEndpoints(this WebApplication app)
     {
         app.MapGroup("/user")
-            .MapUserEndpoint();
+            .MapUserEndpoint(app);
         app.MapGet("special-someone-name/{identifier}", SpecialSomeoneName.GetAsync);
     }
 }
