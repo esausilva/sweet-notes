@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Avatar from 'boring-avatars';
 
@@ -10,7 +9,6 @@ import { Routes } from '@/constants';
 import styles from './Header.module.scss';
 
 export function Header({ me }: { me: Me }): JSX.Element {
-  const router = useRouter();
   const [avatarSize, setAvatarSize] = useState<number>(90);
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
