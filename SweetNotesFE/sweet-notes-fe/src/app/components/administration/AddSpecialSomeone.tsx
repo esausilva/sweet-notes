@@ -1,6 +1,7 @@
-import { useState, LegacyRef, useReducer, FormEvent } from 'react';
+import { useState, useReducer, FormEvent } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Inter } from 'next/font/google';
 
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/networkHelpers';
@@ -16,6 +17,7 @@ import {
 } from '@/types';
 
 import styles from './AddSpecialSomeone.module.scss';
+const inter = Inter({ subsets: ['latin'] });
 
 const createSpecialSomeone = graphql(`
   mutation createSpecialSomeone(
@@ -115,7 +117,7 @@ export function AddSpecialSomeone({
         onClose={onCloseModal}
         center
         classNames={{
-          modal: styles.modal,
+          modal: `${styles.modal} ${inter.className}`,
         }}
       >
         <h3 className={styles.title}>Add a Special Someone</h3>
