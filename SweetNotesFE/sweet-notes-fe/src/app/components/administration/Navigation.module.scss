@@ -1,0 +1,85 @@
+@import '@/style/mixins.scss';
+@import '@/style/colors.scss';
+
+.hamburger {
+  position: absolute;
+  height: 2em;
+  cursor: pointer;
+  top: .5em;
+  left: .5em;
+  
+  @include mediaMedium {
+    height: 1.5em;
+  }
+}
+
+.navigation {
+  position: fixed;
+  background: #fff;
+  width: 40%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transition: transform 300ms;
+  box-shadow: 0 0.1rem 3rem hsla(0, 0%, 0%, 0.7);
+  z-index: 1;
+
+  button {
+    border: 0;
+    background: none;
+    font-size: 3rem;
+    margin: 1rem 0 0 1rem;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    display: inline-block;
+    color: lighten($color: $button-font-color, $amount: 15%);
+  }
+
+  &.closed {
+    transform: translateX(-100%);
+    box-shadow: none;
+  }
+
+  @include mediaMedium {
+    width: 30%;
+
+    button {
+      font-size: 4rem;
+    }
+  }
+}
+
+.navigation-items {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4em;
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+      
+    a {
+      padding: 1rem 0;
+      width: 100%;
+      color: $button-font-color;
+      font-weight: 200;
+      display: block;
+
+      &:hover {
+        color: lighten($color: $button-font-color, $amount: 20%);
+      }
+    }
+  }
+
+  @include mediaMedium {
+    li {
+      font-size: 3rem;
+    }
+  }
+}
