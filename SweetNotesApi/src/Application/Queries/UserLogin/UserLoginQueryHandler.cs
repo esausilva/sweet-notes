@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries.UserLogin;
 
-public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
+public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, UserLoginResponse?>
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
 
@@ -13,7 +13,7 @@ public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
         _dbContextFactory = dbContextFactory;
     }
 
-    async Task<User?> IQueryRequest<UserLoginQuery, User?>.Handle
+    async Task<UserLoginResponse?> IQueryRequest<UserLoginQuery, UserLoginResponse?>.Handle
     (
         UserLoginQuery query, 
         CancellationToken cancellationToken
@@ -22,11 +22,11 @@ public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         var userSet = dbContext.Set<User>();
-
-        // TODO: Create custom response and use projections to return only needed fields
+        
         var user = await userSet
             .AsNoTracking()
             .Where(x => x.EmailAddress == query.EmailAddress)
+            .Select(x => new UserLoginResponse(x.Id, x.Password, x.FirstName, x.LastName))
             .FirstOrDefaultAsync(cancellationToken);
 
         if (user is not null && BCrypt.Net.BCrypt.EnhancedVerify(query.Password, user!.Password))

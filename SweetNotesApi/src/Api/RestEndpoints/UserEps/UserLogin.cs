@@ -15,7 +15,7 @@ public static class UserLogin
         IValidator<UserLoginRequest> validator,
         HttpContext context,
         UserLoginRequest request,
-        IQueryRequest<UserLoginQuery, User?> queryRequest,
+        IQueryRequest<UserLoginQuery, UserLoginResponse?> queryRequest,
         CancellationToken cancellationToken
     )
     {
