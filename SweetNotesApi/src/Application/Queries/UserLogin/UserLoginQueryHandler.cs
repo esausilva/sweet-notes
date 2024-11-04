@@ -22,7 +22,10 @@ public sealed class UserLoginQueryHandler : IQueryRequest<UserLoginQuery, User?>
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         var userSet = dbContext.Set<User>();
+
+        // TODO: Create custom response and use projections to return only needed fields
         var user = await userSet
+            .AsNoTracking()
             .Where(x => x.EmailAddress == query.EmailAddress)
             .FirstOrDefaultAsync(cancellationToken);
 

@@ -11,6 +11,8 @@ public static class UserEndpointBuilder
 
         group.MapPost("signup", UserSignup.PostAsync);
         group.MapPost("login", UserLogin.PostAsync);
+        group.MapPost("update-password", UserUpdatePassword.PostAsync);
+        
         group.MapGet("logout", httpContext => UserLogout.GetAsync(httpContext, corsSettings))
             .RequireAuthorization();
         group.MapGet("me", UserMe.GetAsync);

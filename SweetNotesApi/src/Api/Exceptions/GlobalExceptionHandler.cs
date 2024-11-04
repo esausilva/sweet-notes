@@ -32,7 +32,7 @@ public static class GlobalExceptionHandler
                     statusCode: StatusCodes.Status409Conflict,
                     errors: new Dictionary<string, string[]>
                     {
-                        { "account_exists", new[] { "Account already exists." } }
+                        { "account_exists", ["Account already exists."] }
                     }
                 );
                 break;
@@ -46,7 +46,7 @@ public static class GlobalExceptionHandler
                     statusCode: StatusCodes.Status401Unauthorized,
                     errors: new Dictionary<string, string[]>
                     {
-                        { "not_authorized", new[] { "Email or Password is incorrect." } }
+                        { "not_authorized", ["Email or Password is incorrect."] }
                     }
                 );
                 break;
@@ -61,6 +61,34 @@ public static class GlobalExceptionHandler
                 };
 
                 problemResult = Results.Problem(details);
+                break;
+            }
+            case CannotUpdateSamePasswordException:
+            {
+                problemResult = Results.ValidationProblem
+                (
+                    type: "https://httpstatuses.com/409",
+                    title: "Same Password.",
+                    statusCode: StatusCodes.Status409Conflict,
+                    errors: new Dictionary<string, string[]>
+                    {
+                        { "same_password", ["Cannot update to the same password."] }
+                    }
+                );
+                break;
+            }
+            case PasswordMismatchException:
+            {
+                problemResult = Results.ValidationProblem
+                (
+                    type: "https://httpstatuses.com/409",
+                    title: "Password Mismatch.",
+                    statusCode: StatusCodes.Status409Conflict,
+                    errors: new Dictionary<string, string[]>
+                    {
+                        { "password_mismatch", ["The current password is incorrect."] }
+                    }
+                );
                 break;
             }
             case ApiValidationException:
