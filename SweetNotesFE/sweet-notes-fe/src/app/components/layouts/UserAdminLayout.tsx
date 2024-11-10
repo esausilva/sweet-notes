@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 import { IAdminLayout } from '@/interfaces';
 
@@ -14,6 +15,7 @@ export function UserAdminLayout({
     <div className={`${inter.className} wrapper__main-admin`}>
       {header}
       <main className="main-admin">{children}</main>
+      <Toaster />
     </div>
   );
 }

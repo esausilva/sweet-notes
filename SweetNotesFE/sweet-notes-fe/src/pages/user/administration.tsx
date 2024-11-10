@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useState, FormEvent, useEffect, useRef } from 'react';
 import type { GetServerSideProps } from 'next';
 import { useQuery } from '@tanstack/react-query';
-import { Toaster } from 'react-hot-toast';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
 import { Header } from '@/component/administration/Header';
@@ -105,8 +104,6 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
       <Notes specialSomeoneIdentifier={specialSomeone.uniqueIdentifier} />
 
       <AddSpecialSomeone buttonRef={addSpecialSomeoneButtonRef} />
-
-      <Toaster />
     </UserAdminLayout>
   );
 }

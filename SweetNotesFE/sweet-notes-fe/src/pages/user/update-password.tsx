@@ -2,7 +2,6 @@ import { FormEvent, useReducer, useState } from 'react';
 import type { GetServerSideProps } from 'next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
-import { Toaster } from 'react-hot-toast';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';
 import { Header } from '@/component/administration/Header';
@@ -129,8 +128,6 @@ export default function UpdatePassword({ me }: { me: Me }): JSX.Element {
           </button>
         </form>
       </section>
-
-      <Toaster />
     </UserAdminLayout>
   );
 }
