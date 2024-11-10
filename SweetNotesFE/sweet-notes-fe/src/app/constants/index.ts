@@ -8,6 +8,7 @@ export enum Routes {
   USER_LOGIN = 'user/login',
   USER_LOGOUT = 'user/logout',
   USER_ME = 'user/me',
+  USER_UPDATE_PASSWORD = 'user/update-password',
   SPECIAL_SOMEONE = 'ss',
   SPECIAL_SOMEONE_NAME = 'special-someone-name',
 }

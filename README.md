@@ -16,6 +16,7 @@
 - [x] Show toast message in `/ss/[slug]` after pressing refresh button but no new notes were found
 - [x] Show toast message in admin section after creating new notes
 - [ ] Implement Delete Note
+- [ ] Implement Zod for form validation
 
 ## Back End
 

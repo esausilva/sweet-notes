@@ -27,7 +27,7 @@ export function Navigation(): JSX.Element {
             <Link href={`/${Routes.USER_ADMINISTRATION}`}>Administration</Link>
           </li>
           <li>
-            <a href="#">Update Password</a>
+            <a href={`/${Routes.USER_UPDATE_PASSWORD}`}>Update Password</a>
           </li>
           <li>
             <Link

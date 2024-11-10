@@ -2,6 +2,7 @@
 
 #form-wrapper {
   width: 90%;
+  
   @include mediaMedium {
     width: 50%;
   }
