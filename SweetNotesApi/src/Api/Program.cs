@@ -34,6 +34,7 @@ if (app.Environment.IsDevelopment())
 // else
 //     app.UseHttpsRedirection();
 
+app.EnsureDbMigrated();
 app.UseExceptionHandler(GlobalExceptionHandler.Configure);
 app.UseCors(Cors.FrontEndPolicyName);
 app.UseAuthentication();
