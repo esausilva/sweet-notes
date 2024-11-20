@@ -6,14 +6,21 @@ using Api.Security;
 using Application.DI;
 using Data.DI;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 configuration.GetApiConfigurations();
 
+var serilog = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+Log.Logger = serilog;
+
 var services = builder.Services;
 services
+    .AddSerilog(serilog)
     .ConfigureSettings(configuration)
     .ConfigureApiDependencies(configuration)
     .ConfigureApplicationDependencies(configuration)

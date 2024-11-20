@@ -1,6 +1,7 @@
 using Api.Exceptions;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace Api.Extensions;
 
@@ -31,6 +32,6 @@ public static class ApplicationBuilderExtensions
         if (pendingMigrations.Any())
             throw new PendingDbMigrationsException("Pending migrations.");
         
-        Console.WriteLine("No pending migrations."); // TODO: Refactor to log
+        Log.Debug("No pending migrations");
     }
 }
