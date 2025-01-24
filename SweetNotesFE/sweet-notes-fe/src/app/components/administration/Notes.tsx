@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { graphql } from '@/gql/gql';
 import { GraphQLClient } from '@/helper/networkHelpers';
 import { QueryKeys } from '@/constants';
+import { DeleteNote } from '@/component/administration/DeleteNote';
 import {
   FromUtcToLocal,
   GetFirstAndLastDaysOfTheMonth,
@@ -14,7 +15,11 @@ import styles from './Notes.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const specialSomeoneNotes = graphql(`
-  query Notes($uniqueIdentifier: String!, $from: DateTime!, $to: DateTime!) {
+  query NotesAdmin(
+    $uniqueIdentifier: String!
+    $from: DateTime!
+    $to: DateTime!
+  ) {
     notes(
       where: {
         specialSomeone: { uniqueIdentifier: { eq: $uniqueIdentifier } }
@@ -25,6 +30,7 @@ const specialSomeoneNotes = graphql(`
       totalCount
       nodes {
         message
+        id
         createdUTC
       }
     }
@@ -82,8 +88,11 @@ export function Notes({
         {isLoading && <p>Loading...</p>}
         {data?.notes?.nodes?.map((note, idx) => (
           <li key={`note-${idx}`}>
-            <span>{FromUtcToLocal(note.createdUTC)}</span> <br />
-            {note.message}
+            <div>
+              <span>{FromUtcToLocal(note.createdUTC)}</span>
+              <p>{note.message}</p>
+            </div>
+            <DeleteNote noteId={note.id} />
           </li>
         ))}
       </ul>

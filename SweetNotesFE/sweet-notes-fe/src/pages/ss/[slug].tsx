@@ -27,7 +27,11 @@ import styles from './slug.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const specialSomeoneNotes = graphql(`
-  query Notes($uniqueIdentifier: String!, $from: DateTime!, $to: DateTime!) {
+  query NotesSlug(
+    $uniqueIdentifier: String!
+    $from: DateTime!
+    $to: DateTime!
+  ) {
     notes(
       where: {
         specialSomeone: { uniqueIdentifier: { eq: $uniqueIdentifier } }

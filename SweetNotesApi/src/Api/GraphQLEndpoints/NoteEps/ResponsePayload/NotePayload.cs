@@ -3,13 +3,13 @@ using Domain.Entities;
 
 namespace Api.GraphQLEndpoints.NoteEps.ResponsePayload;
 
-public sealed class CreateNotePayload : NotePayloadBase
+public sealed class NotePayload : NotePayloadBase
 {
-    public CreateNotePayload(Note note) 
+    public NotePayload(Note? note = default) 
         : base(note)
     { }
 
-    public CreateNotePayload(IReadOnlyList<UserError> errors) 
+    public NotePayload(IReadOnlyList<UserError> errors) 
         : base(errors)
     { }
 }

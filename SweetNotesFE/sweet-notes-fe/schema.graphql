@@ -1,38 +1,24 @@
 type Query {
-  """
-  Fetches an object given its ID.
-  """
+  """Fetches an object given its ID."""
   node(
-    """
-    ID of the object.
-    """
+    """ID of the object."""
     id: ID!
   ): Node
 
-  """
-  Lookup nodes by a list of IDs.
-  """
+  """Lookup nodes by a list of IDs."""
   nodes(
-    """
-    The list of node IDs.
-    """
+    """The list of node IDs."""
     ids: [ID!]!
   ): [Node]!
   specialSomeonesForUser(order: [SpecialSomeoneSortInput!]): [SpecialSomeone!]!
   notes(
-    """
-    Returns the first _n_ elements from the list.
-    """
+    """Returns the first _n_ elements from the list."""
     first: Int
 
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
+    """Returns the elements in the list that come after the specified cursor."""
     after: String
 
-    """
-    Returns the last _n_ elements from the list.
-    """
+    """Returns the last _n_ elements from the list."""
     last: Int
 
     """
@@ -45,10 +31,9 @@ type Query {
 }
 
 type Mutation {
-  createSpecialSomeone(
-    input: CreateSpecialSomeoneCommandInput!
-  ): CreateSpecialSomeonePayload!
-  createNote(input: CreateNoteCommandInput!): CreateNotePayload!
+  createSpecialSomeone(input: CreateSpecialSomeoneCommandInput!): CreateSpecialSomeonePayload!
+  createNote(input: CreateNoteCommandInput!): NotePayload!
+  deleteNote(input: DeleteNoteCommandInput!): NotePayload!
 }
 
 type SpecialSomeone implements Node {
@@ -123,9 +108,7 @@ input StringOperationFilterInput {
   nendsWith: String
 }
 
-"""
-The `DateTime` scalar represents an ISO-8601 compliant date time type.
-"""
+"""The `DateTime` scalar represents an ISO-8601 compliant date time type."""
 scalar DateTime @specifiedBy(url: "https://www.graphql-scalars.com/date-time")
 
 input SpecialSomeoneSortInput {
@@ -145,28 +128,18 @@ input NoteSortInput {
   createdUTC: SortEnumType
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type NotesConnection {
-  """
-  Information to aid in pagination.
-  """
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  """
-  A list of edges.
-  """
+  """A list of edges."""
   edges: [NotesEdge!]
 
-  """
-  A flattened list of the nodes.
-  """
+  """A flattened list of the nodes."""
   nodes: [Note!]
 
-  """
-  Identifies the total count of items in the connection.
-  """
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 }
 
@@ -190,9 +163,7 @@ input DateTimeOperationFilterInput {
   nlte: DateTime
 }
 
-"""
-Information about pagination in a connection.
-"""
+"""Information about pagination in a connection."""
 type PageInfo {
   """
   Indicates whether more edges exist following the set defined by the clients arguments.
@@ -204,34 +175,28 @@ type PageInfo {
   """
   hasPreviousPage: Boolean!
 
-  """
-  When paginating backwards, the cursor to continue.
-  """
+  """When paginating backwards, the cursor to continue."""
   startCursor: String
 
-  """
-  When paginating forwards, the cursor to continue.
-  """
+  """When paginating forwards, the cursor to continue."""
   endCursor: String
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type NotesEdge {
-  """
-  A cursor for use in pagination.
-  """
+  """A cursor for use in pagination."""
   cursor: String!
 
-  """
-  The item at the end of the edge.
-  """
+  """The item at the end of the edge."""
   node: Note!
 }
 
-type CreateNotePayload {
-  note: Note!
+input DeleteNoteCommandInput {
+  id: ID!
+}
+
+type NotePayload {
+  note: Note
   errors: [UserError!]
 }
 

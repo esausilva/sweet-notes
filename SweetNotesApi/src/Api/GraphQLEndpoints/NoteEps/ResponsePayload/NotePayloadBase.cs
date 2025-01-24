@@ -5,9 +5,9 @@ namespace Api.GraphQLEndpoints.NoteEps.ResponsePayload;
 
 public class NotePayloadBase : Payload
 {
-    public Note Note { get; }
+    public Note? Note { get; }
 
-    protected NotePayloadBase(Note note)
+    protected NotePayloadBase(Note? note)
     {
         Note = note;
     }

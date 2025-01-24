@@ -11,7 +11,6 @@
   }
 }
 
-
 .notes-list {
   list-style-type: none;
   padding: 0;
@@ -23,6 +22,20 @@
 
   li {
     margin-bottom: .7em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    @include mediaLarge {
+      &:hover {
+        svg {
+          display: block;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
   }
 }
 
