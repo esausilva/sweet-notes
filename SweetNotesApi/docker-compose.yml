@@ -6,6 +6,9 @@
     build:
       context: .
       dockerfile: src/Api/Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
     environment:
       - ASPNETCORE_ENVIRONMENT=Release
       - ASPNETCORE_URLS=http://+:5068
