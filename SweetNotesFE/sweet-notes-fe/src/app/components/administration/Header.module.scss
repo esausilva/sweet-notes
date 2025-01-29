@@ -1,14 +1,14 @@
-@import '@/style/mixins.scss';
-@import '@/style/colors.scss';
+@use '@/style/mixins' as mixin;
+@use '@/style/colors' as color;
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: $background;
+  background-color: color.$background;
   position: relative;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     justify-content: space-between;
   }
 }
@@ -16,7 +16,7 @@
 .title {
   align-self: center;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     margin-left: .5em;
   }
 }
@@ -24,7 +24,7 @@
 .avatar {
   display: none;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     align-self: center;
     margin-right: .5em;
     display: flex;

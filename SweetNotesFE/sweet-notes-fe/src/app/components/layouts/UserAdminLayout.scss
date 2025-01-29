@@ -1,4 +1,4 @@
-@import '@/style/mixins.scss';
+@use '@/style/mixins' as mixin;
 
 .wrapper__main-admin {
   display: grid;
@@ -6,11 +6,11 @@
   height: 100vh;
   width: 100vw;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     grid-template-rows: 7em 1fr;
   }
 
-  @include mediaLarge {
+  @include mixin.mediaLarge {
     grid-template-rows: 9em 1fr;
   }
 }
@@ -25,12 +25,12 @@
   gap: 1em;
   margin: 2em 2em;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     grid-template: none / 1fr 1px 1fr;
     grid-template-areas: "specialsomeone separator notes";
   }
   
-  @include mediaXLarge {
+  @include mixin.mediaXLarge {
     grid-template: none / 845px 1px 845px;
     grid-template-areas: "specialsomeone separator notes";
     justify-content: center;

@@ -1,6 +1,8 @@
-@import '@/style/colors.scss';
-@import '@/style/mixins.scss';
-@import '@/style/variables.scss';
+@use "sass:color";
+
+@use '@/style/colors' as l_color;
+@use '@/style/mixins' as mixin;
+@use '@/style/variables' as var;
 
 
 .main {
@@ -17,11 +19,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: $background;
+  background-color: l_color.$background;
   height: 90px;
   text-align: center;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     height: 140px;
   }
 }
@@ -33,13 +35,13 @@
   align-items: center;
   margin-bottom: 1em;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     flex-direction: row;
     justify-content: space-between;
   }
 
   p {
-    color: $background;
+    color: l_color.$background;
   }
 }
 
@@ -53,7 +55,7 @@
     font-weight: 400;
   }
 
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     margin-bottom: initial;
   }
 }
@@ -61,22 +63,22 @@
 .reload {
   height: 1.4em;
   margin-left: .5em;
-  fill: $background;
+  fill: l_color.$background;
   cursor: pointer;
   transition: transform 330ms ease-in-out;
   
   &:hover {
-    fill: darken($color: $background, $amount: 8);
+    fill: color.scale($color: l_color.$background, $lightness: 8%);
     transform: rotate(180deg);
   }
   
   &:active {
-    fill: $background;
+    fill: l_color.$background;
   }
 }
 
 .loading {
-  color: $background;
+  color: l_color.$background;
 }
 
 .not-found {
@@ -105,8 +107,10 @@
     width: 15em;
 
     span {
-      @include annotation;
-      color: darken($color: $annotation-color, $amount: 30);
+      @include mixin.annotation;
+      & {
+        color: color.scale($color: l_color.$annotation-color, $lightness: 30%);
+      }
     }
   }
   

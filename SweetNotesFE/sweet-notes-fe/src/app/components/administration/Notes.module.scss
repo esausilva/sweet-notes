@@ -1,7 +1,5 @@
-@import '@/style/mixins.scss'; 
-@import '@/style/variables.scss'; 
-@import '@/style/colors.scss'; 
-@import '@/style/mixins.scss'; 
+@use '@/style/mixins' as mixin; 
+@use '@/style/variables' as var; 
 
 .notes {
   grid-area: notes;
@@ -17,7 +15,7 @@
   margin-top: 1em;;
 
   span {
-    @include annotation;
+    @include mixin.annotation;
   }  
 
   li {
@@ -27,7 +25,7 @@
     align-items: center;
     position: relative;
 
-    @include mediaLarge {
+    @include mixin.mediaLarge {
       &:hover {
         svg {
           display: block;
@@ -45,7 +43,7 @@
   justify-content: center;
   margin-bottom: 1em;
 
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     justify-content: flex-start;
   }
   
@@ -55,6 +53,6 @@
 }
 
 .divider {
-  border-top: $border;
+  border-top: var.$border;
   margin-top: 1em;
 }

@@ -1,4 +1,4 @@
-@import '@/style/mixins.scss';
+@use '@/style/mixins' as mixin;
 
 .special-someones {
   grid-area: specialsomeone;
@@ -20,7 +20,7 @@
   textarea {
     height: 6em;
     
-    @include mediaMedium {
+    @include mixin.mediaMedium {
       height: 8em;
     }
   }
@@ -30,7 +30,7 @@
   }
 
   button {
-    @include mediaMedium {
+    @include mixin.mediaMedium {
       width: 9em;
     }
   }

@@ -1,13 +1,13 @@
-@import '@/style/mixins.scss';
-@import '@/style/variables.scss';
+@use '@/style/mixins' as mixin;
+@use '@/style/variables' as var;
 
 .separator {
   grid-area: separator;
-  border-bottom: $border;
+  border-bottom: var.$border;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     border-bottom: 0px;
-    border-left: $border;
+    border-left: var.$border;
   }
 }
 

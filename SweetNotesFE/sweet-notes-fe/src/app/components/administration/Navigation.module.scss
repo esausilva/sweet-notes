@@ -1,5 +1,7 @@
-@import '@/style/mixins.scss';
-@import '@/style/colors.scss';
+@use "sass:color";
+
+@use '@/style/mixins' as mixin;
+@use '@/style/colors' as l_color;
 
 .hamburger {
   position: absolute;
@@ -8,7 +10,7 @@
   top: .5em;
   left: .5em;
   
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     height: 1.5em;
   }
 }
@@ -33,7 +35,7 @@
     padding: 0;
     position: absolute;
     display: inline-block;
-    color: lighten($color: $button-font-color, $amount: 15%);
+    color: color.adjust($color: l_color.$button-font-color, $lightness: 15%);
   }
 
   &.closed {
@@ -41,7 +43,7 @@
     box-shadow: none;
   }
 
-  @include mediaMedium {
+  @include mixin.mediaMedium {
     width: 30%;
 
     button {
@@ -49,7 +51,7 @@
     }
   }
 
-  @include mediaLarge {
+  @include mixin.mediaLarge {
     width: 40%;
   }
 }
@@ -71,17 +73,17 @@
     a {
       padding: 1rem 0;
       width: 100%;
-      color: $button-font-color;
+      color: l_color.$button-font-color;
       font-weight: 200;
       display: block;
 
       &:hover {
-        color: lighten($color: $button-font-color, $amount: 20%);
+        color: color.adjust($color: l_color.$button-font-color, $lightness: 20%);
       }
     }
   }
 
-  @include mediaLarge {
+  @include mixin.mediaLarge {
     li {
       font-size: 3rem;
     }

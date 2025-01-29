@@ -1,11 +1,13 @@
-@import './mixins.scss';
-@import './variables.scss';
-@import './colors.scss';
+@use "sass:color";
+
+@use './mixins' as mixin;
+@use './variables' as var;
+@use './colors' as l_color;
 
 body {
-  color: $font-color;
+  color: l_color.$font-color;
   letter-spacing: 0.07rem;
-  font-size: $body--font-size;
+  font-size: var.$body--font-size;
 }
 
 h1 {
@@ -21,9 +23,9 @@ h3 {
   font-size: 1.8rem;
 }
 
-@include mediaMedium {
+@include mixin.mediaMedium {
   body {
-    font-size: $body--font-size_medium;
+    font-size: var.$body--font-size_medium;
   }
   h1 {
     font-size: 3.5rem;
@@ -39,9 +41,9 @@ h3 {
   }
 }
 
-@include mediaLarge {
+@include mixin.mediaLarge {
   body {
-    font-size: $body--font-size_large;
+    font-size: var.$body--font-size_large;
   }
   h1 {
     font-size: 4rem;
@@ -72,39 +74,39 @@ input, textarea, select {
   background-color: #fff;
 
   &:disabled {
-    background-color: $button-disabled;
+    background-color: l_color.$button-disabled;
   }
 }
 
 a {
-  color: $link-color;
+  color: l_color.$link-color;
   
   &:hover {
-    color: $link-color-hover;
+    color: l_color.$link-color-hover;
   }
 }
 
 
 .button--primary {
-  background-color: $primary-color;
-  border-color: darken($color: $primary-color, $amount: 5);
-  color: $button-font-color;
+  background-color: l_color.$primary-color;
+  border-color: color.scale($color: l_color.$primary-color, $lightness: 5%);
+  color: l_color.$button-font-color;
   cursor: pointer;
   
   &:hover {
-    background-color: $primary-color-hover;
-    border-color: darken($color: $primary-color-hover, $amount: 5);
+    background-color: l_color.$primary-color-hover;
+    border-color: color.scale($color: l_color.$primary-color-hover, $lightness: 5%);
   }
   
   &:disabled {
-    background-color: $button-disabled;
-    border-color: darken($color: $button-disabled, $amount: 5);
+    background-color: l_color.$button-disabled;
+    border-color: color.scale($color: l_color.$button-disabled, $lightness: 5%);
     cursor: not-allowed;
   }
 }
 
 .error-list {
-  color: $danger-color;
+  color: l_color.$danger-color;
   display: flex;
   justify-content: center;
   
@@ -121,5 +123,5 @@ a {
   text-align: right;
   margin-top: .3em;
 
-  @include annotation;
+  @include mixin.annotation;
 }

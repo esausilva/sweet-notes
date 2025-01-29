@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-color: #bae7ff;
 $primary-color-hover: #E1F5FF;
 $font-color: #434343;
@@ -5,6 +7,6 @@ $danger-color: #a8071a;
 $button-font-color: #262626;
 $link-color: #4096ff;
 $link-color-hover: #69b1ff;
-$background: lighten($color: papayawhip, $amount: 5);
-$annotation-color: lighten($color: $font-color, $amount: 40%);
+$background: color.adjust($color: papayawhip, $lightness: 5%);
+$annotation-color: color.adjust($color: $font-color, $lightness: 40%);
 $button-disabled: #f0f0f0;
