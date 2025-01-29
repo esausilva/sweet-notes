@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import type { GetServerSideProps } from 'next';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, JSX } from 'react';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';

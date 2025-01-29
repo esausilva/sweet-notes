@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { ApiError } from '@/types';
 
 export function useRenderErrorList(errors: ApiError): JSX.Element {

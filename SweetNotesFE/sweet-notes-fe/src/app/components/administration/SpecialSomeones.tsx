@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, JSX } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { IsDoneLoadingSpecialSomeones } from '@/component/administration/helpers';

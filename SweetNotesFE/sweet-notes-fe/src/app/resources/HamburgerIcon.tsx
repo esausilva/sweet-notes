@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { IIcon } from '@/interfaces';
 
 export const HamburgerIcon = ({ className, onClick }: IIcon): JSX.Element => (

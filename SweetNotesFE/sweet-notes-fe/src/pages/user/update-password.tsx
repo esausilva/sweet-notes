@@ -1,6 +1,6 @@
-import { FormEvent, useReducer, useState } from 'react';
+import { FormEvent, JSX, useReducer, useState } from 'react';
 import type { GetServerSideProps } from 'next';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import Head from 'next/head';
 
 import { UserAdminLayout } from '@/component/layouts/UserAdminLayout';

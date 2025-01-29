@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { TrashIcon } from '@/resources/TrashIcon';

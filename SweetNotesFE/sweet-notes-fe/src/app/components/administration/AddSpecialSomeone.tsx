@@ -1,4 +1,4 @@
-import { useState, useReducer, FormEvent } from 'react';
+import { useState, useReducer, FormEvent, JSX } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Inter } from 'next/font/google';

@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { IIcon } from '@/interfaces';
 
 export const TrashIcon = ({ className, onClick }: IIcon): JSX.Element => (

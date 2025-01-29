@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import Link from 'next/link';
 
 import { HamburgerIcon } from '@/resources/HamburgerIcon';

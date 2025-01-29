@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, FormEvent, useEffect, useRef } from 'react';
+import { useState, FormEvent, useEffect, useRef, JSX } from 'react';
 import type { GetServerSideProps } from 'next';
 import { useQuery } from '@tanstack/react-query';
 

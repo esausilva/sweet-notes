@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 

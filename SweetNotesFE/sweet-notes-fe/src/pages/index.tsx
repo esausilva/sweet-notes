@@ -1,4 +1,4 @@
-import { FormEvent, useReducer, useState } from 'react';
+import { FormEvent, JSX, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Link from 'next/link';

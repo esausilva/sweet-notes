@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import Avatar from 'boring-avatars';
 
 import { Me } from '@/types';
