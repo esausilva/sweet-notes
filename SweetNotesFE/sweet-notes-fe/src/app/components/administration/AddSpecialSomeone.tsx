@@ -61,6 +61,7 @@ export function AddSpecialSomeone({
     errors: [],
   });
   const queryClient = useQueryClient();
+  const setSuccessMessage = useSuccessToast();
 
   const { isPending, mutate } = useMutation({
     mutationKey: [MutationKeys.CREATE_SPECIAL_SOMEONE],
@@ -71,7 +72,7 @@ export function AddSpecialSomeone({
         lastName: formData.lastName,
       }),
     onSuccess: (data, variables, context) => {
-      useSuccessToast(`'${formData.firstName} ${formData.lastName}' added!`);
+      setSuccessMessage(`'${formData.firstName} ${formData.lastName}' added!`);
       onCloseModal();
       setFormErrors({
         errors: [],

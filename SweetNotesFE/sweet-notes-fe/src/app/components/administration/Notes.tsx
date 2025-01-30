@@ -59,12 +59,12 @@ export function Notes({
   useEffect(() => {
     if (specialSomeoneIdentifier !== '') refetch();
     return () => {};
-  }, [specialSomeoneIdentifier]);
+  }, [specialSomeoneIdentifier, refetch]);
 
   useEffect(() => {
     refetch();
     return () => {};
-  }, [filterMonth]);
+  }, [filterMonth, refetch]);
 
   return (
     <section className={styles.notes}>

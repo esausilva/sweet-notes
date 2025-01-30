@@ -31,6 +31,7 @@ export default function Index(): JSX.Element {
   const router = useRouter();
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [errors, setErrors] = useState<ApiError>({});
+  const setErrorMessage = useErrorToast();
 
   const { mutateAsync, isPending } = useAuthService(
     Routes.USER_LOGIN,
@@ -57,7 +58,7 @@ export default function Index(): JSX.Element {
     if (responseBody.errors) setErrors(responseBody.errors);
 
     if (data.status === 500)
-      useErrorToast(`${responseBody.title} Please contact support.`);
+      setErrorMessage(`${responseBody.title} Please contact support.`);
   };
 
   return (

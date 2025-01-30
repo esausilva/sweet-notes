@@ -33,6 +33,7 @@ export default function Signup(): JSX.Element {
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [errors, setErrors] = useState<ApiError>({});
   const router = useRouter();
+  const setErrorMessage = useErrorToast();
 
   const { mutateAsync, isPending } = useAuthService(
     Routes.USER_SIGNUP,
@@ -63,7 +64,7 @@ export default function Signup(): JSX.Element {
     if (responseBody.errors) setErrors(responseBody.errors);
 
     if (data.status === 500)
-      useErrorToast(`${responseBody.title} Please contact support.`);
+      setErrorMessage(`${responseBody.title} Please contact support.`);
   };
 
   return (

@@ -37,6 +37,8 @@ const formReducer = (
 export default function UpdatePassword({ me }: { me: Me }): JSX.Element {
   const [formData, dispatch] = useReducer(formReducer, initialFormState);
   const [errors, setErrors] = useState<ApiError>({});
+  const setSuccessMessage = useSuccessToast();
+  const setErrorMessage = useErrorToast();
 
   const handleChange = (event: FormEvent<HTMLInputElement>): void => {
     const { name, value } = event.currentTarget;
@@ -45,7 +47,6 @@ export default function UpdatePassword({ me }: { me: Me }): JSX.Element {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ formData });
     mutate();
   };
 
@@ -65,7 +66,7 @@ export default function UpdatePassword({ me }: { me: Me }): JSX.Element {
       const responseBody = (await data.json()) as ApiErrorResponse;
 
       if (data.status === 500) {
-        useErrorToast(`${responseBody.title} Please contact support.`);
+        setErrorMessage(`${responseBody.title} Please contact support.`);
         return;
       }
 
@@ -75,12 +76,12 @@ export default function UpdatePassword({ me }: { me: Me }): JSX.Element {
         return;
       }
 
-      useSuccessToast(`Your password has been updated!`);
+      setSuccessMessage(`Your password has been updated!`);
       clearForm();
       setErrors({});
     },
     onError: (error: ApiErrorResponse) => {
-      useErrorToast(`${error.title} Please contact support.`);
+      setErrorMessage(`${error.title} Please contact support.`);
     },
   });
 

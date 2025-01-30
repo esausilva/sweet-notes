@@ -30,6 +30,7 @@ export function SpecialSomeones({
   queryResult,
 }: ISpecialSomeones): JSX.Element {
   const messageCountMax = 150;
+  const setSuccessMessage = useSuccessToast();
 
   const { isPending, mutate } = useMutation({
     mutationKey: [MutationKeys.CREATE_NOTE],
@@ -39,7 +40,7 @@ export function SpecialSomeones({
         specialSomeoneId: specialSomeone.id,
       }),
     onSuccess: (data, variables, context) => {
-      useSuccessToast('Note added!');
+      setSuccessMessage('Note added!');
       setNote({ message: '', count: 0 });
       setFormErrors({
         errors: [],
@@ -66,11 +67,12 @@ export function SpecialSomeones({
   });
 
   useEffect(() => {
-    if (IsDoneLoadingSpecialSomeones(queryResult)) setButtonDisabled(false);
+    if (IsDoneLoadingSpecialSomeones(queryResult.isLoading, queryResult.data!))
+      setButtonDisabled(false);
     else setButtonDisabled(true);
 
     return () => {};
-  }, [queryResult]);
+  }, [queryResult.isLoading, queryResult.data]);
 
   useEffect(() => {
     setFormErrors({

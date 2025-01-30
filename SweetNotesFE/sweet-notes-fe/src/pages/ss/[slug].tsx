@@ -56,6 +56,7 @@ export default function Page({
   const router = useRouter();
   const [filterMonth, setFilterMonth] = useState<Date | null>(new Date());
   const [notesCount, setNotesCount] = useState<number>(0);
+  const setWarningMessage = useWarningToast();
 
   const { data, refetch, isLoading, isRefetching, isFetched } = useQuery({
     queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES, router.query.slug],
@@ -72,18 +73,24 @@ export default function Page({
   useEffect(() => {
     refetch();
     return () => {};
-  }, [filterMonth]);
+  }, [filterMonth, refetch]);
 
   useEffect(() => {
     if (isFetched && !isRefetching) {
       if (notesCount === data?.notes?.totalCount) {
-        useWarningToast('No new notes at this time!');
+        setWarningMessage('No new notes at this time!');
       }
 
       setNotesCount(data?.notes?.totalCount!);
     }
     return () => {};
-  }, [data?.notes?.totalCount, isRefetching, isFetched]);
+  }, [
+    data?.notes?.totalCount,
+    isRefetching,
+    isFetched,
+    notesCount,
+    setWarningMessage,
+  ]);
 
   const ShouldGetNewNotes = () => {
     var filterDate = new Date(
@@ -94,9 +101,9 @@ export default function Page({
     var today = new Date(todayTemp.getFullYear(), todayTemp.getMonth());
 
     if (filterDate < today) {
-      useWarningToast('Sorry! Past months do not have new notes.');
+      setWarningMessage('Sorry! Past months do not have new notes.');
     } else if (filterDate > today) {
-      useWarningToast('Sorry! Future months do not have notes.');
+      setWarningMessage('Sorry! Future months do not have notes.');
     } else {
       refetch();
     }

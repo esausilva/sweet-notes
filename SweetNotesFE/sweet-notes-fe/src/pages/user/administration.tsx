@@ -48,7 +48,9 @@ export default function UserAdmin({ me }: { me: Me }): JSX.Element {
   }>({ uniqueIdentifier: '', id: '' });
 
   useEffect(() => {
-    if (IsDoneLoadingSpecialSomeones(queryResult)) {
+    if (
+      IsDoneLoadingSpecialSomeones(queryResult.isLoading, queryResult.data!)
+    ) {
       const uniqueIdentifier =
         queryResult.data?.specialSomeonesForUser[0].uniqueIdentifier!;
       setSpecialSomeone({

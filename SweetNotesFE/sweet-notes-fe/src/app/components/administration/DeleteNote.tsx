@@ -22,6 +22,8 @@ const deleteNote = graphql(`
 
 export function DeleteNote({ noteId }: { noteId: string }): JSX.Element {
   const queryClient = useQueryClient();
+  const setSuccessMessage = useSuccessToast();
+  const setErrorMessage = useErrorToast();
 
   const { isPending, mutate } = useMutation({
     mutationKey: [MutationKeys.DELETE_NOTE],
@@ -30,13 +32,13 @@ export function DeleteNote({ noteId }: { noteId: string }): JSX.Element {
         id: noteId,
       }),
     onSuccess: (data, variables, context) => {
-      useSuccessToast('Note Successfully Deleted');
+      setSuccessMessage('Note Successfully Deleted');
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.SPECIAL_SOMEONE_NOTES],
       });
     },
     onError: (error: GraphQLErrorResponse) => {
-      useErrorToast(
+      setErrorMessage(
         'Something went wrong in trying to delete the note. We have refreshed the notes list.',
       );
       queryClient.invalidateQueries({

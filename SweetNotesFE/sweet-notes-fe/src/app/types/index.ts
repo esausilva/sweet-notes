@@ -9,3 +9,4 @@ export * from './SpecialSomeoneQueryResult';
 export * from './CreateSpecialSomeoneForm';
 export * from './SpecialSomeoneName';
 export * from './UpdatePasswordForm';
+export * from './FunctionType';

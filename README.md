@@ -17,6 +17,8 @@
 - [x] Show toast message in admin section after creating new notes
 - [x] Implement Delete Note
 - [ ] Implement Zod for form validation
+- [ ] Fix "No New Notes" at this time warning. Showing up even when there are new notes
+- [ ] Refactor project structure to make better sense
 
 ## Back End
 
