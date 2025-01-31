@@ -1,4 +1,4 @@
-FROM node:22.4-alpine AS base
+FROM --platform=$BUILDPLATFORM node:23.6.1-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -12,10 +12,10 @@ RUN corepack enable pnpm && pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
-ENV NEXT_PRIVATE_STANDALONE true
-ENV NEXT_PUBLIC_API_CLIENT_SIDE_ROOT_URI http://localhost:5068
-ENV NEXT_PUBLIC_API_SERVER_SIDE_ROOT_URI http://host.docker.internal:5068
-ENV NEXT_PUBLIC_FRONTEND_URI http://localhost:3050
+ENV NEXT_PRIVATE_STANDALONE=true
+ENV NEXT_PUBLIC_API_CLIENT_SIDE_ROOT_URI=http://localhost:5068
+ENV NEXT_PUBLIC_API_SERVER_SIDE_ROOT_URI=http://host.docker.internal:5068
+ENV NEXT_PUBLIC_FRONTEND_URI=http://localhost:3050
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
@@ -24,8 +24,8 @@ RUN corepack enable pnpm && pnpm run build
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/next.config.js ./
@@ -44,7 +44,7 @@ USER nextjs
 
 EXPOSE 3050
 
-ENV PORT 3050
+ENV PORT=3050
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output

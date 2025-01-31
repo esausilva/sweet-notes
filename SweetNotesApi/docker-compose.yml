@@ -27,7 +27,7 @@
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
         
   sweetnotes.db:
-    image: postgres:latest
+    image: postgres:17.2
     container_name: SweetNotes.Db
     environment:
       - POSTGRES_USER=esausilva
