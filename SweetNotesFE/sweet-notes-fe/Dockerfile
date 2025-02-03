@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:23.6.1-alpine AS base
+FROM --platform=$BUILDPLATFORM node:23.7.0-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -48,4 +48,6 @@ ENV PORT=3050
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+# CMD HOSTNAME="0.0.0.0" node server.js
+ENV HOSTNAME="0.0.0.0"
+CMD ["node", "server.js"]

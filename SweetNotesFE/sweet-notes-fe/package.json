@@ -43,6 +43,5 @@
     "@tanstack/react-query-devtools": "^5.65.0",
     "@types/react-datepicker": "^7.0.0",
     "rimraf": "^6.0.1"
-  },
-  "packageManager": "pnpm@8.6.12+sha1.a2f983fbf8f2531dc85db2a5d7f398063d51a6f3"
+  }
 }
